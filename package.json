@@ -32,6 +32,7 @@
     "@nestjs/typeorm": "^10.0.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "node-telegram-bot-api": "^0.66.0",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.20"
   },
