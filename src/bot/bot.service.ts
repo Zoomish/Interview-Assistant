@@ -24,7 +24,6 @@ export class BotService implements OnModuleInit {
 
     async initBot(bot: TelegramBot) {
         global.bot = bot
-        global.user = undefined
         await bot.setMyCommands([
             {
                 command: '/start',
