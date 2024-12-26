@@ -91,23 +91,6 @@ export class BotService implements OnModuleInit {
                 }
                 global.user = user
             }
-            switch (text) {
-                case '/everyday':
-                    return this.startMessageService.start(chatId)
-                default:
-                    break
-            }
-            if (msg.reply_to_message) {
-                if (msg.text) {
-                    await this.forwardService.forward(msg.reply_to_message)
-                } else if (msg.voice) {
-                    await this.forwardService.forwardAudio(msg.reply_to_message)
-                } else if (msg.video_note) {
-                    await this.forwardService.forwardVideoNotes(
-                        msg.reply_to_message
-                    )
-                }
-            }
         })
         bot.on('callback_query', async (callbackQuery) => {
             await this.callbackService.callback(callbackQuery)
