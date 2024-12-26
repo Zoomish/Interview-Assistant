@@ -32,7 +32,7 @@ export class GreetingService {
         await bot.sendMessage(
             msg.chat.id,
             `Добро пожаловать, ${msg?.chat?.first_name}! Я здесь, чтобы помочь вам уверенно пройти собеседование. ${text}`,
-            global.level
+            user.level
                 ? {
                       reply_markup: {
                           inline_keyboard: [
