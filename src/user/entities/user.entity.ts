@@ -11,7 +11,7 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ nullable: false, default: true })
+    @Column({ nullable: false, default: false })
     admin: boolean
 
     @Column({ nullable: false })
