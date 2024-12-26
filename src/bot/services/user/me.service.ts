@@ -17,6 +17,28 @@ export class MeService {
         const text = `<b>Меня зовут:</b> ${user.name}\n<b>Профессия:</b> ${
             user.profession
         }\n<b>Уровень:</b> ${user.level}\n<b>Навыки:</b>\n      ${user.skills.join('\n      ')}`
+        const reply_markup = {
+            inline_keyboard: [
+                [
+                    {
+                        text: 'Изменить уровень',
+                        callback_data: 'edit_level',
+                    },
+                ],
+                [
+                    {
+                        text: 'Изменить профессию',
+                        callback_data: 'edit_profession',
+                    },
+                ],
+                [
+                    {
+                        text: 'Изменить навыки',
+                        callback_data: 'edit_skills',
+                    },
+                ],
+            ],
+        }
         if (photos.photos.length) {
             return await bot.sendPhoto(
                 msg.chat.id,
@@ -24,33 +46,13 @@ export class MeService {
                 {
                     caption: text,
                     parse_mode: 'HTML',
-                    reply_markup: {
-                        inline_keyboard: [
-                            [
-                                {
-                                    text: 'Изменить уровень',
-                                    callback_data: 'edit_level',
-                                },
-                            ],
-                            [
-                                {
-                                    text: 'Изменить профессию',
-                                    callback_data: 'edit_profession',
-                                },
-                            ],
-                            [
-                                {
-                                    text: 'Изменить навыки',
-                                    callback_data: 'edit_skills',
-                                },
-                            ],
-                        ],
-                    },
+                    reply_markup: reply_markup,
                 }
             )
         }
         return await bot.sendMessage(msg.chat.id, text, {
             parse_mode: 'HTML',
+            reply_markup: reply_markup,
         })
     }
 }
