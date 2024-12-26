@@ -7,6 +7,7 @@ import {
     GreetingService,
     HelpService,
     StartinterviewService,
+    UserInfoService,
 } from './services'
 
 @Module({
@@ -14,6 +15,7 @@ import {
     providers: [
         BotService,
         StartinterviewService,
+        UserInfoService,
         GreetingService,
         CallbackService,
         HelpService,
