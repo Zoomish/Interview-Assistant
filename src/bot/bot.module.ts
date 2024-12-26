@@ -9,12 +9,14 @@ import {
     StartinterviewService,
     UserInfoService,
 } from './services'
+import { MeService } from './services/user/me.service'
 
 @Module({
     imports: [UserModule],
     providers: [
         BotService,
         StartinterviewService,
+        MeService,
         UserInfoService,
         GreetingService,
         CallbackService,

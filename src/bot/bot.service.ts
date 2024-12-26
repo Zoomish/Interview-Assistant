@@ -10,6 +10,7 @@ import {
     StartinterviewService,
     UserInfoService,
 } from './services'
+import { MeService } from './services/user/me.service'
 
 @Injectable()
 export class BotService implements OnModuleInit {
@@ -20,6 +21,7 @@ export class BotService implements OnModuleInit {
         private readonly startinterviewService: StartinterviewService,
         private readonly userInfoService: UserInfoService,
         private readonly helpService: HelpService,
+        private readonly meService: MeService,
         private readonly badCommandService: BadCommandService,
         private readonly greetingService: GreetingService
     ) {}
@@ -84,7 +86,7 @@ export class BotService implements OnModuleInit {
                 case '/startinterview':
                     return this.startinterviewService.startinterview()
                 case '/editme':
-                    return this.helpService.help(chatId)
+                    return this.meService.getMe(msg)
                 default:
                     return this.badCommandService.badCommand()
             }
