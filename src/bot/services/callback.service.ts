@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
 import { UserService } from 'src/user/user.service'
+import { StartinterviewService } from './startInterview.service'
 
 @Injectable()
 export class CallbackService {
-    constructor(private readonly userService: UserService) {}
+    constructor(
+        private readonly userService: UserService,
+        private readonly startinterviewService: StartinterviewService
+    ) {}
     async callback(callbackQuery) {
         const action = callbackQuery.data
         const msg = callbackQuery.message
@@ -15,6 +19,8 @@ export class CallbackService {
                 return await this.editUser('Middle', msg)
             case 'senior':
                 return await this.editUser('Senior', msg)
+            case 'startinterview':
+                return await this.startinterviewService.startinterview()
             default:
                 break
         }
