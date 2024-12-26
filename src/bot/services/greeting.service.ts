@@ -7,11 +7,15 @@ export class GreetingService {
     constructor(private readonly userService: UserService) {}
     async greeting(msg: TelegramBot.Message) {
         console.log(msg)
-
-        // const user = await this.userService.findOne(msg.chat.id)
-        // if (!user) {
-        //     await this.userService.create({ tgId: msg.chat.id })
-        // }
+        const user = await this.userService.findOne(msg.chat.id)
+        if (!user) {
+            await this.userService.create({
+                tgId: msg.chat.id,
+                name: msg?.chat?.first_name,
+                nickname: msg?.chat?.username,
+            })
+        }
+        global.user = user
         const bot: TelegramBot = global.bot
         await bot.sendMessage(
             msg.chat.id,
