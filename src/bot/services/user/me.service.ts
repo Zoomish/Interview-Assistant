@@ -23,6 +23,28 @@ export class MeService {
                 {
                     caption: text,
                     parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [
+                                {
+                                    text: 'Изменить уровень',
+                                    callback_data: 'edit_level',
+                                },
+                            ],
+                            [
+                                {
+                                    text: 'Изменить профессию',
+                                    callback_data: 'edit_profession',
+                                },
+                            ],
+                            [
+                                {
+                                    text: 'Изменить навыки',
+                                    callback_data: 'edit_skills',
+                                },
+                            ],
+                        ],
+                    },
                 }
             )
         }
