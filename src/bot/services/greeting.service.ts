@@ -14,12 +14,19 @@ export class GreetingService {
                 nickname: msg?.chat?.username,
             })
         }
+        let text = ''
+        if (!user.profession) {
+            global.profession = true
+            text = `Какую профессию вы выбрали?`
+        } else if (!user.skills) {
+            global.skills = true
+            text = `Укажите свои навыки, через запятую. Например: Node.js, React, Next`
+        }
         global.user = user
-        global.profession = true
         const bot: TelegramBot = global.bot
         await bot.sendMessage(
             msg.chat.id,
-            `Добро пожаловать, ${msg?.chat?.first_name}! Я здесь, чтобы помочь вам уверенно пройти собеседование. Какую профессию вы выбрали?`
+            `Добро пожаловать, ${msg?.chat?.first_name}! Я здесь, чтобы помочь вам уверенно пройти собеседование. ${text}`
         )
     }
 
