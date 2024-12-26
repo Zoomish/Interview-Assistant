@@ -21,6 +21,8 @@ export class GreetingService {
         } else if (!user?.skills.length) {
             global.skills = true
             text = `Укажите свои навыки, через запятую. Например: Node.js, React, Next`
+        } else if (!user?.level) {
+            global.level = true
         }
         global.user = user
         const bot: TelegramBot = global.bot
