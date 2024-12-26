@@ -79,8 +79,8 @@ export class BotService implements OnModuleInit {
                 return await this.greetingService.skills()
             }
             switch (text) {
-                case '/start':
-                    return this.greetingService.greeting(msg)
+                case '/startinterview':
+                    return this.startinterviewService.startinterview()
                 case '/help':
                     return this.helpService.help(chatId)
                 default:
