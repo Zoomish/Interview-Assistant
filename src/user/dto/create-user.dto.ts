@@ -5,5 +5,8 @@ export class CreateUserDto {
     name: string
 
     @IsNotEmpty()
+    nickname: string
+
+    @IsNotEmpty()
     tgId: number
 }
