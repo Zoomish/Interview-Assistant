@@ -23,9 +23,10 @@ export class GreetingService {
         )
     }
 
-    async profession(){
+    async profession() {
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
+        global.profession = false
         global.skills = true
         await bot.sendMessage(
             chatId,
@@ -33,5 +34,24 @@ export class GreetingService {
         )
     }
 
-    
+    async skills() {
+        const bot: TelegramBot = global.bot
+        const chatId = global.msg.chat.id
+        global.skills = false
+        global.experience = true
+        await bot.sendMessage(chatId, `Спасибо! Теперь укажите свой уровень.`, {
+            reply_markup: {
+                keyboard: [
+                    [
+                        {
+                            text: 'Войти в аккаунт',
+                            web_app: {
+                                url: process.env.URL,
+                            },
+                        },
+                    ],
+                ],
+            },
+        })
+    }
 }
