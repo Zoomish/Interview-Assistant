@@ -11,13 +11,4 @@ export class BadUserService {
             `К сожалению у тебя нет доступа к боту. Авторизуйтесь или получите доступ`
         )
     }
-
-    async noTg() {
-        const chatId = global.msg.chat.id
-        const bot: TelegramBot = global.bot
-        await bot.sendMessage(
-            chatId,
-            `К сожалению у тебя не подключен телеграм к аккаунту. Авторизуйтесь через почту и пароль`
-        )
-    }
 }
