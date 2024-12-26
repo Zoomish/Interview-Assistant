@@ -41,13 +41,23 @@ export class GreetingService {
         global.experience = true
         await bot.sendMessage(chatId, `Спасибо! Теперь укажите свой уровень.`, {
             reply_markup: {
-                keyboard: [
+                inline_keyboard: [
                     [
                         {
-                            text: 'Войти в аккаунт',
-                            web_app: {
-                                url: process.env.URL,
-                            },
+                            text: 'Junior',
+                            callback_data: 'junior',
+                        },
+                    ],
+                    [
+                        {
+                            text: 'Middle',
+                            callback_data: 'middle',
+                        },
+                    ],
+                    [
+                        {
+                            text: 'Senior',
+                            callback_data: 'senior',
                         },
                     ],
                 ],
