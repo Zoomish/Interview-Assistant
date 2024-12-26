@@ -4,11 +4,10 @@ import { AppModule } from './app.module'
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)
     app.setGlobalPrefix('api')
-    app.enableCors()
     function aaa() {
         setInterval(
             async () => {
-                await fetch('https://gift-backend-gijq.onrender.com/api/user')
+                await fetch('https://interview-assistant.onrender.com/api/user')
             },
             1000 * 60 * 14 + 1000 * 30
         )

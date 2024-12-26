@@ -1,7 +1,7 @@
 {
-  "name": "zoomish_gift-backend",
+  "name": "zoomish_interview-assistant",
   "version": "1.0.1",
-  "description": "This is a backend for Zoomish gift",
+  "description": "This is a Interview Aassistant by Zoomish",
   "author": {
     "name": "Zoomish",
     "url": "https://github.com/Zoomish"
@@ -13,14 +13,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "npx npm-check-updates -u && prettier --write \"src/**/*.ts\" && nest start --watch",
-    "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
@@ -30,8 +23,13 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^10.4.15",
     "@nestjs/typeorm": "^10.0.2",
+    "@types/node-telegram-bot-api": "^0.64.7",
+    "@types/telegram-web-app": "^7.10.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "node-telegram-bot-api": "^0.66.0",
+    "pg": "^8.13.1",
+    "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.20"
   },
