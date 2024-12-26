@@ -34,7 +34,7 @@ export class CallbackService {
                     [
                         {
                             text: 'Начать собеседование',
-                            callback_data: 'start',
+                            callback_data: 'startinterview',
                         },
                     ],
                 ],
