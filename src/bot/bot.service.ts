@@ -8,6 +8,7 @@ import {
     GreetingService,
     HelpService,
     StartinterviewService,
+    UserInfoService,
 } from './services'
 
 @Injectable()
@@ -17,6 +18,7 @@ export class BotService implements OnModuleInit {
         private readonly userService: UserService,
         private readonly configService: ConfigService,
         private readonly startinterviewService: StartinterviewService,
+        private readonly userInfoService: UserInfoService,
         private readonly helpService: HelpService,
         private readonly badCommandService: BadCommandService,
         private readonly greetingService: GreetingService
@@ -74,9 +76,9 @@ export class BotService implements OnModuleInit {
                 }
             }
             if (global.profession) {
-                return await this.greetingService.profession()
+                return await this.userInfoService.profession()
             } else if (global.skills) {
-                return await this.greetingService.skills()
+                return await this.userInfoService.skills()
             }
             switch (text) {
                 case '/startinterview':
