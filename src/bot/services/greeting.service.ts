@@ -19,18 +19,56 @@ export class GreetingService {
             global.profession = true
             text = `Какую профессию вы выбрали?`
         }
-        if (!user?.skills.length) {
+        if (!user?.skills.length && user?.profession) {
             global.skills = true
             text = `Укажите свои навыки, через запятую. Например: Node.js, React, Next`
         }
-        if (!user?.level) {
+        if (!user?.level && user?.skills.length) {
             global.level = true
+            text = `Теперь укажите свой уровень.`
         }
         global.user = user
         const bot: TelegramBot = global.bot
         await bot.sendMessage(
             msg.chat.id,
-            `Добро пожаловать, ${msg?.chat?.first_name}! Я здесь, чтобы помочь вам уверенно пройти собеседование. ${text}`
+            `Добро пожаловать, ${msg?.chat?.first_name}! Я здесь, чтобы помочь вам уверенно пройти собеседование. ${text}`,
+            global.level
+                ? {
+                      reply_markup: {
+                          inline_keyboard: [
+                              [
+                                  {
+                                      text: 'Начать собеседование',
+                                      callback_data: 'startinterview',
+                                  },
+                              ],
+                          ],
+                      },
+                  }
+                : {
+                      reply_markup: {
+                          inline_keyboard: [
+                              [
+                                  {
+                                      text: 'Junior',
+                                      callback_data: 'junior',
+                                  },
+                              ],
+                              [
+                                  {
+                                      text: 'Middle',
+                                      callback_data: 'middle',
+                                  },
+                              ],
+                              [
+                                  {
+                                      text: 'Senior',
+                                      callback_data: 'senior',
+                                  },
+                              ],
+                          ],
+                      },
+                  }
         )
     }
 }
