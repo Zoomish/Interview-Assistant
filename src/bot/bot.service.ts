@@ -43,26 +43,6 @@ export class BotService implements OnModuleInit {
                 description: 'Начать',
             },
             {
-                command: '/everyday',
-                description: 'Отправить сообщение другим пользователям',
-            },
-            {
-                command: '/allgifts',
-                description: 'Все подарки',
-            },
-            {
-                command: '/mygifts',
-                description: 'Мои подарки',
-            },
-            {
-                command: '/publicgifts',
-                description: 'Общие подарки',
-            },
-            {
-                command: '/me',
-                description: 'Мои подарки',
-            },
-            {
                 command: '/help',
                 description: 'Помощь с командами',
             },
