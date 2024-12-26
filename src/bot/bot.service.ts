@@ -53,10 +53,9 @@ export class BotService implements OnModuleInit {
             const chatId = msg.chat.id
             const text = msg.text
             global.msg = msg
-            console.log(msg)
             switch (text) {
                 case '/start':
-                    return this.greetingService.greeting(chatId, msg)
+                    return this.greetingService.greeting(msg)
                 case '/help':
                     return this.helpService.help(chatId)
                 default:
