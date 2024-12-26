@@ -20,7 +20,7 @@ export class User {
     @Column({ nullable: true })
     profession: string
 
-    @Column({ nullable: true, array: true, default: [] })
+    @Column({ nullable: true, array: true, default: [], type: 'text' })
     skills: string[]
 
     @Column({ nullable: true, unique: true })
