@@ -7,6 +7,6 @@ export class AppController {
 
     @Get()
     async AAA() {
-        return await this.appService.first()
+        return {}
     }
 }
