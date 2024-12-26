@@ -11,7 +11,7 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ nullable: false, default: false })
+    @Column({ nullable: false, default: true })
     admin: boolean
 
     @Column({ nullable: false })
@@ -25,6 +25,9 @@ export class User {
 
     @Column({ nullable: true, array: true, default: [], type: 'text' })
     skills: string[]
+
+    @Column({ nullable: true })
+    level: 'Junior' | 'Middle' | 'Senior'
 
     @Column({ nullable: true, unique: true })
     tgId: number
