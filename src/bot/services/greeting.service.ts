@@ -15,7 +15,7 @@ export class GreetingService {
         const bot: TelegramBot = global.bot
         await bot.sendMessage(
             msg.chat.id,
-            `Привет, ${msg?.chat?.first_name}! Этого бота я делал как дополнение к подарку, так что надеюсь он тебе понравится)`
+            `Добро пожаловать, ${msg?.chat?.first_name}! Я здесь, чтобы помочь вам уверенно пройти собеседование. Какую профессию вы выбрали?`
         )
     }
 }
