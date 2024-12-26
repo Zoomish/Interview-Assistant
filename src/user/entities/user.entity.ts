@@ -14,9 +14,6 @@ export class User {
     @Column({ nullable: false })
     email: string
 
-    @Column({ default: false, nullable: false })
-    admin: boolean
-
     @Column({ nullable: false })
     name: string
 
@@ -25,12 +22,6 @@ export class User {
 
     @Column({ nullable: true })
     tgId: number
-
-    @Column({ default: false })
-    showModal: boolean
-
-    @Column({ nullable: false })
-    password: string
 
     @CreateDateColumn()
     createdAt: Date
