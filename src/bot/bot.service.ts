@@ -59,11 +59,16 @@ export class BotService implements OnModuleInit {
             if (!global.user) {
                 const user = await this.userService.findOne(msg.chat.id)
                 global.user = user
+                if (!user?.profession) {
+                    global.profession = true
+                } else if (!user?.skills.length) {
+                    global.skills = true
+                }
             }
             if (global.profession) {
-                await this.greetingService.profession()
+                return await this.greetingService.profession()
             } else if (global.skills) {
-                await this.greetingService.skills()
+                return await this.greetingService.skills()
             }
         })
         bot.on('callback_query', async (callbackQuery) => {
