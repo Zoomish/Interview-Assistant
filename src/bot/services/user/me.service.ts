@@ -15,7 +15,7 @@ export class MeService {
         await bot.deleteMessage(msgWait.chat.id, msgWait.message_id)
         const text = `<b>Меня зовут:</b> ${user.name}\n<b>Профессия:</b> ${
             user.profession
-        }\n<b>Уровень:</b> ${user.level}\n<b>Навыки:</b>\n            ${user.skills.join('\n            ')}`
+        }\n<b>Уровень:</b> ${user.level}\n<b>Навыки:</b>\n      ${user.skills.join('\n      ')}`
         if (photos.photos.length) {
             return await bot.sendPhoto(
                 msg.chat.id,
