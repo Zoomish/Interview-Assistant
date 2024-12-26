@@ -26,9 +26,12 @@ export class GreetingService {
     async profession(){
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
+        global.skills = true
         await bot.sendMessage(
             chatId,
-            `Спасибо! Теперь, какие у вас навыки? Например: React, Next`
+            `Спасибо! Теперь укажите свои навыки, через запятую. Например: Node.js, React, Next`
         )
     }
+
+    
 }
