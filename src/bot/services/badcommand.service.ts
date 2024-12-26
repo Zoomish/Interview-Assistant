@@ -11,4 +11,13 @@ export class BadUserService {
             `К сожалению у тебя нет доступа к боту. Авторизуйтесь или получите доступ`
         )
     }
+
+    async badCommand() {
+        const bot: TelegramBot = global.bot
+        const msg: TelegramBot.Message = global.msg
+        await bot.sendMessage(
+            msg.chat.id,
+            `Неизвестная команда. Используйте другую`
+        )
+    }
 }
