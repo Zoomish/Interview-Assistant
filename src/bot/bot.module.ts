@@ -4,7 +4,6 @@ import { BotService } from './bot.service'
 import {
     BadUserService,
     CallbackService,
-    ForwardService,
     GreetingService,
     HelpService,
 } from './services'
@@ -17,7 +16,6 @@ import {
         CallbackService,
         HelpService,
         BadUserService,
-        ForwardService,
     ],
     exports: [],
 })

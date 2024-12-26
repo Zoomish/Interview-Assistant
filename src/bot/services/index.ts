@@ -1,5 +1,4 @@
 export * from './baduser.service'
 export * from './callback.service'
-export * from './forward.service'
 export * from './greeting.service'
 export * from './help.service'
