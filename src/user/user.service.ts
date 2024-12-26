@@ -12,12 +12,6 @@ export class UserService {
         private readonly userRepository: Repository<User>
     ) {}
     async create(createUserDto: CreateUserDto) {
-        const exist = await this.userRepository.findOne({
-            where: { tgId: createUserDto.tgId },
-        })
-        if (exist) {
-            throw new BadRequestException('User already exists')
-        }
         const user = await this.userRepository.save({
             ...createUserDto,
         })
