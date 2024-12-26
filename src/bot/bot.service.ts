@@ -52,6 +52,9 @@ export class BotService implements OnModuleInit {
                 const user = await this.userService.findOne(msg.chat.id)
                 global.user = user
             }
+            if (global.profession) {
+                await this.greetingService.profession()
+            }
         })
         bot.on('callback_query', async (callbackQuery) => {
             await this.callbackService.callback(callbackQuery)

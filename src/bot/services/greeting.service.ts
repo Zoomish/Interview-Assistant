@@ -15,10 +15,20 @@ export class GreetingService {
             })
         }
         global.user = user
+        global.profession = true
         const bot: TelegramBot = global.bot
         await bot.sendMessage(
             msg.chat.id,
             `Добро пожаловать, ${msg?.chat?.first_name}! Я здесь, чтобы помочь вам уверенно пройти собеседование. Какую профессию вы выбрали?`
+        )
+    }
+
+    async profession(){
+        const bot: TelegramBot = global.bot
+        const chatId = global.msg.chat.id
+        await bot.sendMessage(
+            chatId,
+            `Спасибо! Теперь, какие у вас навыки? Например: React, Next`
         )
     }
 }
