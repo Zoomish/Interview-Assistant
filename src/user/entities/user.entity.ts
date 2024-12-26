@@ -11,6 +11,9 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number
 
+    @Column({ nullable: false, default: false })
+    admin: boolean
+
     @Column({ nullable: false })
     name: string
 
