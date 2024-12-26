@@ -54,8 +54,7 @@ export class BotService implements OnModuleInit {
             }
             if (global.profession) {
                 await this.greetingService.profession()
-            }
-            if (global.skills) {
+            } else if (global.skills) {
                 await this.greetingService.skills()
             }
         })
