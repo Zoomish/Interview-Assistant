@@ -7,6 +7,7 @@ import {
     CallbackService,
     GreetingService,
     HelpService,
+    StartinterviewService,
 } from './services'
 
 @Injectable()
@@ -15,6 +16,7 @@ export class BotService implements OnModuleInit {
         private readonly callbackService: CallbackService,
         private readonly userService: UserService,
         private readonly configService: ConfigService,
+        private readonly startinterviewService: StartinterviewService,
         private readonly helpService: HelpService,
         private readonly badCommandService: BadCommandService,
         private readonly greetingService: GreetingService
