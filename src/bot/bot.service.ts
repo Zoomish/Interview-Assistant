@@ -70,6 +70,14 @@ export class BotService implements OnModuleInit {
             } else if (global.skills) {
                 return await this.greetingService.skills()
             }
+            switch (text) {
+                case '/start':
+                    return this.greetingService.greeting(msg)
+                case '/help':
+                    return this.helpService.help(chatId)
+                default:
+                    break
+            }
         })
         bot.on('callback_query', async (callbackQuery) => {
             await this.callbackService.callback(callbackQuery)
