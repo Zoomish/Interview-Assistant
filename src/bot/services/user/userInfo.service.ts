@@ -12,6 +12,7 @@ export class UserInfoService {
         global.profession = true
         await bot.sendMessage(msg.chat.id, `Какую профессию вы выбрали?`)
     }
+
     async getProfession() {
         const msg: TelegramBot.Message = global.msg
         global.profession = false
