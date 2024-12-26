@@ -11,6 +11,7 @@ export class CallbackService {
     ) {}
     async callback(callbackQuery: TelegramBot.CallbackQuery) {
         const action = callbackQuery.data
+        const bot: TelegramBot = global.bot
         const msg = callbackQuery.message
         global.msg = msg
         switch (action) {
@@ -21,6 +22,9 @@ export class CallbackService {
             case 'senior':
                 return await this.editUser('Senior', msg, callbackQuery.id)
             case 'startinterview':
+                await bot.answerCallbackQuery(callbackQuery.id, {
+                    text: 'Вы начали собеседование!',
+                })
                 return await this.startinterviewService.startinterview()
             default:
                 break
@@ -37,7 +41,6 @@ export class CallbackService {
             level: text,
         })
         await bot.answerCallbackQuery(id, {
-            show_alert: false,
             text: `Вы выбрали уровень ${text}`,
         })
         await bot.sendMessage(msg.chat.id, `Спасибо! Теперь можно начинать!`, {
