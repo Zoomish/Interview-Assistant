@@ -13,22 +13,19 @@ export class MeService {
             offset: 1,
         })
         await bot.deleteMessage(msgWait.chat.id, msgWait.message_id)
+        const text = `<b>Меня зовут:</b> ${user.name}`
         if (photos.photos.length) {
             return await bot.sendPhoto(
                 msg.chat.id,
                 photos.photos[0][0].file_id,
                 {
-                    caption: `<b>Меня зовут:</b> ${user.name}`,
+                    caption: text,
                     parse_mode: 'HTML',
                 }
             )
         }
-        return await bot.sendMessage(
-            msg.chat.id,
-            `<b>Меня зовут:</b> ${user.name}`,
-            {
-                parse_mode: 'HTML',
-            }
-        )
+        return await bot.sendMessage(msg.chat.id, text, {
+            parse_mode: 'HTML',
+        })
     }
 }
