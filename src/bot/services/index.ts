@@ -1,7 +1,5 @@
 export * from './baduser.service'
 export * from './callback.service'
-export * from './everyday'
 export * from './forward.service'
 export * from './greeting.service'
 export * from './help.service'
-export * from './web'

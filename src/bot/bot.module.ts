@@ -4,15 +4,9 @@ import { BotService } from './bot.service'
 import {
     BadUserService,
     CallbackService,
-    EveryDayStartMessageService,
     ForwardService,
     GreetingService,
     HelpService,
-    SendMessagesService,
-    SuccessAuthService,
-    WebInitService,
-    WebUserAuthService,
-    WebUserService,
 } from './services'
 
 @Module({
@@ -23,13 +17,7 @@ import {
         CallbackService,
         HelpService,
         BadUserService,
-        WebInitService,
-        WebUserService,
-        WebUserAuthService,
-        SuccessAuthService,
         ForwardService,
-        SendMessagesService,
-        EveryDayStartMessageService,
     ],
     exports: [],
 })
