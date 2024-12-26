@@ -66,7 +66,7 @@ export class BotService implements OnModuleInit {
                 await this.webInitService.init(msg)
             }
             if (!global.user) {
-                const user = await this.userService.findOneByTgId(msg.chat.id)
+                const user = await this.userService.findOne(msg.chat.id)
                 if (!user) {
                     return this.badUserService.noTg()
                 }

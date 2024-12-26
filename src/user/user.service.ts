@@ -13,7 +13,7 @@ export class UserService {
     ) {}
     async create(createUserDto: CreateUserDto) {
         const exist = await this.userRepository.findOne({
-            where: { email: createUserDto.email },
+            where: { tgId: createUserDto.tgId },
         })
         if (exist) {
             throw new BadRequestException('User already exists')
@@ -24,9 +24,9 @@ export class UserService {
         return user
     }
 
-    async findOne(email: string) {
+    async findOne(tgId: number) {
         return await this.userRepository.findOne({
-            where: { email },
+            where: { tgId },
         })
     }
 
@@ -34,14 +34,8 @@ export class UserService {
         return await this.userRepository.find()
     }
 
-    async update(email: string, dto: UpdateUserDto) {
-        const user = await this.findOne(email)
+    async update(tgId: number, dto: UpdateUserDto) {
+        const user = await this.findOne(tgId)
         return await this.userRepository.save(Object.assign(user, dto))
-    }
-
-    async findOneByTgId(tgId: number) {
-        return await this.userRepository.findOne({
-            where: { tgId },
-        })
     }
 }
