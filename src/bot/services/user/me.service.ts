@@ -8,6 +8,7 @@ export class MeService {
     async getMe(msg: TelegramBot.Message) {
         const bot: TelegramBot = global.bot
         const msgWait = await bot.sendMessage(msg.chat.id, `Получаю данные...`)
+        await bot.sendChatAction(msg.chat.id, 'typing')
         const user = await this.userService.findOne(msg.chat.id)
         const photos = await bot.getUserProfilePhotos(user.tgId, {
             offset: 1,
