@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
 
 @Injectable()
-export class BadUserService {
+export class BadCommandService {
     constructor() {}
     async badUser(chatId) {
         const bot: TelegramBot = global.bot
