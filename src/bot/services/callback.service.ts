@@ -9,16 +9,17 @@ export class CallbackService {
         private readonly userService: UserService,
         private readonly startinterviewService: StartinterviewService
     ) {}
-    async callback(callbackQuery) {
+    async callback(callbackQuery: TelegramBot.CallbackQuery) {
         const action = callbackQuery.data
         const msg = callbackQuery.message
+        global.msg = msg
         switch (action) {
             case 'junior':
-                return await this.editUser('Junior', msg)
+                return await this.editUser('Junior', msg, callbackQuery.id)
             case 'middle':
-                return await this.editUser('Middle', msg)
+                return await this.editUser('Middle', msg, callbackQuery.id)
             case 'senior':
-                return await this.editUser('Senior', msg)
+                return await this.editUser('Senior', msg, callbackQuery.id)
             case 'startinterview':
                 return await this.startinterviewService.startinterview()
             default:
@@ -28,11 +29,16 @@ export class CallbackService {
 
     private async editUser(
         text: 'Junior' | 'Middle' | 'Senior',
-        msg: TelegramBot.Message
+        msg: TelegramBot.Message,
+        id: string
     ) {
         const bot: TelegramBot = global.bot
         await this.userService.update(msg.chat.id, {
             level: text,
+        })
+        await bot.answerCallbackQuery(id, {
+            show_alert: false,
+            text: `Вы выбрали уровень ${text}`,
         })
         await bot.sendMessage(msg.chat.id, `Спасибо! Теперь можно начинать!`, {
             reply_markup: {
