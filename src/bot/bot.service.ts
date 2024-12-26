@@ -46,7 +46,7 @@ export class BotService implements OnModuleInit {
                 description: 'Начать собеседование',
             },
             {
-                command: '/editme',
+                command: '/me',
                 description: 'Редактировать профиль',
             },
             {
@@ -85,7 +85,7 @@ export class BotService implements OnModuleInit {
             switch (text) {
                 case '/startinterview':
                     return this.startinterviewService.startinterview()
-                case '/editme':
+                case '/me':
                     return this.meService.getMe(msg)
                 default:
                     return this.badCommandService.badCommand()
