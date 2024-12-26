@@ -25,43 +25,53 @@ export class GreetingService {
 
     async profession() {
         const bot: TelegramBot = global.bot
-        const chatId = global.msg.chat.id
+        const msg: TelegramBot.Message = global.msg
         global.profession = false
         global.skills = true
+        await this.userService.update(msg.chat.id, {
+            profession: msg.text,
+        })
         await bot.sendMessage(
-            chatId,
+            msg.chat.id,
             `Спасибо! Теперь укажите свои навыки, через запятую. Например: Node.js, React, Next`
         )
     }
 
     async skills() {
         const bot: TelegramBot = global.bot
-        const chatId = global.msg.chat.id
+        const msg: TelegramBot.Message = global.msg
         global.skills = false
         global.experience = true
-        await bot.sendMessage(chatId, `Спасибо! Теперь укажите свой уровень.`, {
-            reply_markup: {
-                inline_keyboard: [
-                    [
-                        {
-                            text: 'Junior',
-                            callback_data: 'junior',
-                        },
-                    ],
-                    [
-                        {
-                            text: 'Middle',
-                            callback_data: 'middle',
-                        },
-                    ],
-                    [
-                        {
-                            text: 'Senior',
-                            callback_data: 'senior',
-                        },
-                    ],
-                ],
-            },
+        await this.userService.update(msg.chat.id, {
+            skills: msg.text.replaceAll(' ', '').split(','),
         })
+        await bot.sendMessage(
+            msg.chat.id,
+            `Спасибо! Теперь укажите свой уровень.`,
+            {
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: 'Junior',
+                                callback_data: 'junior',
+                            },
+                        ],
+                        [
+                            {
+                                text: 'Middle',
+                                callback_data: 'middle',
+                            },
+                        ],
+                        [
+                            {
+                                text: 'Senior',
+                                callback_data: 'senior',
+                            },
+                        ],
+                    ],
+                },
+            }
+        )
     }
 }

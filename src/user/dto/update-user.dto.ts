@@ -4,11 +4,11 @@ import { CreateUserDto } from './create-user.dto'
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {
     @IsOptional()
-    profession: string
+    profession?: string
 
     @IsOptional()
-    level: string
+    level?: string
 
     @IsOptional()
-    skills: string[]
+    skills?: string[]
 }
