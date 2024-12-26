@@ -1,14 +1,9 @@
-import { Betting } from 'src/betting/entities/betting.entity'
-import { Gift } from 'src/gift/entities/gift.entity'
 import {
     Column,
     CreateDateColumn,
     Entity,
-    JoinTable,
-    ManyToMany,
-    OneToMany,
     PrimaryGeneratedColumn,
-    UpdateDateColumn,
+    UpdateDateColumn
 } from 'typeorm'
 
 @Entity()
@@ -36,17 +31,6 @@ export class User {
 
     @Column({ nullable: false })
     password: string
-
-    @OneToMany(() => Gift, (gift) => gift.user, {
-        onDelete: 'CASCADE',
-    })
-    gifts: Gift[]
-
-    @ManyToMany(() => Betting, (betting) => betting.user, {
-        onDelete: 'CASCADE',
-    })
-    @JoinTable()
-    bettings: Betting[]
 
     @CreateDateColumn()
     createdAt: Date

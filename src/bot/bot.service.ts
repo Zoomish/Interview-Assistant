@@ -9,7 +9,6 @@ import {
     ForwardService,
     GreetingService,
     HelpService,
-    MeService,
     WebInitService,
 } from './services'
 
@@ -17,7 +16,6 @@ import {
 export class BotService implements OnModuleInit {
     constructor(
         private readonly callbackService: CallbackService,
-        private readonly meService: MeService,
         private readonly userService: UserService,
         private readonly configService: ConfigService,
         private readonly helpService: HelpService,
@@ -105,8 +103,6 @@ export class BotService implements OnModuleInit {
             switch (text) {
                 case '/everyday':
                     return this.startMessageService.start(chatId)
-                case '/me':
-                    return this.meService.getMe(msg)
                 default:
                     break
             }
