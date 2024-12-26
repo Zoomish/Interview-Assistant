@@ -6,16 +6,15 @@ import { UserService } from 'src/user/user.service'
 export class CallbackService {
     constructor(private readonly userService: UserService) {}
     async callback(callbackQuery) {
-        const bot: TelegramBot = global.bot
         const action = callbackQuery.data
         const msg = callbackQuery.message
         switch (action) {
             case 'junior':
-                await this.editUser('Junior', msg)
+                return await this.editUser('Junior', msg)
             case 'middle':
-                await this.editUser('Middle', msg)
+                return await this.editUser('Middle', msg)
             case 'senior':
-                await this.editUser('Senior', msg)
+                return await this.editUser('Senior', msg)
             default:
                 break
         }
