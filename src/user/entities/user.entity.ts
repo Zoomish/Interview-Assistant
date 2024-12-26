@@ -12,15 +12,18 @@ export class User {
     id: number
 
     @Column({ nullable: false })
-    email: string
-
-    @Column({ nullable: false })
     name: string
 
     @Column({ nullable: true })
     nickname: string
 
     @Column({ nullable: true })
+    profession: string
+
+    @Column({ nullable: true })
+    skills: string[]
+
+    @Column({ nullable: true, unique: true })
     tgId: number
 
     @CreateDateColumn()
