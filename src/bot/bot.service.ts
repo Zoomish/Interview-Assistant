@@ -73,15 +73,6 @@ export class BotService implements OnModuleInit {
             const text = msg.text
             global.msg = msg
             console.log(msg)
-            const whiteList: Array<string> = this.configService
-                .get('WHITE_LIST')
-                .split(',')
-                .map((id) => {
-                    return Number(id)
-                })
-            if (!whiteList.find((id) => Number(id) === msg.chat.id)) {
-                return this.badUserService.badUser(chatId)
-            }
             switch (text) {
                 case '/start':
                     return this.greetingService.greeting(chatId, msg)
