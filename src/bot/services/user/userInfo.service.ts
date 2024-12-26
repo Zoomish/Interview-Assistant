@@ -5,27 +5,42 @@ import { UserService } from 'src/user/user.service'
 @Injectable()
 export class UserInfoService {
     constructor(private readonly userService: UserService) {}
-    async profession() {
+
+    async sendProfession() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
+        global.profession = true
+        await bot.sendMessage(msg.chat.id, `Какую профессию вы выбрали?`)
+    }
+    async getProfession() {
+        const msg: TelegramBot.Message = global.msg
         global.profession = false
-        global.skills = true
         await this.userService.update(msg.chat.id, {
             profession: msg.text,
         })
+    }
+
+    async sendSkills() {
+        const bot: TelegramBot = global.bot
+        const msg: TelegramBot.Message = global.msg
+        global.skills = true
         await bot.sendMessage(
             msg.chat.id,
             `Отлично! Теперь укажите свои навыки, через запятую. Например: Node.js, React, Next`
         )
     }
 
-    async skills() {
-        const bot: TelegramBot = global.bot
+    async getSkills() {
         const msg: TelegramBot.Message = global.msg
         global.skills = false
         await this.userService.update(msg.chat.id, {
             skills: msg.text.replaceAll(' ', '').split(','),
         })
+    }
+
+    async level() {
+        const bot: TelegramBot = global.bot
+        const msg: TelegramBot.Message = global.msg
         await bot.sendMessage(
             msg.chat.id,
             `Отлично! Теперь укажите свой уровень.`,
