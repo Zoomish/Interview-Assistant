@@ -41,7 +41,6 @@ export class GreetingService {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
         global.skills = false
-        global.experience = true
         await this.userService.update(msg.chat.id, {
             skills: msg.text.replaceAll(' ', '').split(','),
         })

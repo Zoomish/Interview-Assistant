@@ -55,6 +55,9 @@ export class BotService implements OnModuleInit {
             if (global.profession) {
                 await this.greetingService.profession()
             }
+            if (global.skills) {
+                await this.greetingService.skills()
+            }
         })
         bot.on('callback_query', async (callbackQuery) => {
             await this.callbackService.callback(callbackQuery)
