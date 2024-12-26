@@ -40,7 +40,7 @@ export class GreetingService {
         })
         await bot.sendMessage(
             msg.chat.id,
-            `Спасибо! Теперь укажите свои навыки, через запятую. Например: Node.js, React, Next`
+            `Отлично! Теперь укажите свои навыки, через запятую. Например: Node.js, React, Next`
         )
     }
 
@@ -53,7 +53,7 @@ export class GreetingService {
         })
         await bot.sendMessage(
             msg.chat.id,
-            `Спасибо! Теперь укажите свой уровень.`,
+            `Отлично! Теперь укажите свой уровень.`,
             {
                 reply_markup: {
                     inline_keyboard: [
