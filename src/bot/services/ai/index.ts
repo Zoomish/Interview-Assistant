@@ -1,2 +1,1 @@
-export * from './aiStart.service';
-
+export * from './aiStart.service'
