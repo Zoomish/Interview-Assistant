@@ -8,9 +8,12 @@ export class StartinterviewService {
     async startinterview() {
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
-        await bot.sendMessage(
-            chatId,
-            `Все команды бота\n\n${(await bot.getMyCommands()).map((el) => `/${el.command} - ${el.description}`).join('\n\n')}`
+        const model = await this.aiStartService.getModel()
+        const chat = model.startChat()
+        console.log(chat)
+        const text = await model.generateContent(
+            'Сколько примитивных типов в js?'
         )
+        return await bot.sendMessage(chatId, text.response.text())
     }
 }

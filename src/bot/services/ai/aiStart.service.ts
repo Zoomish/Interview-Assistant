@@ -13,10 +13,10 @@ export class AiStartService implements OnModuleInit {
             systemInstruction:
                 'Ты эйчар, твое имя Максим. Ты технический специалист, который задает технические вопросы по навыкам. Ты отвечаешь, правильно или неправильно человек ответил на вопрос. В случае правильного ответа ты говоришь об этом и задаешь следующий вопрос. В случае неправильного - объясняешь где ошибка и после этого задаешь следующий вопрос',
         })
-        await this.getModel(model)
+        global.ai = model
     }
 
-    async getModel(model: GenerativeModel) {
-        return model
+    async getModel() {
+        return global.ai as GenerativeModel
     }
 }
