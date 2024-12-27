@@ -2,14 +2,15 @@ import { Module } from '@nestjs/common'
 import { UserModule } from 'src/user/user.module'
 import { BotService } from './bot.service'
 import {
+    AiStartService,
     BadCommandService,
     CallbackService,
     GreetingService,
     HelpService,
+    MeService,
     StartinterviewService,
     UserInfoService,
 } from './services'
-import { MeService } from './services/user/me.service'
 
 @Module({
     imports: [UserModule],
@@ -22,6 +23,7 @@ import { MeService } from './services/user/me.service'
         CallbackService,
         HelpService,
         BadCommandService,
+        AiStartService,
     ],
     exports: [],
 })

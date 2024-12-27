@@ -7,10 +7,10 @@ import {
     CallbackService,
     GreetingService,
     HelpService,
+    MeService,
     StartinterviewService,
     UserInfoService,
 } from './services'
-import { MeService } from './services/user/me.service'
 
 @Injectable()
 export class BotService implements OnModuleInit {
@@ -75,13 +75,15 @@ export class BotService implements OnModuleInit {
                     global.profession = true
                 } else if (!user?.skills.length) {
                     global.skills = true
+                } else if (!user?.level) {
+                    global.level = true
                 }
             }
             if (global.profession) {
                 return await this.userInfoService.getProfession()
             } else if (global.skills) {
                 return await this.userInfoService.getSkills()
-            }else if (global.level) {
+            } else if (global.level) {
                 return await this.userInfoService.level()
             }
             switch (text) {
