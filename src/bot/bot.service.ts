@@ -7,10 +7,10 @@ import {
     CallbackService,
     GreetingService,
     HelpService,
+    MeService,
     StartinterviewService,
     UserInfoService,
 } from './services'
-import { MeService } from './services/user/me.service'
 
 @Injectable()
 export class BotService implements OnModuleInit {
