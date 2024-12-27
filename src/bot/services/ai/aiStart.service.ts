@@ -1,8 +1,11 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
-import { Injectable } from '@nestjs/common'
+import { Injectable, OnModuleInit } from '@nestjs/common'
 
 @Injectable()
-export class AppService {
+export class AiStartService implements OnModuleInit {
+    async onModuleInit() {
+        const geminiToken = this.configService.get('TELEGRAM_TOKEN')
+    }
     private readonly genAI = new GoogleGenerativeAI(process.env.GEMINI_API)
     private readonly model = this.genAI.getGenerativeModel({
         model: 'gemini-1.5-flash',
