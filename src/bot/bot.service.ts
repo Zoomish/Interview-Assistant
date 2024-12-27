@@ -5,6 +5,7 @@ import { UserService } from 'src/user/user.service'
 import {
     BadCommandService,
     CallbackService,
+    GenerateContentService,
     GreetingService,
     HelpService,
     MeService,
@@ -21,6 +22,7 @@ export class BotService implements OnModuleInit {
         private readonly startinterviewService: StartinterviewService,
         private readonly userInfoService: UserInfoService,
         private readonly helpService: HelpService,
+        private readonly generateContentService: GenerateContentService,
         private readonly meService: MeService,
         private readonly badCommandService: BadCommandService,
         private readonly greetingService: GreetingService
@@ -60,6 +62,8 @@ export class BotService implements OnModuleInit {
             const chatId = msg.chat.id
             const text = msg.text
             global.msg = msg
+            console.log(msg)
+
             switch (text) {
                 case '/start':
                     return this.greetingService.greeting(msg)
@@ -92,7 +96,12 @@ export class BotService implements OnModuleInit {
                 case '/me':
                     return this.meService.getMe(msg)
                 default:
-                    return this.badCommandService.badCommand()
+                    if (msg.entities[0].type === 'bot_command') {
+                        return await this.badCommandService.badCommand()
+                    }
+                    return await this.generateContentService.generateQuetion(
+                        msg.text
+                    )
             }
         })
         bot.on('callback_query', async (callbackQuery) => {
