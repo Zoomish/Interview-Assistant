@@ -9,6 +9,7 @@ import {
     StartinterviewService,
     UserInfoService,
 } from './services'
+import { AiStartService } from './services/ai'
 import { MeService } from './services/user/me.service'
 
 @Module({
@@ -22,6 +23,7 @@ import { MeService } from './services/user/me.service'
         CallbackService,
         HelpService,
         BadCommandService,
+        AiStartService,
     ],
     exports: [],
 })
