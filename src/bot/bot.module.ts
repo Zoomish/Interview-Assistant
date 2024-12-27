@@ -5,6 +5,7 @@ import {
     AiStartService,
     BadCommandService,
     CallbackService,
+    GenerateContentService,
     GreetingService,
     HelpService,
     MeService,
@@ -24,6 +25,7 @@ import {
         HelpService,
         BadCommandService,
         AiStartService,
+        GenerateContentService,
     ],
     exports: [],
 })
