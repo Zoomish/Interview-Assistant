@@ -96,7 +96,7 @@ export class BotService implements OnModuleInit {
                 case '/me':
                     return this.meService.getMe(msg)
                 default:
-                    if (msg?.entities[0]?.type === 'bot_command') {
+                    if (msg?.entities && msg?.entities[0]?.type === 'bot_command') {
                         return await this.badCommandService.badCommand()
                     }
                     return await this.generateContentService.generateQuetion(
