@@ -9,7 +9,7 @@ export class GenerateContentService {
         const model = await this.aiStartService.getModel()
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
-        const generatedText = await model.generateContent(text)
+        const generatedText = await model.sendMessage(text)
         return await bot.sendMessage(chatId, generatedText.response.text())
     }
 }
