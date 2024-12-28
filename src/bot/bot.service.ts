@@ -77,19 +77,21 @@ export class BotService implements OnModuleInit {
                 global.user = user
                 if (!user?.profession) {
                     global.profession = true
-                    await this.userInfoService.sendProfession()
                 }
                 if (!user?.skills.length) {
                     global.skills = true
-                    if (user?.profession) {
-                        await this.userInfoService.sendSkills()
-                    }
                 }
                 if (!user?.level) {
                     global.level = true
-                    if (user?.skills.length) {
-                        return await this.userInfoService.level()
-                    }
+                }
+                if (!user?.profession) {
+                    return await this.userInfoService.sendProfession()
+                }
+                if (!user?.skills.length) {
+                    return await this.userInfoService.sendSkills()
+                }
+                if (!user?.level) {
+                    return await this.userInfoService.level()
                 }
             }
             if (global.profession) {
