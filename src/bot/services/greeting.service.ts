@@ -32,43 +32,45 @@ export class GreetingService {
         await bot.sendMessage(
             msg.chat.id,
             `Добро пожаловать, ${msg?.chat?.first_name}! Я здесь, чтобы помочь вам уверенно пройти собеседование. ${text}`,
-            user.level
-                ? {
-                      reply_markup: {
-                          inline_keyboard: [
-                              [
-                                  {
-                                      text: 'Начать собеседование',
-                                      callback_data: 'startinterview',
-                                  },
+            user?.skills.length
+                ? user.level
+                    ? {
+                          reply_markup: {
+                              inline_keyboard: [
+                                  [
+                                      {
+                                          text: 'Начать собеседование',
+                                          callback_data: 'startinterview',
+                                      },
+                                  ],
                               ],
-                          ],
-                      },
-                  }
-                : {
-                      reply_markup: {
-                          inline_keyboard: [
-                              [
-                                  {
-                                      text: 'Junior',
-                                      callback_data: 'junior',
-                                  },
+                          },
+                      }
+                    : {
+                          reply_markup: {
+                              inline_keyboard: [
+                                  [
+                                      {
+                                          text: 'Junior',
+                                          callback_data: 'junior',
+                                      },
+                                  ],
+                                  [
+                                      {
+                                          text: 'Middle',
+                                          callback_data: 'middle',
+                                      },
+                                  ],
+                                  [
+                                      {
+                                          text: 'Senior',
+                                          callback_data: 'senior',
+                                      },
+                                  ],
                               ],
-                              [
-                                  {
-                                      text: 'Middle',
-                                      callback_data: 'middle',
-                                  },
-                              ],
-                              [
-                                  {
-                                      text: 'Senior',
-                                      callback_data: 'senior',
-                                  },
-                              ],
-                          ],
-                      },
-                  }
+                          },
+                      }
+                : {}
         )
     }
 }
