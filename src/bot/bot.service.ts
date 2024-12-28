@@ -59,6 +59,8 @@ export class BotService implements OnModuleInit {
 
         bot.on('message', async (msg: TelegramBot.Message) => {
             if (msg.chat.type !== 'private') return
+            const bot: TelegramBot = global.bot
+            await bot.sendChatAction(msg.chat.id, 'typing')
             const chatId = msg.chat.id
             const text = msg.text
             global.msg = msg
