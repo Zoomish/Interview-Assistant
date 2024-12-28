@@ -10,15 +10,17 @@ export class UserInfoService {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
         global.profession = true
-        await bot.sendMessage(msg.chat.id, `Какую профессию вы выбрали?`)
+        return await bot.sendMessage(msg.chat.id, `Какую профессию вы выбрали?`)
     }
 
     async getProfession() {
+        const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
         global.profession = false
         await this.userService.update(msg.chat.id, {
             profession: msg.text,
         })
+        return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
     }
 
     async sendSkills() {
@@ -32,11 +34,13 @@ export class UserInfoService {
     }
 
     async getSkills() {
+        const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
         global.skills = false
         await this.userService.update(msg.chat.id, {
             skills: msg.text.replaceAll(' ', '').split(','),
         })
+        return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
     }
 
     async level() {
