@@ -1,6 +1,6 @@
-import { Injectable, OnModuleInit } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import TelegramBot, * as telegram from 'node-telegram-bot-api'
+import TelegramBot from 'node-telegram-bot-api'
 import { UserService } from 'src/user/user.service'
 import {
     BadCommandService,
@@ -14,7 +14,7 @@ import {
 } from '.'
 
 @Injectable()
-export class HandleService implements OnModuleInit {
+export class HandleService {
     constructor(
         private readonly callbackService: CallbackService,
         private readonly userService: UserService,
@@ -28,35 +28,8 @@ export class HandleService implements OnModuleInit {
         private readonly greetingService: GreetingService
     ) {}
 
-    async onModuleInit() {
-        const telegramToken = this.configService.get('TELEGRAM_TOKEN')
-        const bot: TelegramBot = new telegram(telegramToken, {
-            polling: true,
-        })
-        await this.initBot(bot)
-    }
-
     async initBot(bot: TelegramBot) {
         global.bot = bot
-        await bot.setMyCommands([
-            {
-                command: '/start',
-                description: 'Начать',
-            },
-            {
-                command: '/startinterview',
-                description: 'Начать собеседование',
-            },
-            {
-                command: '/me',
-                description: 'Редактировать профиль',
-            },
-            {
-                command: '/help',
-                description: 'Помощь с командами',
-            },
-        ])
-
         bot.on('message', async (msg: TelegramBot.Message) => {
             if (msg.chat.type !== 'private') return
             const bot: TelegramBot = global.bot
