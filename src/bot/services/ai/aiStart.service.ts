@@ -1,7 +1,4 @@
-import {
-    ChatSession,
-    GoogleGenerativeAI
-} from '@google/generative-ai'
+import { ChatSession, GoogleGenerativeAI } from '@google/generative-ai'
 import { Injectable, OnModuleInit } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 
