@@ -27,17 +27,22 @@ export class EditLevelService {
         await bot.answerCallbackQuery(id, {
             text: `Вы изменили уровень на ${text}`,
         })
-        await bot.sendMessage(msg.chat.id, `Спасибо! Теперь можно начинать!`, {
-            reply_markup: {
-                inline_keyboard: [
-                    [
-                        {
-                            text: 'Начать собеседование',
-                            callback_data: 'startinterview',
-                        },
+        await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
+        return await bot.sendMessage(
+            msg.chat.id,
+            `Спасибо! Теперь можно начинать!`,
+            {
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: 'Начать собеседование',
+                                callback_data: 'startinterview',
+                            },
+                        ],
                     ],
-                ],
-            },
-        })
+                },
+            }
+        )
     }
 }
