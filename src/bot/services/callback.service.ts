@@ -49,7 +49,7 @@ export class CallbackService {
             level: text,
         })
         await bot.answerCallbackQuery(id, {
-            text: `Вы выбрали уровень ${text}`,
+            text: `Вы изменили уровень на ${text}`,
         })
         await bot.sendMessage(msg.chat.id, `Спасибо! Теперь можно начинать!`, {
             reply_markup: {
