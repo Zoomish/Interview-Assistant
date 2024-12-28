@@ -19,13 +19,17 @@ export class GreetingService {
             global.profession = true
             text = `Какую профессию вы выбрали?`
         }
-        if (!user?.skills.length && user?.profession) {
+        if (!user?.skills.length) {
             global.skills = true
-            text = `Укажите свои навыки, через запятую. Например: Node.js, React, Next`
+            if (user?.profession) {
+                text = `Укажите свои навыки, через запятую. Например: Node.js, React, Next`
+            }
         }
-        if (!user?.level && user?.skills.length) {
+        if (!user?.level) {
             global.level = true
-            text = `Теперь укажите свой уровень.`
+            if (user?.skills.length) {
+                text = `Теперь укажите свой уровень.`
+            }
         }
         global.user = user
         const bot: TelegramBot = global.bot
