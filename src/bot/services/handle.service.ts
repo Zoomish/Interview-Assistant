@@ -33,7 +33,7 @@ export class HandleService {
         global.msg = msg
         await this.startOptions(text, msg)
         if (!global.user) {
-            return await this.noGlobalUser(msg)
+            await this.noGlobalUser(msg)
         }
         if (
             global.user?.profession ||
