@@ -56,19 +56,19 @@ export class UserInfoService {
                         [
                             {
                                 text: 'Junior',
-                                callback_data: 'junior',
+                                callback_data: 'level_junior',
                             },
                         ],
                         [
                             {
                                 text: 'Middle',
-                                callback_data: 'middle',
+                                callback_data: 'level_middle',
                             },
                         ],
                         [
                             {
                                 text: 'Senior',
-                                callback_data: 'senior',
+                                callback_data: 'level_senior',
                             },
                         ],
                     ],
