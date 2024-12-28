@@ -35,11 +35,7 @@ export class HandleService {
         if (!global.user) {
             await this.noGlobalUser(msg)
         }
-        if (
-            global.user?.profession ||
-            global.user?.skills.length ||
-            global.user?.level
-        ) {
+        if (global?.profession || global?.skills?.length || global?.level) {
             return await this.setUserInfo()
         }
         return await this.endOptions(text, msg)
