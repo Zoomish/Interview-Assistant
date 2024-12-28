@@ -32,7 +32,14 @@ export class HandleService {
         await bot.sendChatAction(chatId, 'typing')
         const text = msg.text
         global.msg = msg
-        await this.startOptions(text, msg)
+        switch (text) {
+            case '/start':
+                return await this.greetingService.greeting(msg)
+            case '/help':
+                return await this.helpService.help(msg.chat.id)
+            default:
+                break
+        }
         if (!global.user) {
             const user = await this.userService.findOne(msg.chat.id)
             global.user = user
@@ -44,17 +51,6 @@ export class HandleService {
             return await this.setUserInfo()
         }
         return await this.endOptions(text, msg)
-    }
-
-    async startOptions(text, msg: TelegramBot.Message) {
-        switch (text) {
-            case '/start':
-                return await this.greetingService.greeting(msg)
-            case '/help':
-                return await this.helpService.help(msg.chat.id)
-            default:
-                break
-        }
     }
 
     async noGlobalUser(user: User) {
