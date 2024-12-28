@@ -9,6 +9,7 @@ import {
     EditUserService,
     GenerateContentService,
     GreetingService,
+    HandleService,
     HelpService,
     MeService,
     StartinterviewService,
@@ -30,6 +31,7 @@ import {
         GenerateContentService,
         EditLevelService,
         EditUserService,
+        HandleService,
     ],
     exports: [],
 })
