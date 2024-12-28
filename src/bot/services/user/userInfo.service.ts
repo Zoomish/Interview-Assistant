@@ -42,6 +42,7 @@ export class UserInfoService {
     async level() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
+        global.level = false
         await bot.sendMessage(
             msg.chat.id,
             `Отлично! Теперь укажите свой уровень.`,

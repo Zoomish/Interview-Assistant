@@ -96,6 +96,8 @@ export class BotService implements OnModuleInit {
                 if (global.level) {
                     return await this.userInfoService.level()
                 }
+            } else if (global.level) {
+                return await this.userInfoService.level()
             }
             switch (text) {
                 case '/startinterview':
