@@ -10,7 +10,7 @@ export class GreetingService {
         if (!user) {
             user = await this.userService.create({
                 tgId: msg.chat.id,
-                name: msg?.chat?.first_name + ' ' + msg?.chat?.last_name,
+                name: msg?.chat?.first_name + ' ' + msg?.chat?.last_name || '',
                 nickname: msg?.chat?.username,
             })
         }
