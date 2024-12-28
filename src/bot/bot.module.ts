@@ -5,6 +5,8 @@ import {
     AiStartService,
     BadCommandService,
     CallbackService,
+    EditLevelService,
+    EditUserService,
     GenerateContentService,
     GreetingService,
     HelpService,
@@ -26,6 +28,8 @@ import {
         BadCommandService,
         AiStartService,
         GenerateContentService,
+        EditLevelService,
+        EditUserService,
     ],
     exports: [],
 })
