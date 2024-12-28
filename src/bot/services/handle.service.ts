@@ -66,9 +66,9 @@ export class HandleService implements OnModuleInit {
             global.msg = msg
             switch (text) {
                 case '/start':
-                    return this.greetingService.greeting(msg)
+                    return await this.greetingService.greeting(msg)
                 case '/help':
-                    return this.helpService.help(chatId)
+                    return await this.helpService.help(chatId)
                 default:
                     break
             }
