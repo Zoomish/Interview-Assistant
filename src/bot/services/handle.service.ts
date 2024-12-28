@@ -31,14 +31,7 @@ export class HandleService {
         await bot.sendChatAction(chatId, 'typing')
         const text = msg.text
         global.msg = msg
-        switch (text) {
-            case '/start':
-                return await this.greetingService.greeting(msg)
-            case '/help':
-                return await this.helpService.help(chatId)
-            default:
-                break
-        }
+        await this.noNeedUser(text, msg)
         if (!global.user) {
             return await this.noGlobalUser(msg)
         }
@@ -61,6 +54,17 @@ export class HandleService {
                 return await this.generateContentService.generateQuetion(
                     msg.text
                 )
+        }
+    }
+
+    async noNeedUser(text, msg: TelegramBot.Message) {
+        switch (text) {
+            case '/start':
+                return await this.greetingService.greeting(msg)
+            case '/help':
+                return await this.helpService.help(msg.chat.id)
+            default:
+                break
         }
     }
 
