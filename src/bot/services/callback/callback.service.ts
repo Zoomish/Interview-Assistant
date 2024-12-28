@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
+import { BadCommandService } from '../badcommand.service'
 import { StartinterviewService } from '../startInterview.service'
 import { EditLevelService } from './editLevel.service'
 import { EditUserService } from './editUser.service'
@@ -9,6 +10,7 @@ export class CallbackService {
     constructor(
         private readonly editLevelService: EditLevelService,
         private readonly editUserService: EditUserService,
+        private readonly badCommandService: BadCommandService,
         private readonly startinterviewService: StartinterviewService
     ) {}
     async callback(callbackQuery: TelegramBot.CallbackQuery) {
@@ -25,14 +27,17 @@ export class CallbackService {
                     callbackQuery
                 )
             case 'edit':
-                return await this.editUserService.editUser(action, callbackQuery.id)
+                return await this.editUserService.editUser(
+                    action,
+                    callbackQuery.id
+                )
             case 'startinterview':
                 await bot.answerCallbackQuery(callbackQuery.id, {
                     text: 'Вы начали собеседование!',
                 })
                 return await this.startinterviewService.startinterview()
             default:
-                break
+                return await this.badCommandService.badQuery()
         }
     }
 }

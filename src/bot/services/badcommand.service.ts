@@ -21,6 +21,15 @@ export class BadCommandService {
         )
     }
 
+    async badQuery() {
+        const bot: TelegramBot = global.bot
+        const msg: TelegramBot.Message = global.msg
+        await bot.sendMessage(
+            msg.chat.id,
+            `Кнопка устарела и не работает. Попробуйте еще раз или используйте другую`
+        )
+    }
+
     async badServer(type: 'Start' | 'Interview') {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
