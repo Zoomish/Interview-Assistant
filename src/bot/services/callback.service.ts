@@ -10,17 +10,15 @@ export class CallbackService {
         private readonly startinterviewService: StartinterviewService
     ) {}
     async callback(callbackQuery: TelegramBot.CallbackQuery) {
-        const action = callbackQuery.data
+        const data = callbackQuery.data.split('_')
         const bot: TelegramBot = global.bot
         const msg = callbackQuery.message
         global.msg = msg
-        switch (action) {
-            case 'junior':
-                return await this.editUser('Junior', msg, callbackQuery.id)
-            case 'middle':
-                return await this.editUser('Middle', msg, callbackQuery.id)
-            case 'senior':
-                return await this.editUser('Senior', msg, callbackQuery.id)
+        const type = data[0]
+        const action = data[1]
+        switch (type) {
+            case 'level':
+                return await this.editLevel(action, callbackQuery)
             case 'startinterview':
                 await bot.answerCallbackQuery(callbackQuery.id, {
                     text: 'Вы начали собеседование!',
@@ -31,12 +29,22 @@ export class CallbackService {
         }
     }
 
-    private async editUser(
-        text: 'Junior' | 'Middle' | 'Senior',
-        msg: TelegramBot.Message,
-        id: string
-    ) {
+    async editLevel(action, callbackQuery) {
+        switch (action) {
+            case 'junior':
+                return await this.editUser('Junior', callbackQuery.id)
+            case 'middle':
+                return await this.editUser('Middle', callbackQuery.id)
+            case 'senior':
+                return await this.editUser('Senior', callbackQuery.id)
+            default:
+                break
+        }
+    }
+
+    private async editUser(text: 'Junior' | 'Middle' | 'Senior', id: string) {
         const bot: TelegramBot = global.bot
+        const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
             level: text,
         })
