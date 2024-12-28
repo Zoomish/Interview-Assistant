@@ -40,27 +40,7 @@ export class HandleService {
                 break
         }
         if (!global.user) {
-            const user = await this.userService.findOne(msg.chat.id)
-            global.user = user
-            if (!user?.profession) {
-                global.profession = true
-            }
-            if (!user?.skills.length) {
-                global.skills = true
-            }
-            if (!user?.level) {
-                global.level = true
-            }
-            if (!user?.profession || !user?.skills.length || !user?.level) {
-                await this.badCommandService.badServer('Start')
-            }
-            if (!user?.profession) {
-                return await this.userInfoService.sendProfession()
-            } else if (!user?.skills.length) {
-                return await this.userInfoService.sendSkills()
-            } else if (!user?.level) {
-                return await this.userInfoService.level()
-            }
+            return await this.noGlobalUser(msg)
         }
         if (global.profession) {
             await this.userInfoService.getProfession()
@@ -89,6 +69,30 @@ export class HandleService {
                 return await this.generateContentService.generateQuetion(
                     msg.text
                 )
+        }
+    }
+
+    async noGlobalUser(msg: TelegramBot.Message) {
+        const user = await this.userService.findOne(msg.chat.id)
+        global.user = user
+        if (!user?.profession) {
+            global.profession = true
+        }
+        if (!user?.skills.length) {
+            global.skills = true
+        }
+        if (!user?.level) {
+            global.level = true
+        }
+        if (!user?.profession || !user?.skills.length || !user?.level) {
+            await this.badCommandService.badServer('Start')
+        }
+        if (!user?.profession) {
+            return await this.userInfoService.sendProfession()
+        } else if (!user?.skills.length) {
+            return await this.userInfoService.sendSkills()
+        } else if (!user?.level) {
+            return await this.userInfoService.level()
         }
     }
 }
