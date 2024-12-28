@@ -20,12 +20,6 @@ export class MeService {
             inline_keyboard: [
                 [
                     {
-                        text: 'Изменить уровень',
-                        callback_data: 'edit_level',
-                    },
-                ],
-                [
-                    {
                         text: 'Изменить профессию',
                         callback_data: 'edit_profession',
                     },
@@ -34,6 +28,12 @@ export class MeService {
                     {
                         text: 'Изменить навыки',
                         callback_data: 'edit_skills',
+                    },
+                ],
+                [
+                    {
+                        text: 'Изменить уровень',
+                        callback_data: 'edit_level',
                     },
                 ],
             ],

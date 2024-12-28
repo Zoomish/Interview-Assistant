@@ -6,11 +6,11 @@ import { UserService } from 'src/user/user.service'
 export class GreetingService {
     constructor(private readonly userService: UserService) {}
     async greeting(msg: TelegramBot.Message) {
-        const user = await this.userService.findOne(msg.chat.id)
+        let user = await this.userService.findOne(msg.chat.id)
         if (!user) {
-            await this.userService.create({
+            user = await this.userService.create({
                 tgId: msg.chat.id,
-                name: msg?.chat?.first_name + ' ' + msg?.chat?.last_name,
+                name: msg?.chat?.first_name + ' ' + msg?.chat?.last_name || '',
                 nickname: msg?.chat?.username,
             })
         }
@@ -19,13 +19,17 @@ export class GreetingService {
             global.profession = true
             text = `Какую профессию вы выбрали?`
         }
-        if (!user?.skills.length && user?.profession) {
+        if (!user?.skills.length) {
             global.skills = true
-            text = `Укажите свои навыки, через запятую. Например: Node.js, React, Next`
+            if (user?.profession) {
+                text = `Укажите свои навыки, через запятую. Например: Node.js, React, Next`
+            }
         }
-        if (!user?.level && user?.skills.length) {
+        if (!user?.level) {
             global.level = true
-            text = `Теперь укажите свой уровень.`
+            if (user?.skills.length) {
+                text = `Теперь укажите свой уровень.`
+            }
         }
         global.user = user
         const bot: TelegramBot = global.bot
