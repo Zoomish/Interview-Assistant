@@ -92,9 +92,10 @@ export class BotService implements OnModuleInit {
                 }
                 return
             } else if (global.skills) {
-                return await this.userInfoService.getSkills()
-            } else if (global.level) {
-                return await this.userInfoService.level()
+                await this.userInfoService.getSkills()
+                if (global.level) {
+                    return await this.userInfoService.level()
+                }
             }
             switch (text) {
                 case '/startinterview':
