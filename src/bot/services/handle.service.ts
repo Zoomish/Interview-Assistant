@@ -42,20 +42,12 @@ export class HandleService {
         if (!global.user) {
             return await this.noGlobalUser(msg)
         }
-        if (global.profession) {
-            await this.userInfoService.getProfession()
-            if (global.skills) {
-                return await this.userInfoService.sendSkills()
-            }
-            return
-        } else if (global.skills) {
-            await this.userInfoService.getSkills()
-            if (global.level) {
-                return await this.userInfoService.level()
-            }
-            return
-        } else if (global.level) {
-            return await this.userInfoService.level()
+        if (
+            global.user?.profession ||
+            global.user?.skills.length ||
+            global.user?.level
+        ) {
+            return await this.setUserInfo()
         }
         switch (text) {
             case '/startinterview':
@@ -92,6 +84,23 @@ export class HandleService {
         } else if (!user?.skills.length) {
             return await this.userInfoService.sendSkills()
         } else if (!user?.level) {
+            return await this.userInfoService.level()
+        }
+    }
+
+    async setUserInfo() {
+        if (global.profession) {
+            await this.userInfoService.getProfession()
+            if (global.skills) {
+                return await this.userInfoService.sendSkills()
+            }
+        } else if (global.skills) {
+            await this.userInfoService.getSkills()
+            if (global.level) {
+                return await this.userInfoService.level()
+            }
+            return
+        } else if (global.level) {
             return await this.userInfoService.level()
         }
     }
