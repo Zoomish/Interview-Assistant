@@ -31,7 +31,7 @@ export class HandleService {
         await bot.sendChatAction(chatId, 'typing')
         const text = msg.text
         global.msg = msg
-        await this.noNeedUser(text, msg)
+        await this.startOptions(text, msg)
         if (!global.user) {
             return await this.noGlobalUser(msg)
         }
@@ -42,22 +42,10 @@ export class HandleService {
         ) {
             return await this.setUserInfo()
         }
-        switch (text) {
-            case '/startinterview':
-                return this.startinterviewService.startinterview()
-            case '/me':
-                return this.meService.getMe(msg)
-            default:
-                if (msg?.entities && msg?.entities[0]?.type === 'bot_command') {
-                    return await this.badCommandService.badCommand()
-                }
-                return await this.generateContentService.generateQuetion(
-                    msg.text
-                )
-        }
+        return await this.endOptions(text, msg)
     }
 
-    async noNeedUser(text, msg: TelegramBot.Message) {
+    async startOptions(text, msg: TelegramBot.Message) {
         switch (text) {
             case '/start':
                 return await this.greetingService.greeting(msg)
@@ -106,6 +94,22 @@ export class HandleService {
             return
         } else if (global.level) {
             return await this.userInfoService.level()
+        }
+    }
+
+    async endOptions(text: string, msg: TelegramBot.Message) {
+        switch (text) {
+            case '/startinterview':
+                return this.startinterviewService.startinterview()
+            case '/me':
+                return this.meService.getMe(msg)
+            default:
+                if (msg?.entities && msg?.entities[0]?.type === 'bot_command') {
+                    return await this.badCommandService.badCommand()
+                }
+                return await this.generateContentService.generateQuetion(
+                    msg.text
+                )
         }
     }
 }
