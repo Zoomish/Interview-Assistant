@@ -36,7 +36,9 @@ export class HandleService {
         if (!global.user) {
             const user = await this.userService.findOne(msg.chat.id)
             global.user = user
-            await this.noGlobalUser(user)
+            if (!user?.profession || !user?.skills.length || !user?.level) {
+                return await this.noGlobalUser(user)
+            }
         }
         if (global?.profession || global?.skills?.length || global?.level) {
             return await this.setUserInfo()
@@ -56,17 +58,15 @@ export class HandleService {
     }
 
     async noGlobalUser(user: User) {
-        if (!user?.profession || !user?.skills.length || !user?.level) {
-            await this.badCommandService.badServer('Start')
-            if (!user?.profession) {
-                global.profession = true
-            }
-            if (!user?.skills.length) {
-                global.skills = true
-            }
-            if (!user?.level) {
-                global.level = true
-            }
+        await this.badCommandService.badServer('Start')
+        if (!user?.profession) {
+            global.profession = true
+        }
+        if (!user?.skills.length) {
+            global.skills = true
+        }
+        if (!user?.level) {
+            global.level = true
         }
         if (!user?.profession) {
             return await this.userInfoService.sendProfession()
