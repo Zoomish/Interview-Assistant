@@ -6,9 +6,9 @@ import { UserService } from 'src/user/user.service'
 export class GreetingService {
     constructor(private readonly userService: UserService) {}
     async greeting(msg: TelegramBot.Message) {
-        const user = await this.userService.findOne(msg.chat.id)
+        let user = await this.userService.findOne(msg.chat.id)
         if (!user) {
-            await this.userService.create({
+            user = await this.userService.create({
                 tgId: msg.chat.id,
                 name: msg?.chat?.first_name + ' ' + msg?.chat?.last_name,
                 nickname: msg?.chat?.username,

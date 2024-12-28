@@ -72,7 +72,7 @@ export class BotService implements OnModuleInit {
                 default:
                     break
             }
-            if (global.user === undefined) {
+            if (!global.user) {
                 const user = await this.userService.findOne(msg.chat.id)
                 global.user = user
                 if (!user?.profession) {
