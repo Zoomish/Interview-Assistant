@@ -29,7 +29,7 @@ export class CallbackService {
             case 'edit':
                 return await this.editUserService.editUser(
                     action,
-                    callbackQuery.id
+                    callbackQuery
                 )
             case 'startinterview':
                 await bot.answerCallbackQuery(callbackQuery.id, {

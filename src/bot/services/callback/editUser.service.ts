@@ -13,12 +13,12 @@ export class EditUserService {
                 await bot.answerCallbackQuery(callbackQuery.id, {
                     text: 'Вы выбрали изменить профессию',
                 })
-                return await this.userInfoService.getProfession()
+                return await this.userInfoService.sendProfession()
             case 'skills':
                 await bot.answerCallbackQuery(callbackQuery.id, {
                     text: 'Вы выбрали изменить навыки',
                 })
-                return await this.userInfoService.getSkills()
+                return await this.userInfoService.sendSkills()
             case 'level':
                 await bot.answerCallbackQuery(callbackQuery.id, {
                     text: 'Вы выбрали изменить уровень',
