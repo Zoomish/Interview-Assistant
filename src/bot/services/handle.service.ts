@@ -53,6 +53,8 @@ export class HandleService {
         }
         if (global?.profession || global?.skills || global?.level) {
             return await this.setUserInfo()
+        } else {
+            await this.badCommandService.badServer('Interview')
         }
         return await this.endOptions(text, msg)
     }
