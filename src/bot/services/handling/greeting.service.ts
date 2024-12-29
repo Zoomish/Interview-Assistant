@@ -8,12 +8,13 @@ export class GreetingService {
     async greeting(msg: TelegramBot.Message) {
         let user = await this.userService.findOne(msg.chat.id)
         if (!user) {
+            const name =
+                msg?.chat?.first_name && msg?.chat?.last_name
+                    ? msg?.chat?.first_name + ' ' + msg?.chat?.last_name
+                    : msg?.chat?.first_name
             user = await this.userService.create({
                 tgId: msg.chat.id,
-                name:
-                    msg?.chat?.first_name + ' ' + msg?.chat?.last_name
-                        ? msg?.chat?.last_name
-                        : '',
+                name: name,
                 nickname: msg?.chat?.username,
             })
         }
