@@ -18,7 +18,7 @@ export class User {
     @Column({ nullable: false, default: false })
     admin: boolean
 
-    @Column({ nullable: true, array: true, default: [], type: 'simple-json' })
+    @Column({ nullable: true, array: true, default: [], type: 'jsonb' })
     localhistory: Content[]
 
     @Column({ nullable: false })
