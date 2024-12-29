@@ -36,18 +36,20 @@ export class BadCommandService {
         await bot.sendMessage(
             msg.chat.id,
             `К сожалению сервер перезапускался, и я не могу понять на какой вопрос ты отвечал. ${type === 'Start' ? 'Ответь на вопрос еще раз' : 'Начни собеседование заново'}`,
-            type === 'Interview' && {
-                reply_markup: {
-                    inline_keyboard: [
-                        [
-                            {
-                                text: 'Начать собеседование заново',
-                                callback_data: 'start',
-                            },
-                        ],
-                    ],
-                },
-            }
+            type === 'Interview'
+                ? {
+                      reply_markup: {
+                          inline_keyboard: [
+                              [
+                                  {
+                                      text: 'Начать собеседование заново',
+                                      callback_data: 'start',
+                                  },
+                              ],
+                          ],
+                      },
+                  }
+                : {}
         )
     }
 }
