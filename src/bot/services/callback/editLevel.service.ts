@@ -7,18 +7,25 @@ export class EditLevelService {
     constructor(private readonly userService: UserService) {}
     async editLevel(action, callbackQuery) {
         switch (action) {
+            case 'intern':
+                return await this.editUser('Intern', callbackQuery.id)
             case 'junior':
                 return await this.editUser('Junior', callbackQuery.id)
             case 'middle':
                 return await this.editUser('Middle', callbackQuery.id)
             case 'senior':
                 return await this.editUser('Senior', callbackQuery.id)
+            case 'lead':
+                return await this.editUser('Lead', callbackQuery.id)
             default:
                 break
         }
     }
 
-    private async editUser(text: 'Junior' | 'Middle' | 'Senior', id: string) {
+    private async editUser(
+        text: 'Intern' | 'Junior' | 'Middle' | 'Senior' | 'Lead',
+        id: string
+    ) {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {

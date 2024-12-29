@@ -34,7 +34,7 @@ export class User {
     skills: string[]
 
     @Column({ nullable: true })
-    level: 'Junior' | 'Middle' | 'Senior'
+    level: 'Intern' | 'Junior' | 'Middle' | 'Senior' | 'Lead'
 
     @CreateDateColumn()
     createdAt: Date

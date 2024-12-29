@@ -55,6 +55,12 @@ export class UserInfoService {
                     inline_keyboard: [
                         [
                             {
+                                text: 'Intern',
+                                callback_data: 'level_intern',
+                            },
+                        ],
+                        [
+                            {
                                 text: 'Junior',
                                 callback_data: 'level_junior',
                             },
@@ -69,6 +75,12 @@ export class UserInfoService {
                             {
                                 text: 'Senior',
                                 callback_data: 'level_senior',
+                            },
+                        ],
+                        [
+                            {
+                                text: 'Lead',
+                                callback_data: 'level_lead',
                             },
                         ],
                     ],
