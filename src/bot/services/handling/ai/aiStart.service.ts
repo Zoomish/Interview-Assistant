@@ -22,7 +22,7 @@ export class AiStartService {
         })
         const chat = model.startChat({
             history: user.localhistory,
-            systemInstruction: `Задавай вопросы уровня ${user.level} профессии ${user.profession} и навыкам ${user.skills.join(', ')}.`,
+            systemInstruction: `Задавай вопросы уровня Senior профессии Frontend Developer и навыкам Next, React`,
         })
         global.ai = chat
         return chat
