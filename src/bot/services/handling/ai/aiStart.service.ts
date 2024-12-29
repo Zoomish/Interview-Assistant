@@ -22,7 +22,8 @@ export class AiStartService {
         })
         const chat = model.startChat({
             history: user.localhistory,
-            systemInstruction: `Задавай вопросы уровня Senior профессии Frontend Developer и навыкам Next, React`,
+            systemInstruction:
+                'Ты эйчар, твое имя Максим. Ты технический специалист, который задает технические вопросы по навыкам. Ты отвечаешь, правильно или неправильно человек ответил на вопрос. В случае правильного ответа ты говоришь об этом и задаешь следующий вопрос. В случае неправильного - объясняешь где ошибка и после этого задаешь следующий вопрос',
         })
         global.ai = chat
         return chat
