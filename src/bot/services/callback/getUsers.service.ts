@@ -18,21 +18,11 @@ export class GetUsersService {
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
         const users = await this.userService.findAll()
-        const tgIdLenght = 10
-        const nicknameLenght = 30
-        const nameLenght = 30
-        let table = `┌${'─'.repeat(tgIdLenght)}┬${'─'.repeat(nicknameLenght)}┬${'─'.repeat(nameLenght)}┐\n`
-        table += `│tgId${' '.repeat(tgIdLenght - 4)}│Nickname${' '.repeat(nicknameLenght - 8)}│Name${' '.repeat(nameLenght - 4)}│\n`
-        table += `├${'─'.repeat(tgIdLenght)}┼${'─'.repeat(nicknameLenght)}┼${'─'.repeat(nameLenght)}┤\n`
-        users.forEach((row, i) => {
-            table += `│${row.tgId.toString().padEnd(10)}│${row.nickname.slice(0, nicknameLenght).padEnd(nicknameLenght)}│${row.name.slice(0, nameLenght).padEnd(nameLenght)}│\n`
-            if (i < users.length - 1) {
-                table += `├${'─'.repeat(tgIdLenght)}┼${'─'.repeat(nicknameLenght)}┼${'─'.repeat(nameLenght)}┤\n`
-            }
-        })
-        table += `└${'─'.repeat(tgIdLenght)}┴${'─'.repeat(nicknameLenght)}┴${'─'.repeat(nameLenght)}┘`
-        await bot.sendMessage(chatId, `\`\`\`${table}\`\`\``, {
-            parse_mode: 'MarkdownV2',
+        users.forEach(async (user) => {
+            await bot.sendMessage(
+                chatId,
+                `ID: ${user.tgId}\nИмя: ${user.name}\nПрофессия: ${user.profession}\nУровень: ${user.level}`
+            )
         })
     }
 }
