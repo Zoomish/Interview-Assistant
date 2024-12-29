@@ -3,12 +3,14 @@ import TelegramBot from 'node-telegram-bot-api'
 import { BadCommandService, StartinterviewService } from '../handling'
 import { EditLevelService } from './editLevel.service'
 import { EditUserService } from './editUser.service'
+import { GetUsersService } from './getUsers.service'
 
 @Injectable()
 export class CallbackService {
     constructor(
         private readonly editLevelService: EditLevelService,
         private readonly editUserService: EditUserService,
+        private readonly getUsersService: GetUsersService,
         private readonly badCommandService: BadCommandService,
         private readonly startinterviewService: StartinterviewService
     ) {}
@@ -30,6 +32,8 @@ export class CallbackService {
                     action,
                     callbackQuery
                 )
+            case 'get':
+                return await this.getUsersService.start(action)
             case 'startinterview':
                 await bot.answerCallbackQuery(callbackQuery.id, {
                     text: 'Вы начали собеседование!',
