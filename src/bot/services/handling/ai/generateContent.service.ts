@@ -13,10 +13,11 @@ export class GenerateContentService {
         const chat = await this.aiStartService.getModel()
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
+        const user = await this.userService.findOne(chatId)
         const generatedText = await chat.sendMessage(text)
         const history = await chat.getHistory()
         await this.userService.update(chatId, {
-            localhistory: history,
+            localhistory: [...user.localhistory, ...history],
         })
         return await bot.sendMessage(chatId, generatedText.response.text())
     }
