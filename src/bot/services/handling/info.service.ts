@@ -7,7 +7,10 @@ export class InfoService {
         const bot: TelegramBot = global.bot
         await bot.sendMessage(
             chatId,
-            `Этот бот создан мной(@Zoomish) для помощи людям с прохождением собеседований и трудоустройством.\n\nИнформация обо мне:\n`
+            `Этот бот создан мной(@Zoomish) для помощи людям с прохождением собеседований и трудоустройством.\n\nИнформация обо мне:\n`,
+            {
+                parse_mode: 'HTML',
+            }
         )
     }
 }
