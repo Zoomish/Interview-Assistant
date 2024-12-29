@@ -1,10 +1,14 @@
 import { ChatSession, GoogleGenerativeAI } from '@google/generative-ai'
 import { Injectable, OnModuleInit } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
+import { UserService } from 'src/user/user.service'
 
 @Injectable()
 export class AiStartService implements OnModuleInit {
-    constructor(private readonly configService: ConfigService) {}
+    constructor(
+        private readonly configService: ConfigService,
+        private readonly userService: UserService
+    ) {}
     async onModuleInit() {
         const geminiToken = this.configService.get('GEMINI_API')
         const genAI = new GoogleGenerativeAI(geminiToken)
