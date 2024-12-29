@@ -6,17 +6,20 @@ import { UserService } from 'src/user/user.service'
 export class GetUsersService {
     constructor(private readonly userService: UserService) {}
 
-    async start(action: string) {
+    async start(action: string, id: string) {
         switch (action) {
             case 'users':
-                return await this.getUsers()
+                return await this.getUsers(id)
             default:
                 break
         }
     }
-    async getUsers() {
+    async getUsers(id: string) {
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
+        await bot.answerCallbackQuery(id, {
+            text: `Вы получаете всех пользователей`,
+        })
         const users = await this.userService.findAll()
         if (users.length === 0) {
             await bot.sendMessage(chatId, 'Нет ни одного пользователя в базе.')

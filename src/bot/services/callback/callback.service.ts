@@ -33,7 +33,10 @@ export class CallbackService {
                     callbackQuery
                 )
             case 'get':
-                return await this.getUsersService.start(action)
+                return await this.getUsersService.start(
+                    action,
+                    callbackQuery.id
+                )
             case 'startinterview':
                 await bot.answerCallbackQuery(callbackQuery.id, {
                     text: 'Вы начали собеседование!',
