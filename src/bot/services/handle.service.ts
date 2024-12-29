@@ -28,7 +28,7 @@ export class HandleService {
     ) {}
 
     async handleMessage(msg: TelegramBot.Message) {
-        if (msg.chat.type !== 'private') return
+        if (msg.chat.type !== 'private' || !msg.text) return
         const bot: TelegramBot = global.bot
         const chatId = msg.chat.id
         await bot.sendChatAction(chatId, 'typing')
