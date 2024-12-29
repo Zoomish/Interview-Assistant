@@ -22,8 +22,8 @@ export class GetUsersService {
         const nicknameLenght = 30
         const nameLenght = 30
         let table = `┌${'─'.repeat(tgIdLenght)}┬${'─'.repeat(nicknameLenght)}┬${'─'.repeat(nameLenght)}┐\n`
-        table += `├${'─'.repeat(tgIdLenght)}┼${'─'.repeat(nicknameLenght)}┼${'─'.repeat(nameLenght)}┤\n`
         table += `│tgId${' '.repeat(tgIdLenght - 4)}│Nickname${' '.repeat(nicknameLenght - 8)}│Name${' '.repeat(nameLenght - 4)}│\n`
+        table += `├${'─'.repeat(tgIdLenght)}┼${'─'.repeat(nicknameLenght)}┼${'─'.repeat(nameLenght)}┤\n`
         users.forEach((row) => {
             table += `│${row.tgId.toString().padEnd(10)}│${row.nickname.slice(0, nicknameLenght).padEnd(nicknameLenght)}│${row.name.slice(0, nameLenght).padEnd(nameLenght)}│\n`
             table += `├${'─'.repeat(tgIdLenght)}┼${'─'.repeat(nicknameLenght)}┼${'─'.repeat(nameLenght)}┤\n`
