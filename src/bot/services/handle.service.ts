@@ -7,6 +7,7 @@ import {
     GenerateContentService,
     GreetingService,
     HelpService,
+    InfoService,
     MeService,
     StartinterviewService,
     UserInfoService,
@@ -19,6 +20,7 @@ export class HandleService {
         private readonly startinterviewService: StartinterviewService,
         private readonly userInfoService: UserInfoService,
         private readonly helpService: HelpService,
+        private readonly infoService: InfoService,
         private readonly generateContentService: GenerateContentService,
         private readonly meService: MeService,
         private readonly badCommandService: BadCommandService,
@@ -37,6 +39,8 @@ export class HandleService {
                 return await this.greetingService.greeting(msg)
             case '/help':
                 return await this.helpService.help(msg.chat.id)
+            case '/info':
+                return await this.infoService.info(msg.chat.id)
             default:
                 break
         }
@@ -45,9 +49,11 @@ export class HandleService {
             global.user = user
             if (!user?.profession || !user?.skills.length || !user?.level) {
                 return await this.noGlobalUser(user)
+            } else {
+                return await this.badCommandService.badServer('Interview')
             }
         }
-        if (global?.profession || global?.skills?.length || global?.level) {
+        if (global?.profession || global?.skills || global?.level) {
             return await this.setUserInfo()
         }
         return await this.endOptions(text, msg)

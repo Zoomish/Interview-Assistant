@@ -38,6 +38,10 @@ export class BotService implements OnModuleInit {
                 command: '/help',
                 description: 'Помощь с командами',
             },
+            {
+                command: '/info',
+                description: 'Информация о боте',
+            },
         ])
 
         bot.on('message', async (msg: TelegramBot.Message) => {

@@ -11,6 +11,7 @@ import {
     GreetingService,
     HandleService,
     HelpService,
+    InfoService,
     MeService,
     StartinterviewService,
     UserInfoService,
@@ -32,6 +33,7 @@ import {
         EditLevelService,
         EditUserService,
         HandleService,
+        InfoService,
     ],
     exports: [],
 })
