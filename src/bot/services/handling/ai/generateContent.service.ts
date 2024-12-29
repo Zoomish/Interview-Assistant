@@ -20,7 +20,15 @@ export class GenerateContentService {
             localhistory: [
                 ...(user.localhistory ? user.localhistory : []),
                 ...history,
-            ],
+            ].reduce(
+                (res, cur) =>
+                    res.find(
+                        (find) => JSON.stringify(find) === JSON.stringify(cur)
+                    )
+                        ? res
+                        : [...res, cur],
+                []
+            ),
         })
         return await bot.sendMessage(chatId, generatedText.response.text())
     }
