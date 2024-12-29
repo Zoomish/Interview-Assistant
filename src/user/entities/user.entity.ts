@@ -18,7 +18,7 @@ export class User {
     @Column({ nullable: false, default: false })
     admin: boolean
 
-    @Column({ nullable: true, array: true, default: [], type: 'text' })
+    @Column({ nullable: true, array: true, default: [], type: 'simple-json' })
     localhistory: Content[]
 
     @Column({ nullable: false })
@@ -30,7 +30,7 @@ export class User {
     @Column({ nullable: true })
     profession: string
 
-    @Column({ nullable: true, array: true, default: [], type: 'simple-json' })
+    @Column({ nullable: true, array: true, default: [], type: 'text' })
     skills: string[]
 
     @Column({ nullable: true })
