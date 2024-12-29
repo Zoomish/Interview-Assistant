@@ -12,7 +12,7 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ nullable: true, unique: true })
+    @Column({ nullable: false, unique: true })
     tgId: number
 
     @Column({ nullable: false, default: false })
