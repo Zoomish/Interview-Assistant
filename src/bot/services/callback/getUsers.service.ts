@@ -18,10 +18,22 @@ export class GetUsersService {
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
         const users = await this.userService.findAll()
-        users.forEach(async (user) => {
+        if (users.length === 0) {
+            await bot.sendMessage(chatId, 'Нет ни одного пользователя в базе.')
+            return
+        }
+        await bot.sendMessage(
+            chatId,
+            `<b>Список всех пользователей (${users.length}):</b>`,
+            {
+                parse_mode: 'HTML',
+            }
+        )
+        users.forEach(async (user, i) => {
             await bot.sendMessage(
                 chatId,
-                '<b>Id:</b> ' +
+                `<b>Пользователь ${i + 1}:</b>` +
+                    '\n<b>Id:</b> ' +
                     user.tgId.toString() +
                     '\n<b>Ник:</b> ' +
                     user.nickname +
