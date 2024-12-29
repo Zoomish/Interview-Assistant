@@ -18,37 +18,17 @@ export class GetUsersService {
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
         const users = await this.userService.findAll()
-        const idLenght = 10
-        const nicknameLenght = Math.max(...users.map((o) => o.nickname.length))
-        const nameLenght = Math.max(...users.map((o) => o.name.length))
-        let table =
-            '┌' +
-            '─'.repeat(idLenght) +
-            '┬' +
-            '─'.repeat(nicknameLenght) +
-            '┬' +
-            '─'.repeat(nameLenght) +
-            '┐\n'
-        table += '│    tgId    │ Age │ Occupation  │\n'
-        table +=
-            '┌' +
-            '─'.repeat(idLenght) +
-            '┬' +
-            '─'.repeat(nicknameLenght) +
-            '┬' +
-            '─'.repeat(nameLenght) +
-            '┐\n'
+        const tgIdLenght = 10
+        const nicknameLenght = 30
+        const nameLenght = 30
+        let table = `┌${'─'.repeat(tgIdLenght)}┬${'─'.repeat(nicknameLenght)}┬${'─'.repeat(nameLenght)}┐\n`
+        table += `├${'─'.repeat(tgIdLenght)}┼${'─'.repeat(nicknameLenght)}┼${'─'.repeat(nameLenght)}┤\n`
+        table += `│tgId${' '.repeat(tgIdLenght - 4)}│Nickname${' '.repeat(nicknameLenght - 8)}│Name${' '.repeat(nameLenght - 4)}│\n`
         users.forEach((row) => {
-            table += `│${row.tgId.toString().padEnd(10)}│${row.nickname.padEnd(nicknameLenght, ' ')}│${row.name.padEnd(nameLenght, ' ')}│\n`
+            table += `│${row.tgId.toString().padEnd(10)}│${row.nickname.slice(0, nicknameLenght).padEnd(nicknameLenght)}│${row.name.slice(0, nameLenght).padEnd(nameLenght)}│\n`
+            table += `├${'─'.repeat(tgIdLenght)}┼${'─'.repeat(nicknameLenght)}┼${'─'.repeat(nameLenght)}┤\n`
         })
-        table +=
-            '└' +
-            '─'.repeat(idLenght) +
-            '┴' +
-            '─'.repeat(nicknameLenght) +
-            '┴' +
-            '─'.repeat(nameLenght) +
-            '┘'
+        table += `└${'─'.repeat(tgIdLenght)}┴${'─'.repeat(nicknameLenght)}┴${'─'.repeat(nameLenght)}┘`
         await bot.sendMessage(chatId, `\`\`\`${table}\`\`\``, {
             parse_mode: 'MarkdownV2',
         })
