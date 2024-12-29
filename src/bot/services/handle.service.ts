@@ -49,7 +49,10 @@ export class HandleService {
             global.user = user
             if (!user?.profession || !user?.skills.length || !user?.level) {
                 return await this.noGlobalUser(user)
-            } else {
+            } else if (
+                msg?.entities &&
+                msg?.entities[0]?.type !== 'bot_command'
+            ) {
                 return await this.badCommandService.badServer('Interview')
             }
         }
