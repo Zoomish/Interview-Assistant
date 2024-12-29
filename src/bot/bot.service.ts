@@ -1,13 +1,14 @@
 import { Injectable, OnModuleInit } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import TelegramBot, * as telegram from 'node-telegram-bot-api'
-import { CallbackService, HandleService } from './services'
+import { CallbackService, ErrorService, HandleService } from './services'
 
 @Injectable()
 export class BotService implements OnModuleInit {
     constructor(
         private readonly callbackService: CallbackService,
         private readonly handleService: HandleService,
+        private readonly errorService: ErrorService,
         private readonly configService: ConfigService
     ) {}
 
@@ -45,7 +46,11 @@ export class BotService implements OnModuleInit {
         ])
 
         bot.on('message', async (msg: TelegramBot.Message) => {
-            return await this.handleService.handleMessage(msg)
+            try {
+                return await this.handleService.handleMessage(msg)
+            } catch (error) {
+                return await this.errorService.error(error)
+            }
         })
         bot.on('callback_query', async (callbackQuery) => {
             await this.callbackService.callback(callbackQuery)

@@ -7,6 +7,7 @@ import {
     CallbackService,
     EditLevelService,
     EditUserService,
+    ErrorService,
     GenerateContentService,
     GreetingService,
     HandleService,
@@ -34,6 +35,7 @@ import {
         EditUserService,
         HandleService,
         InfoService,
+        ErrorService,
     ],
     exports: [],
 })
