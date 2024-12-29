@@ -13,7 +13,7 @@ export class MeService {
             offset: 1,
         })
         await bot.deleteMessage(msgWait.chat.id, msgWait.message_id)
-        const text = `<b>Меня зовут:</b> ${user.name}\n<b>Профессия:</b> ${
+        const text = `<b>Меня зовут:</b> ${user.name}\n${user.admin ? '<b>Я админ</b>\n' : ''}<b>Профессия:</b> ${
             user.profession
         }\n<b>Уровень:</b> ${user.level}\n<b>Навыки:</b>\n      ${user.skills.join('\n      ')}`
         const reply_markup = {
@@ -49,9 +49,28 @@ export class MeService {
                 }
             )
         }
-        return await bot.sendMessage(msg.chat.id, text, {
-            parse_mode: 'HTML',
-            reply_markup: reply_markup,
-        })
+        return await bot.sendMessage(
+            msg.chat.id,
+            text,
+            user.admin
+                ? {
+                      parse_mode: 'HTML',
+                      reply_markup: {
+                          inline_keyboard: [
+                              ...reply_markup.inline_keyboard,
+                              [
+                                  {
+                                      text: 'Получить пользователей',
+                                      callback_data: 'get_users',
+                                  },
+                              ],
+                          ],
+                      },
+                  }
+                : {
+                      parse_mode: 'HTML',
+                      reply_markup: reply_markup,
+                  }
+        )
     }
 }
