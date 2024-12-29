@@ -21,9 +21,6 @@ export class User {
     @Column({ nullable: true, array: true, default: [], type: 'text' })
     localhistory: Content[]
 
-    @Column({ nullable: true, array: true, default: [], type: 'text' })
-    globalhistory: Content[][]
-
     @Column({ nullable: false })
     name: string
 
