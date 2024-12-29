@@ -17,7 +17,10 @@ export class GenerateContentService {
         const generatedText = await chat.sendMessage(text)
         const history = await chat.getHistory()
         await this.userService.update(chatId, {
-            localhistory: [...user.localhistory, ...history],
+            localhistory: [
+                ...(user.localhistory ? user.localhistory : []),
+                ...history,
+            ],
         })
         return await bot.sendMessage(chatId, generatedText.response.text())
     }
