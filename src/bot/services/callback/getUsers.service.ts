@@ -21,7 +21,19 @@ export class GetUsersService {
         users.forEach(async (user) => {
             await bot.sendMessage(
                 chatId,
-                `ID: ${user.tgId}\nИмя: ${user.name}\nПрофессия: ${user.profession}\nУровень: ${user.level}`
+                '<b>Id:</b> ' +
+                    user.tgId.toString() +
+                    '\n<b>Ник:</b> ' +
+                    user.nickname +
+                    '\n<b>Имя:</b> ' +
+                    user.name +
+                    '\n<b>Профессия:</b> ' +
+                    user.profession +
+                    '\n<b>Уровень:</b> ' +
+                    user.level,
+                {
+                    parse_mode: 'HTML',
+                }
             )
         })
     }
