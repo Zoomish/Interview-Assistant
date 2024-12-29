@@ -1,3 +1,4 @@
+import { Content } from '@google/generative-ai'
 import {
     Column,
     CreateDateColumn,
@@ -11,8 +12,17 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number
 
+    @Column({ nullable: true, unique: true })
+    tgId: number
+
     @Column({ nullable: false, default: false })
     admin: boolean
+
+    @Column({ nullable: true, array: true, default: [], type: 'text' })
+    localhistory: Content[]
+
+    @Column({ nullable: true, array: true, default: [], type: 'text' })
+    globalhistory: Content[][]
 
     @Column({ nullable: false })
     name: string
@@ -28,9 +38,6 @@ export class User {
 
     @Column({ nullable: true })
     level: 'Junior' | 'Middle' | 'Senior'
-
-    @Column({ nullable: true, unique: true })
-    tgId: number
 
     @CreateDateColumn()
     createdAt: Date
