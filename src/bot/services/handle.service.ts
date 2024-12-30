@@ -34,7 +34,6 @@ export class HandleService {
         await bot.sendChatAction(chatId, 'typing')
         const text = msg.text
         global.msg = msg
-        console.log(msg)
         if (!msg.text) {
             return await this.badCommandService.onlyText()
         }
@@ -53,15 +52,12 @@ export class HandleService {
             global.user = user
             if (!user?.profession || !user?.skills.length || !user?.level) {
                 return await this.noGlobalUser(user)
-            } else if (
-                msg?.entities &&
-                msg?.entities[0]?.type !== 'bot_command'
-            ) {
+            } else if (msg?.entities === undefined) {
                 return await this.badCommandService.badServer('Interview')
             }
         }
         if (global?.profession || global?.skills || global?.level) {
-            if (msg?.entities && msg?.entities[0]?.type !== 'bot_command') {
+            if (msg?.entities === undefined) {
                 return await this.setUserInfo()
             } else {
                 return await this.badCommandService.noCommands()
@@ -114,7 +110,10 @@ export class HandleService {
             case '/me':
                 return this.meService.getMe(msg)
             default:
-                if (msg?.entities && msg?.entities[0]?.type === 'bot_command') {
+                if (
+                    msg?.entities !== undefined &&
+                    msg?.entities[0]?.type === 'bot_command'
+                ) {
                     return await this.badCommandService.badCommand()
                 }
                 return await this.generateContentService.generateQuetion(
