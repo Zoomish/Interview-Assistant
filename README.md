@@ -13,7 +13,7 @@ This repository contains a Telegram bot built using [Nest.js](https://nestjs.com
 
 ### Prerequisites
 - Node.js (v16 or higher)
-- npm or yarn
+- npm
 - A Telegram Bot Token (create one via [BotFather](https://core.telegram.org/bots#botfather))
 
 ### Installation
@@ -25,8 +25,6 @@ This repository contains a Telegram bot built using [Nest.js](https://nestjs.com
 2. Install dependencies:
    ```bash
    npm install
-   # or
-   yarn install
    ```
 
 3. Create a `.env` file in the root directory and add the following:
@@ -79,5 +77,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Acknowledgments
 - [Nest.js](https://nestjs.com/)
 - [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api)
-- [OpenAI API](https://platform.openai.com/)
+- [Gemini API](https://ai.google.dev/gemini-api/docs)
 
