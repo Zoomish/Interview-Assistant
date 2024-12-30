@@ -11,7 +11,9 @@ export class InfoService {
                 '<b>Информация обо мне:</b>\n' +
                 "<b>Меня зовут:</b> <a href='https://t.me/Zoomish'>Резвый Егор</a>\n" +
                 "<b>Мой гитхаб:</b> <a href='https://github.com/Zoomish'>Zoomish</a>\n" +
-                "<b>Мой канал:</b> <a href='https://t.me/ZoomishChannel'>Zoomish Channel</a>\n",
+                "<b>Мой канал:</b> <a href='https://t.me/ZoomishChannel'>Zoomish Channel</a>\n\n" +
+                'Информация о проекте.\n' +
+                "<b>Исходный код: </b><a href='https://github.com/Zoomish/Interview-Assistant'>GitHub</a>",
             {
                 parse_mode: 'HTML',
             }
