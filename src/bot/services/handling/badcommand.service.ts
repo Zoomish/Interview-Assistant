@@ -30,6 +30,15 @@ export class BadCommandService {
         )
     }
 
+    async onlyText() {
+        const bot: TelegramBot = global.bot
+        const msg: TelegramBot.Message = global.msg
+        await bot.sendMessage(
+            msg.chat.id,
+            `Бот не поддерживает другие типы сообщений. Используйте текстовое сообщение`
+        )
+    }
+
     async badServer(type: 'Start' | 'Interview') {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
