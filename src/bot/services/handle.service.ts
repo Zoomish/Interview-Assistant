@@ -57,10 +57,13 @@ export class HandleService {
             }
         }
         if (global?.profession || global?.skills || global?.level) {
-            if (msg?.entities === undefined) {
-                return await this.setUserInfo()
-            } else {
+            if (
+                msg?.entities !== undefined &&
+                msg?.entities[0]?.type === 'bot_command'
+            ) {
                 return await this.badCommandService.noCommands()
+            } else {
+                return await this.setUserInfo()
             }
         }
         return await this.endOptions(text, msg)
