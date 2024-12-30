@@ -44,6 +44,7 @@ export class GetUsersService {
                     '\n<b>Id:</b> ' +
                     user.tgId.toString() +
                     '\n<b>Ник:</b> ' +
+                    '@' +
                     user.nickname +
                     '\n<b>Сообщения:</b> ' +
                     messgase +
