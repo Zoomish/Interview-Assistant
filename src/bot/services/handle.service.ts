@@ -61,7 +61,11 @@ export class HandleService {
             }
         }
         if (global?.profession || global?.skills || global?.level) {
-            return await this.setUserInfo()
+            if (msg?.entities && msg?.entities[0]?.type !== 'bot_command') {
+                return await this.setUserInfo()
+            } else {
+                return await this.badCommandService.noCommands()
+            }
         }
         return await this.endOptions(text, msg)
     }

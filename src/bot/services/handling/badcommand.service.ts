@@ -39,6 +39,15 @@ export class BadCommandService {
         )
     }
 
+    async noCommands() {
+        const bot: TelegramBot = global.bot
+        const msg: TelegramBot.Message = global.msg
+        await bot.sendMessage(
+            msg.chat.id,
+            `Команды бота нельзя использовать в качестве профессии, уровня, навыков. Используйте текстовое сообщение`
+        )
+    }
+
     async badServer(type: 'Start' | 'Interview') {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
