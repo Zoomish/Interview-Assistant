@@ -61,7 +61,7 @@ export class BadCommandService {
                               [
                                   {
                                       text: 'Начать собеседование заново',
-                                      callback_data: 'start',
+                                      callback_data: 'startinterview',
                                   },
                               ],
                           ],
