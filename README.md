@@ -50,7 +50,7 @@ npm run start:dev
 #### Production Mode
 ```bash
 npm run build
-npm run start:prod
+npm run start
 ```
 
 ### Deployment
