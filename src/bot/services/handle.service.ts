@@ -28,12 +28,15 @@ export class HandleService {
     ) {}
 
     async handleMessage(msg: TelegramBot.Message) {
-        if (msg.chat.type !== 'private' || !msg.text) return
+        if (msg.chat.type !== 'private') return
         const bot: TelegramBot = global.bot
         const chatId = msg.chat.id
         await bot.sendChatAction(chatId, 'typing')
         const text = msg.text
         global.msg = msg
+        if (!msg.text) {
+            return await this.badCommandService.onlyText()
+        }
         switch (text) {
             case '/start':
                 return await this.greetingService.greeting(msg)
@@ -49,15 +52,16 @@ export class HandleService {
             global.user = user
             if (!user?.profession || !user?.skills.length || !user?.level) {
                 return await this.noGlobalUser(user)
-            } else if (
-                msg?.entities &&
-                msg?.entities[0]?.type !== 'bot_command'
-            ) {
+            } else if (msg?.entities === undefined) {
                 return await this.badCommandService.badServer('Interview')
             }
         }
         if (global?.profession || global?.skills || global?.level) {
-            return await this.setUserInfo()
+            if (msg?.entities === undefined) {
+                return await this.setUserInfo()
+            } else {
+                return await this.badCommandService.noCommands()
+            }
         }
         return await this.endOptions(text, msg)
     }
@@ -106,7 +110,10 @@ export class HandleService {
             case '/me':
                 return this.meService.getMe(msg)
             default:
-                if (msg?.entities && msg?.entities[0]?.type === 'bot_command') {
+                if (
+                    msg?.entities !== undefined &&
+                    msg?.entities[0]?.type === 'bot_command'
+                ) {
                     return await this.badCommandService.badCommand()
                 }
                 return await this.generateContentService.generateQuetion(
