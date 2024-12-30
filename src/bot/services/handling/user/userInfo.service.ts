@@ -55,31 +55,31 @@ export class UserInfoService {
                     inline_keyboard: [
                         [
                             {
-                                text: 'Intern',
+                                text: 'Intern (без опыта)',
                                 callback_data: 'level_intern',
                             },
                         ],
                         [
                             {
-                                text: 'Junior',
+                                text: 'Junior (1-3 года)',
                                 callback_data: 'level_junior',
                             },
                         ],
                         [
                             {
-                                text: 'Middle',
+                                text: 'Middle (3-6 лет)',
                                 callback_data: 'level_middle',
                             },
                         ],
                         [
                             {
-                                text: 'Senior',
+                                text: 'Senior (6-10 лет)',
                                 callback_data: 'level_senior',
                             },
                         ],
                         [
                             {
-                                text: 'Lead',
+                                text: 'Lead (более 10 лет)',
                                 callback_data: 'level_lead',
                             },
                         ],
