@@ -9,14 +9,15 @@ export class UserInfoService {
     async sendProfession() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
-        global.profession = true
+        await this.userService.update(msg.chat.id, {
+            profession: null,
+        })
         return await bot.sendMessage(msg.chat.id, `Какую профессию вы выбрали?`)
     }
 
     async getProfession() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
-        global.profession = false
         await this.userService.update(msg.chat.id, {
             profession: msg.text,
         })
@@ -26,7 +27,9 @@ export class UserInfoService {
     async sendSkills() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
-        global.skills = true
+        await this.userService.update(msg.chat.id, {
+            skills: [],
+        })
         await bot.sendMessage(
             msg.chat.id,
             `Отлично! Теперь укажите свои навыки, через запятую. Например: Node.js, React, Next`
@@ -36,7 +39,6 @@ export class UserInfoService {
     async getSkills() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
-        global.skills = false
         await this.userService.update(msg.chat.id, {
             skills: msg.text.replaceAll(' ', '').split(','),
         })
@@ -46,7 +48,6 @@ export class UserInfoService {
     async level() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
-        global.level = false
         await bot.sendMessage(
             msg.chat.id,
             `Отлично! Теперь укажите свой уровень.`,

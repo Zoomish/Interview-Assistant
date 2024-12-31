@@ -47,61 +47,33 @@ export class HandleService {
             default:
                 break
         }
-        if (!global.user) {
-            const user = await this.userService.findOne(msg.chat.id)
-            global.user = user
-            if (!user?.profession || !user?.skills.length || !user?.level) {
-                return await this.noGlobalUser(user)
-            } else if (msg?.entities === undefined) {
-                return await this.badCommandService.badServer('Interview')
-            }
-        }
-        if (global?.profession || global?.skills || global?.level) {
+        const user = await this.userService.findOne(msg.chat.id)
+        if (!user?.profession || !user?.skills.length || !user?.level) {
             if (
                 msg?.entities !== undefined &&
                 msg?.entities[0]?.type === 'bot_command'
             ) {
                 return await this.badCommandService.noCommands()
             } else {
-                return await this.setUserInfo()
+                return await this.setUserInfo(user)
             }
         }
         return await this.endOptions(text, msg)
     }
 
-    async noGlobalUser(user: User) {
-        await this.badCommandService.badServer('Start')
+    async setUserInfo(user: User) {
         if (!user?.profession) {
-            global.profession = true
-        }
-        if (!user?.skills.length) {
-            global.skills = true
-        }
-        if (!user?.level) {
-            global.level = true
-        }
-        if (!user?.profession) {
-            return await this.userInfoService.sendProfession()
-        } else if (!user?.skills.length) {
-            return await this.userInfoService.sendSkills()
-        } else if (!user?.level) {
-            return await this.userInfoService.level()
-        }
-    }
-
-    async setUserInfo() {
-        if (global.profession) {
             await this.userInfoService.getProfession()
-            if (global.skills) {
+            if (!user?.skills.length) {
                 return await this.userInfoService.sendSkills()
             }
-        } else if (global.skills) {
+        } else if (!user?.skills.length) {
             await this.userInfoService.getSkills()
-            if (global.level) {
+            if (!user?.level) {
                 return await this.userInfoService.level()
             }
             return
-        } else if (global.level) {
+        } else if (!user?.level) {
             return await this.userInfoService.level()
         }
     }
