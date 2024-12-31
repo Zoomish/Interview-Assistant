@@ -4,6 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppController } from './app.controller'
 import { BotModule } from './bot/bot.module'
 import { UserModule } from './user/user.module'
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const fs = require('fs')
 
 @Module({
     imports: [
@@ -22,6 +24,7 @@ import { UserModule } from './user/user.module'
                 migrationsRun: true,
                 ssl: {
                     rejectUnauthorized: true,
+                    ca: fs.readFileSync('./ca.pem').toString(),
                 },
                 autoLoadEntities: true,
             }),
