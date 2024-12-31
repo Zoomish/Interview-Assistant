@@ -22,7 +22,6 @@ export class AiStartService {
         const chat = model.startChat({
             history: user.localhistory,
         })
-        global.ai = chat
         return chat
     }
 }
