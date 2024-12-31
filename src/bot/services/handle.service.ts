@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
+import { User } from 'src/user/entities/user.entity'
 import { UserService } from 'src/user/user.service'
 import {
     BadCommandService,
@@ -54,25 +55,25 @@ export class HandleService {
             ) {
                 return await this.badCommandService.noCommands()
             } else {
-                return await this.setUserInfo()
+                return await this.setUserInfo(user)
             }
         }
         return await this.endOptions(text, msg)
     }
 
-    async setUserInfo() {
-        if (global.profession) {
+    async setUserInfo(user: User) {
+        if (!user?.profession) {
             await this.userInfoService.getProfession()
-            if (global.skills) {
+            if (!user?.skills.length) {
                 return await this.userInfoService.sendSkills()
             }
-        } else if (global.skills) {
+        } else if (!user?.skills.length) {
             await this.userInfoService.getSkills()
-            if (global.level) {
+            if (!user?.level) {
                 return await this.userInfoService.level()
             }
             return
-        } else if (global.level) {
+        } else if (!user?.level) {
             return await this.userInfoService.level()
         }
     }
