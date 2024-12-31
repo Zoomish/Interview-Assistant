@@ -36,6 +36,9 @@ export class User {
     @Column({ nullable: true })
     level: 'Intern' | 'Junior' | 'Middle' | 'Senior' | 'Lead'
 
+    @Column({ nullable: true })
+    review: string
+
     @CreateDateColumn()
     createdAt: Date
 
