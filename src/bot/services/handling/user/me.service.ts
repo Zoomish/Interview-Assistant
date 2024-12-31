@@ -9,9 +9,6 @@ export class MeService {
         const bot: TelegramBot = global.bot
         const msgWait = await bot.sendMessage(msg.chat.id, `Получаю данные...`)
         const user = await this.userService.findOne(msg.chat.id)
-        const photos = await bot.getUserProfilePhotos(user.tgId, {
-            offset: 1,
-        })
         await bot.deleteMessage(msgWait.chat.id, msgWait.message_id)
         const text = `<b>Меня зовут:</b> ${user.name}\n${user.admin ? '<b>Я админ</b>\n' : ''}<b>Профессия:</b> ${
             user.profession
@@ -36,41 +33,19 @@ export class MeService {
                         callback_data: 'edit_level',
                     },
                 ],
+                user.admin
+                    ? [
+                          {
+                              text: 'Получить пользователей',
+                              callback_data: 'get_users',
+                          },
+                      ]
+                    : [],
             ],
         }
-        if (photos.photos.length) {
-            return await bot.sendPhoto(
-                msg.chat.id,
-                photos.photos[0][0].file_id,
-                {
-                    caption: text,
-                    parse_mode: 'HTML',
-                    reply_markup: reply_markup,
-                }
-            )
-        }
-        return await bot.sendMessage(
-            msg.chat.id,
-            text,
-            user.admin
-                ? {
-                      parse_mode: 'HTML',
-                      reply_markup: {
-                          inline_keyboard: [
-                              ...reply_markup.inline_keyboard,
-                              [
-                                  {
-                                      text: 'Получить пользователей',
-                                      callback_data: 'get_users',
-                                  },
-                              ],
-                          ],
-                      },
-                  }
-                : {
-                      parse_mode: 'HTML',
-                      reply_markup: reply_markup,
-                  }
-        )
+        return await bot.sendMessage(msg.chat.id, text, {
+            parse_mode: 'HTML',
+            reply_markup: reply_markup,
+        })
     }
 }
