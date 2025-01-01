@@ -4,12 +4,12 @@ import { UserInfoService } from 'src/bot/services/handling'
 @Injectable()
 export class EditProfessionService {
     constructor(private readonly userInfoService: UserInfoService) {}
-    async start(action, callbackQuery) {
+    async start(action: string, id: string) {
         switch (action) {
             case 'start':
                 return await this.userInfoService.sendProfession()
             case 'end':
-                return await this.editUser('Junior', callbackQuery.id)
+                return await this.userInfoService.sendProfession()
         }
     }
 }
