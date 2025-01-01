@@ -99,7 +99,8 @@ export class HandleService {
                     return await this.badCommandService.badCommand()
                 } else if (user.startedInterview) {
                     return await this.generateContentService.generateQuetion(
-                        msg.text
+                        msg.text,
+                        user
                     )
                 } else {
                     return await this.badCommandService.badText()
