@@ -107,6 +107,7 @@ export class UserInfoService {
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
             review: msg.text,
+            startedReview: false,
         })
         return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
     }
