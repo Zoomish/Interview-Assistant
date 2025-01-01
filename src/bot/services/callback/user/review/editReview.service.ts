@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
-import { UserInfoService } from '../../../handling'
+import { ReviewService } from 'src/bot/services/handling'
 
 @Injectable()
 export class EditReviewService {
-    constructor(private readonly userInfoService: UserInfoService) {}
+    constructor(private readonly reviewService: ReviewService) {}
 
     async editReview(action: string, id: string) {
         const bot: TelegramBot = global.bot
@@ -13,17 +13,17 @@ export class EditReviewService {
                 await bot.answerCallbackQuery(id, {
                     text: 'Вы выбрали оставить отзыв',
                 })
-                return await this.userInfoService.startReview()
+                return await this.reviewService.startReview()
             case 'edit':
                 await bot.answerCallbackQuery(id, {
                     text: 'Вы выбрали изменить отзыв',
                 })
-                return await this.userInfoService.startReview()
+                return await this.reviewService.startReview()
             case 'end':
                 await bot.answerCallbackQuery(id, {
                     text: 'Вы отменили действие',
                 })
-                return await this.userInfoService.endReview()
+                return await this.reviewService.endReview()
             default:
                 break
         }
