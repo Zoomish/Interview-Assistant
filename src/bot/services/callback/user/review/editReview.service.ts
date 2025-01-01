@@ -14,9 +14,14 @@ export class EditReviewService {
                     text: 'Вы выбрали оставить отзыв',
                 })
                 return await this.userInfoService.startReview()
-            case 'end':
+            case 'edit':
                 await bot.answerCallbackQuery(id, {
                     text: 'Вы выбрали изменить отзыв',
+                })
+                return await this.userInfoService.startReview()
+            case 'end':
+                await bot.answerCallbackQuery(id, {
+                    text: 'Вы отменили действие',
                 })
                 return await this.userInfoService.endReview()
             default:

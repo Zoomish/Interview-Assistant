@@ -105,7 +105,7 @@ export class UserInfoService {
                         [
                             {
                                 text: 'Отменить',
-                                callback_data: 'cancel_review',
+                                callback_data: 'review_end',
                             },
                         ],
                     ],
