@@ -53,6 +53,14 @@ export class MeService {
                           },
                       ]
                     : [],
+                user.admin
+                    ? [
+                          {
+                              text: 'Получить отзывы',
+                              callback_data: 'get_reviews',
+                          },
+                      ]
+                    : [],
             ],
         }
         return await bot.sendMessage(msg.chat.id, text, {

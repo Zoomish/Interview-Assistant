@@ -1,4 +1,3 @@
 export * from './callback.service'
-export * from './getUsers.service'
+export * from './getInfo.service'
 export * from './user'
-
