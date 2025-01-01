@@ -9,6 +9,8 @@ import {
     HelpService,
     InfoService,
     MeService,
+    ProfessionService,
+    SkillsService,
     StartinterviewService,
 } from './handling'
 
@@ -18,6 +20,8 @@ export class HandleService {
         private readonly userService: UserService,
         private readonly startinterviewService: StartinterviewService,
         private readonly helpService: HelpService,
+        private readonly professionService: ProfessionService,
+        private readonly skillsService: SkillsService,
         private readonly infoService: InfoService,
         private readonly generateContentService: GenerateContentService,
         private readonly meService: MeService,
@@ -66,12 +70,12 @@ export class HandleService {
 
     async setUserInfo(user: User) {
         if (!user?.professionExist) {
-            await this.userInfoService.getProfession()
+            await this.professionService.startProfession()
             if (!user?.skillsExist) {
-                return await this.userInfoService.sendSkills()
+                return await this.skillsService.startSkills()
             }
         } else if (!user?.skillsExist) {
-            await this.userInfoService.getSkills()
+            await this.skillsService.getSkills()
             if (!user?.levelExist) {
                 return await this.userInfoService.level()
             }
