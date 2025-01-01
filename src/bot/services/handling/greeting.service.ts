@@ -20,17 +20,14 @@ export class GreetingService {
         }
         let text = ''
         if (!user?.profession) {
-            global.profession = true
             text = `Какую профессию вы выбрали?`
         }
         if (!user?.skills.length) {
-            global.skills = true
             if (user?.profession) {
                 text = `Укажите свои навыки, через запятую. Например: Node.js, React, Next`
             }
         }
         if (!user?.level) {
-            global.level = true
             if (user?.skills.length) {
                 text = `Теперь укажите свой уровень.`
             }
