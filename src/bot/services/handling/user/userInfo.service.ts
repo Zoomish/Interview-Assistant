@@ -98,8 +98,27 @@ export class UserInfoService {
         })
         await bot.sendMessage(
             msg.chat.id,
-            `Отлично! Теперь напишите свой отзыв.`
+            `Отлично! Теперь напишите свой отзыв.`,
+            {
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: 'Отменить',
+                                callback_data: 'cancel_review',
+                            },
+                        ],
+                    ],
+                },
+            }
         )
+    }
+
+    async endReview() {
+        const msg: TelegramBot.Message = global.msg
+        await this.userService.update(msg.chat.id, {
+            startedReview: false,
+        })
     }
 
     async getReview() {

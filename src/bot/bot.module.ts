@@ -6,6 +6,7 @@ import {
     BadCommandService,
     CallbackService,
     EditLevelService,
+    EditReviewService,
     EditUserService,
     GenerateContentService,
     GetUsersService,
@@ -36,6 +37,7 @@ import {
         HandleService,
         InfoService,
         GetUsersService,
+        EditReviewService,
     ],
     exports: [],
 })
