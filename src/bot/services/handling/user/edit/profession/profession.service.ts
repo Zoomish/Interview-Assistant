@@ -47,4 +47,11 @@ export class ProfessionService {
             `Данные успешно сохранены, а история очищена!`
         )
     }
+
+    async endProfession() {
+        const msg: TelegramBot.Message = global.msg
+        await this.userService.update(msg.chat.id, {
+            professionExist: false,
+        })
+    }
 }

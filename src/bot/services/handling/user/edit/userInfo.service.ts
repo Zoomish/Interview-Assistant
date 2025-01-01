@@ -13,12 +13,16 @@ export class UserInfoService {
         private readonly levelService: LevelService
     ) {}
 
-    async sendProfession() {
+    async startProfession() {
         return await this.professionService.sendProfession()
     }
 
     async getProfession() {
         return await this.professionService.getProfession()
+    }
+
+    async endProfession() {
+        return await this.professionService.endProfession()
     }
 
     async sendSkills() {
