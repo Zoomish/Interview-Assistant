@@ -14,6 +14,7 @@ import {
     HandleService,
     HelpService,
     InfoService,
+    InterviewService,
     LevelService,
     MeService,
     ProfessionService,
@@ -46,6 +47,7 @@ import {
         ProfessionService,
         ReviewService,
         SkillsService,
+        InterviewService,
     ],
     exports: [],
 })
