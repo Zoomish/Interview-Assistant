@@ -32,7 +32,6 @@ export class GreetingService {
                 text = `Теперь укажите свой уровень.`
             }
         }
-        global.user = user
         const bot: TelegramBot = global.bot
         await bot.sendMessage(
             msg.chat.id,
