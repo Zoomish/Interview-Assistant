@@ -55,9 +55,9 @@ export class HandleService {
         }
         const user = await this.userService.findOne(msg.chat.id)
         if (
-            !user?.profession ||
-            !user?.skills.length ||
-            !user?.level ||
+            !user?.professionExist ||
+            !user?.skillsExist ||
+            !user?.levelExist ||
             user.startedReview
         ) {
             if (
