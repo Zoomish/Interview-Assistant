@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common'
-import { UserService } from 'src/user/user.service'
 import { LevelService } from './level'
 import { ProfessionService } from './profession'
 import { ReviewService } from './review'
@@ -8,7 +7,6 @@ import { SkillsService } from './skills'
 @Injectable()
 export class UserInfoService {
     constructor(
-        private readonly userService: UserService,
         private readonly skillsService: SkillsService,
         private readonly reviewService: ReviewService,
         private readonly professionService: ProfessionService,
