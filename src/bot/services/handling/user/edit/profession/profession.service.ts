@@ -9,12 +9,27 @@ export class ProfessionService {
     async sendProfession() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
+        const user = await this.userService.findOne(msg.chat.id)
         await this.userService.update(msg.chat.id, {
             professionExist: false,
         })
         return await bot.sendMessage(
             msg.chat.id,
-            `Какую профессию вы выбрали? Изменение профессии очищает историю`
+            `Какую профессию вы выбрали? Изменение профессии очищает историю`,
+            user.profession
+                ? {
+                      reply_markup: {
+                          inline_keyboard: [
+                              [
+                                  {
+                                      text: 'Отменить',
+                                      callback_data: 'profession_end',
+                                  },
+                              ],
+                          ],
+                      },
+                  }
+                : {}
         )
     }
 
