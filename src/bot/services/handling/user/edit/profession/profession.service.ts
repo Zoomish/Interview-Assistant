@@ -11,8 +11,6 @@ export class ProfessionService {
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
             profession: null,
-            localhistory: [],
-            startedInterview: false,
         })
         return await bot.sendMessage(msg.chat.id, `Какую профессию вы выбрали?`)
     }
@@ -22,6 +20,8 @@ export class ProfessionService {
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
             profession: msg.text,
+            localhistory: [],
+            startedInterview: false,
         })
         return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
     }
