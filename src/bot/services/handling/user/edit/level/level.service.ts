@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
 
 @Injectable()
-export class EditLevelService {
+export class LevelService {
     async level() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg

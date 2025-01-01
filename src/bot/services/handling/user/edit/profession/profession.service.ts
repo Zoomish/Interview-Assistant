@@ -3,7 +3,7 @@ import TelegramBot from 'node-telegram-bot-api'
 import { UserService } from 'src/user/user.service'
 
 @Injectable()
-export class EditProfessionService {
+export class ProfessionService {
     constructor(private readonly userService: UserService) {}
 
     async sendProfession() {

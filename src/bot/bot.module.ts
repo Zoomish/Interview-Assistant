@@ -14,7 +14,11 @@ import {
     HandleService,
     HelpService,
     InfoService,
+    LevelService,
     MeService,
+    ProfessionService,
+    ReviewService,
+    SkillsService,
     StartinterviewService,
     UserInfoService,
 } from './services'
@@ -38,6 +42,10 @@ import {
         InfoService,
         GetUsersService,
         EditReviewService,
+        LevelService,
+        ProfessionService,
+        ReviewService,
+        SkillsService,
     ],
     exports: [],
 })

@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
 import { UserService } from 'src/user/user.service'
+import { LevelService } from './level'
 
 @Injectable()
 export class UserInfoService {
-    constructor(private readonly userService: UserService) {}
+    constructor(
+        private readonly userService: UserService,
+        private readonly LevelService: LevelService
+    ) {}
 
     async sendProfession() {
         const bot: TelegramBot = global.bot
