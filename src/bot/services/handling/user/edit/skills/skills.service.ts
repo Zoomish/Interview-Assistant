@@ -16,7 +16,7 @@ export class SkillsService {
         })
         await bot.sendMessage(
             msg.chat.id,
-            `Отлично! Теперь укажите свои навыки, через запятую. Например: Node.js, React, Next`
+            `Отлично! Теперь укажите свои навыки, через запятую. Например: Node.js, React, Next. Изменение навыков очищает историю`
         )
     }
 
@@ -26,6 +26,9 @@ export class SkillsService {
         await this.userService.update(msg.chat.id, {
             skills: msg.text.replaceAll(' ', '').split(','),
         })
-        return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
+        return await bot.sendMessage(
+            msg.chat.id,
+            `Данные успешно сохранены, а история очищена!`
+        )
     }
 }

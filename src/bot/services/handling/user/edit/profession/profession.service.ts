@@ -12,7 +12,10 @@ export class ProfessionService {
         await this.userService.update(msg.chat.id, {
             profession: null,
         })
-        return await bot.sendMessage(msg.chat.id, `Какую профессию вы выбрали?`)
+        return await bot.sendMessage(
+            msg.chat.id,
+            `Какую профессию вы выбрали? Изменение профессии очищает историю`
+        )
     }
 
     async getProfession() {
@@ -23,6 +26,6 @@ export class ProfessionService {
             localhistory: [],
             startedInterview: false,
         })
-        return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
+        return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены, а история очищена!`)
     }
 }
