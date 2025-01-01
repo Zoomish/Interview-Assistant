@@ -38,55 +38,42 @@ export class GreetingService {
             msg.chat.id,
             `Добро пожаловать, ${msg?.chat?.first_name}! Я здесь, чтобы помочь вам уверенно пройти собеседование. ${text}`,
             user?.skills.length
-                ? user.level
-                    ? {
-                          reply_markup: {
-                              inline_keyboard: [
-                                  [
-                                      {
-                                          text: 'Начать собеседование',
-                                          callback_data: 'startinterview',
-                                      },
-                                  ],
+                ? {
+                      reply_markup: {
+                          inline_keyboard: [
+                              [
+                                  {
+                                      text: 'Intern (без опыта)',
+                                      callback_data: 'level_intern',
+                                  },
                               ],
-                          },
-                      }
-                    : {
-                          reply_markup: {
-                              inline_keyboard: [
-                                  [
-                                      {
-                                          text: 'Intern (без опыта)',
-                                          callback_data: 'level_intern',
-                                      },
-                                  ],
-                                  [
-                                      {
-                                          text: 'Junior (1-3 года)',
-                                          callback_data: 'level_junior',
-                                      },
-                                  ],
-                                  [
-                                      {
-                                          text: 'Middle (3-6 лет)',
-                                          callback_data: 'level_middle',
-                                      },
-                                  ],
-                                  [
-                                      {
-                                          text: 'Senior (6-10 лет)',
-                                          callback_data: 'level_senior',
-                                      },
-                                  ],
-                                  [
-                                      {
-                                          text: 'Lead (более 10 лет)',
-                                          callback_data: 'level_lead',
-                                      },
-                                  ],
+                              [
+                                  {
+                                      text: 'Junior (1-3 года)',
+                                      callback_data: 'level_junior',
+                                  },
                               ],
-                          },
-                      }
+                              [
+                                  {
+                                      text: 'Middle (3-6 лет)',
+                                      callback_data: 'level_middle',
+                                  },
+                              ],
+                              [
+                                  {
+                                      text: 'Senior (6-10 лет)',
+                                      callback_data: 'level_senior',
+                                  },
+                              ],
+                              [
+                                  {
+                                      text: 'Lead (более 10 лет)',
+                                      callback_data: 'level_lead',
+                                  },
+                              ],
+                          ],
+                      },
+                  }
                 : {}
         )
     }
