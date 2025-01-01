@@ -68,7 +68,7 @@ export class BadCommandService {
         const msg: TelegramBot.Message = global.msg
         await bot.sendMessage(
             msg.chat.id,
-            `Вы уже зарегестрированы в боте. Остановите собеседование и сбросьте историю или используйте другую команду`,
+            `Вы уже зарегестрированы в боте, заполнили данные и начали собеседование. Остановите собеседование и сбросьте историю или используйте другую команду`,
             {
                 reply_markup: {
                     inline_keyboard: [
