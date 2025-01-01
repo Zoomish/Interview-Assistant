@@ -59,20 +59,32 @@ export class GreetingService {
                               inline_keyboard: [
                                   [
                                       {
-                                          text: 'Junior',
-                                          callback_data: 'junior',
+                                          text: 'Intern (без опыта)',
+                                          callback_data: 'level_intern',
                                       },
                                   ],
                                   [
                                       {
-                                          text: 'Middle',
-                                          callback_data: 'middle',
+                                          text: 'Junior (1-3 года)',
+                                          callback_data: 'level_junior',
                                       },
                                   ],
                                   [
                                       {
-                                          text: 'Senior',
-                                          callback_data: 'senior',
+                                          text: 'Middle (3-6 лет)',
+                                          callback_data: 'level_middle',
+                                      },
+                                  ],
+                                  [
+                                      {
+                                          text: 'Senior (6-10 лет)',
+                                          callback_data: 'level_senior',
+                                      },
+                                  ],
+                                  [
+                                      {
+                                          text: 'Lead (более 10 лет)',
+                                          callback_data: 'level_lead',
                                       },
                                   ],
                               ],

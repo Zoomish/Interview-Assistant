@@ -29,7 +29,8 @@ export class BotService implements OnModuleInit {
             {
                 command: '/startinterview',
                 description: 'Начать собеседование',
-            },{
+            },
+            {
                 command: '/review',
                 description: 'Оставить/редактировать отзыв',
             },
