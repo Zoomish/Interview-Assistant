@@ -20,9 +20,6 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     profession?: string
 
     @IsOptional()
-    levelExist?: boolean
-
-    @IsOptional()
     level?: 'Intern' | 'Junior' | 'Middle' | 'Senior' | 'Lead'
 
     @IsOptional()

@@ -28,7 +28,7 @@ export class GreetingService {
             text = `Какую профессию вы выбрали?`
         } else if (user?.skillsExist) {
             text = `Укажите свои навыки, через запятую. Например: Node.js, React, Next`
-        } else if (user?.levelExist) {
+        } else if (!user?.level) {
             text = `Теперь укажите свой уровень.`
         } else {
             return await this.badCommandService.exist(user)
