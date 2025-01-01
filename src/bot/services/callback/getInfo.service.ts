@@ -83,10 +83,6 @@ export class GetInfoService {
             }
         )
         reviews.forEach(async (user, i) => {
-            const messgase =
-                user?.localhistory?.length > 0
-                    ? Math.floor(user.localhistory.length / 2).toString()
-                    : '0'
             await bot.sendChatAction(chatId, 'typing')
             await bot.sendMessage(
                 chatId,
