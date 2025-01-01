@@ -27,6 +27,8 @@ export class CallbackService {
                     action,
                     callbackQuery
                 )
+            case 'profession':
+                return await this.getInfoService.start(action, callbackQuery.id)
             case 'edit':
                 return await this.editUserService.editUser(
                     action,
