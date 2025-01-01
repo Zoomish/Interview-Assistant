@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
 import { UserService } from 'src/user/user.service'
 import { LevelService } from './level'
+import { SkillsService } from './skills'
 
 @Injectable()
 export class UserInfoService {
     constructor(
         private readonly userService: UserService,
-        private readonly LevelService: LevelService
+        private readonly skillsService: SkillsService,
+        private readonly levelService: LevelService
     ) {}
 
     async sendProfession() {
@@ -29,69 +31,15 @@ export class UserInfoService {
     }
 
     async sendSkills() {
-        const bot: TelegramBot = global.bot
-        const msg: TelegramBot.Message = global.msg
-        await this.userService.update(msg.chat.id, {
-            skills: [],
-        })
-        await bot.sendMessage(
-            msg.chat.id,
-            `Отлично! Теперь укажите свои навыки, через запятую. Например: Node.js, React, Next`
-        )
+        return await this.skillsService.sendSkills()
     }
 
     async getSkills() {
-        const bot: TelegramBot = global.bot
-        const msg: TelegramBot.Message = global.msg
-        await this.userService.update(msg.chat.id, {
-            skills: msg.text.replaceAll(' ', '').split(','),
-        })
-        return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
+        return await this.skillsService.getSkills()
     }
 
     async level() {
-        const bot: TelegramBot = global.bot
-        const msg: TelegramBot.Message = global.msg
-        await bot.sendMessage(
-            msg.chat.id,
-            `Отлично! Теперь укажите свой уровень.`,
-            {
-                reply_markup: {
-                    inline_keyboard: [
-                        [
-                            {
-                                text: 'Intern (без опыта)',
-                                callback_data: 'level_intern',
-                            },
-                        ],
-                        [
-                            {
-                                text: 'Junior (1-3 года)',
-                                callback_data: 'level_junior',
-                            },
-                        ],
-                        [
-                            {
-                                text: 'Middle (3-6 лет)',
-                                callback_data: 'level_middle',
-                            },
-                        ],
-                        [
-                            {
-                                text: 'Senior (6-10 лет)',
-                                callback_data: 'level_senior',
-                            },
-                        ],
-                        [
-                            {
-                                text: 'Lead (более 10 лет)',
-                                callback_data: 'level_lead',
-                            },
-                        ],
-                    ],
-                },
-            }
-        )
+        return await this.levelService.level()
     }
 
     async startReview() {
