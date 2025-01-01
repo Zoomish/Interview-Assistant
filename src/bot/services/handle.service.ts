@@ -8,8 +8,10 @@ import {
     GreetingService,
     HelpService,
     InfoService,
+    LevelService,
     MeService,
     ProfessionService,
+    ReviewService,
     SkillsService,
     StartinterviewService,
 } from './handling'
@@ -20,6 +22,8 @@ export class HandleService {
         private readonly userService: UserService,
         private readonly startinterviewService: StartinterviewService,
         private readonly helpService: HelpService,
+        private readonly reviewService: ReviewService,
+        private readonly levelService: LevelService,
         private readonly professionService: ProfessionService,
         private readonly skillsService: SkillsService,
         private readonly infoService: InfoService,
@@ -77,13 +81,13 @@ export class HandleService {
         } else if (!user?.skillsExist) {
             await this.skillsService.getSkills()
             if (!user?.levelExist) {
-                return await this.userInfoService.level()
+                return await this.levelService.level()
             }
             return
         } else if (!user?.levelExist) {
-            return await this.userInfoService.level()
+            return await this.levelService.level()
         } else if (user?.startedReview) {
-            return await this.userInfoService.getReview()
+            return await this.reviewService.getReview()
         }
     }
 
@@ -104,7 +108,7 @@ export class HandleService {
             case '/me':
                 return await this.meService.getMe(msg)
             case '/review':
-                return await this.userInfoService.startReview()
+                return await this.reviewService.startReview()
             default:
                 if (
                     msg?.entities !== undefined &&
