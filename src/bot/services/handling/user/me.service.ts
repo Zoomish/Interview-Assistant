@@ -34,7 +34,7 @@ export class MeService {
                 [
                     {
                         text: 'Изменить уровень',
-                        callback_data: 'level_start',
+                        callback_data: 'level',
                     },
                 ],
                 [

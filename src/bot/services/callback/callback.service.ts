@@ -44,7 +44,7 @@ export class CallbackService {
                     action,
                     callbackQuery.id
                 )
-            case 'level_start':
+            case 'level':
                 return await this.levelService.level()
             case 'get':
                 return await this.getInfoService.start(action, callbackQuery.id)
