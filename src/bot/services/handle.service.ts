@@ -57,7 +57,7 @@ export class HandleService {
         if (
             !user?.professionExist ||
             !user?.skillsExist ||
-            !user?.levelExist ||
+            !user?.level ||
             user.startedReview
         ) {
             if (

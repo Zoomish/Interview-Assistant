@@ -42,9 +42,6 @@ export class User {
     @Column({ nullable: true, array: true, default: [], type: 'text' })
     skills: string[]
 
-    @Column({ nullable: false, default: false })
-    levelExist: boolean
-
     @Column({ nullable: true })
     level: 'Intern' | 'Junior' | 'Middle' | 'Senior' | 'Lead'
 
