@@ -24,11 +24,11 @@ export class GreetingService {
             })
         }
         let text = ''
-        if (!user?.professionExist) {
+        if (user?.professionExist) {
             text = `Какую профессию вы выбрали?`
-        } else if (!user?.skillsExist) {
+        } else if (user?.skillsExist) {
             text = `Укажите свои навыки, через запятую. Например: Node.js, React, Next`
-        } else if (!user?.levelExist) {
+        } else if (user?.levelExist) {
             text = `Теперь укажите свой уровень.`
         } else {
             return await this.badCommandService.exist(user)
@@ -37,7 +37,7 @@ export class GreetingService {
         await bot.sendMessage(
             msg.chat.id,
             `Добро пожаловать, ${msg?.chat?.first_name}! Я здесь, чтобы помочь вам уверенно пройти собеседование. ${text}`,
-            user?.skills.length
+            !user?.level
                 ? {
                       reply_markup: {
                           inline_keyboard: [
