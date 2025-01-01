@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common'
-import TelegramBot from 'node-telegram-bot-api'
 import { UserService } from 'src/user/user.service'
 import { LevelService } from './level'
+import { ProfessionService } from './profession'
+import { ReviewService } from './review'
 import { SkillsService } from './skills'
 
 @Injectable()
@@ -9,25 +10,17 @@ export class UserInfoService {
     constructor(
         private readonly userService: UserService,
         private readonly skillsService: SkillsService,
+        private readonly reviewService: ReviewService,
+        private readonly professionService: ProfessionService,
         private readonly levelService: LevelService
     ) {}
 
     async sendProfession() {
-        const bot: TelegramBot = global.bot
-        const msg: TelegramBot.Message = global.msg
-        await this.userService.update(msg.chat.id, {
-            profession: null,
-        })
-        return await bot.sendMessage(msg.chat.id, `Какую профессию вы выбрали?`)
+        return await this.professionService.sendProfession()
     }
 
     async getProfession() {
-        const bot: TelegramBot = global.bot
-        const msg: TelegramBot.Message = global.msg
-        await this.userService.update(msg.chat.id, {
-            profession: msg.text,
-        })
-        return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
+        return await this.professionService.getProfession()
     }
 
     async sendSkills() {
@@ -43,43 +36,14 @@ export class UserInfoService {
     }
 
     async startReview() {
-        const bot: TelegramBot = global.bot
-        const msg: TelegramBot.Message = global.msg
-        await this.userService.update(msg.chat.id, {
-            startedReview: true,
-        })
-        await bot.sendMessage(
-            msg.chat.id,
-            `Отлично! Теперь напишите свой отзыв.`,
-            {
-                reply_markup: {
-                    inline_keyboard: [
-                        [
-                            {
-                                text: 'Отменить',
-                                callback_data: 'review_end',
-                            },
-                        ],
-                    ],
-                },
-            }
-        )
+        return await this.reviewService.startReview()
     }
 
     async endReview() {
-        const msg: TelegramBot.Message = global.msg
-        await this.userService.update(msg.chat.id, {
-            startedReview: false,
-        })
+        return await this.reviewService.endReview()
     }
 
     async getReview() {
-        const bot: TelegramBot = global.bot
-        const msg: TelegramBot.Message = global.msg
-        await this.userService.update(msg.chat.id, {
-            review: msg.text,
-            startedReview: false,
-        })
-        return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
+        return await this.reviewService.getReview()
     }
 }
