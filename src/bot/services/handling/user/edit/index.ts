@@ -1,4 +1,6 @@
-export * from './userInfo.service'
 export * from './level'
 export * from './profession'
+export * from './review'
 export * from './skills'
+export * from './userInfo.service'
+
