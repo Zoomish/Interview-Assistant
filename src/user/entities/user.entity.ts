@@ -30,19 +30,19 @@ export class User {
     @Column({ nullable: true })
     nickname: string
 
-    @Column({ nullable: false, default: true })
+    @Column({ nullable: false, default: false })
     professionExist: boolean
 
     @Column({ nullable: true })
     profession: string
 
-    @Column({ nullable: false, default: true })
+    @Column({ nullable: false, default: false })
     skillsExist: boolean
 
     @Column({ nullable: true, array: true, default: [], type: 'text' })
     skills: string[]
 
-    @Column({ nullable: false, default: true })
+    @Column({ nullable: false, default: false })
     levelExist: boolean
 
     @Column({ nullable: true })
