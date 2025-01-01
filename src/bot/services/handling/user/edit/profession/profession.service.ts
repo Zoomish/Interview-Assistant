@@ -10,7 +10,7 @@ export class ProfessionService {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
-            profession: null,
+            professionExist: false,
         })
         return await bot.sendMessage(
             msg.chat.id,
@@ -23,6 +23,7 @@ export class ProfessionService {
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
             profession: msg.text,
+            professionExist: true,
             localhistory: [],
             startedInterview: false,
         })

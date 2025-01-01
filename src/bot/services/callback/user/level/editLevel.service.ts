@@ -30,6 +30,7 @@ export class EditLevelService {
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
             level: text,
+            levelExist: true,
             localhistory: [],
             startedInterview: false,
         })
