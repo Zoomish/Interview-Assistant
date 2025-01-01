@@ -12,6 +12,7 @@ export class SkillsService {
         await this.userService.update(msg.chat.id, {
             skills: [],
             localhistory: [],
+            startedInterview: false,
         })
         await bot.sendMessage(
             msg.chat.id,

@@ -26,7 +26,7 @@ export class BadCommandService {
         const msg: TelegramBot.Message = global.msg
         await bot.sendMessage(
             msg.chat.id,
-            'Вы не начали собеседование. Начните его или используйте другую команду',
+            'Вы не начали собеседование или изменили информацию о себе. Начните его или используйте другую команду',
             {
                 reply_markup: {
                     inline_keyboard: [

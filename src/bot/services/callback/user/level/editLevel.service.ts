@@ -31,6 +31,7 @@ export class EditLevelService {
         await this.userService.update(msg.chat.id, {
             level: text,
             localhistory: [],
+            startedInterview: false,
         })
         await bot.answerCallbackQuery(id, {
             text: `Вы изменили уровень на ${text}`,

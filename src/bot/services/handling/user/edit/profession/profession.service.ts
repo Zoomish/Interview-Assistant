@@ -12,6 +12,7 @@ export class ProfessionService {
         await this.userService.update(msg.chat.id, {
             profession: null,
             localhistory: [],
+            startedInterview: false,
         })
         return await bot.sendMessage(msg.chat.id, `Какую профессию вы выбрали?`)
     }
