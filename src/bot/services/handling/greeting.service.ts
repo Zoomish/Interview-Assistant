@@ -12,9 +12,6 @@ export class GreetingService {
 
     async greeting(msg: TelegramBot.Message) {
         let user = await this.userService.findOne(msg.chat.id)
-        // if (user) {
-        //     return await this.badCommandService.exist()
-        // }
         if (!user) {
             const name =
                 msg?.chat?.first_name && msg?.chat?.last_name
@@ -33,6 +30,8 @@ export class GreetingService {
             text = `Укажите свои навыки, через запятую. Например: Node.js, React, Next`
         } else if (!user?.level) {
             text = `Теперь укажите свой уровень.`
+        } else {
+            return await this.badCommandService.exist()
         }
         const bot: TelegramBot = global.bot
         await bot.sendMessage(
