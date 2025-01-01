@@ -54,6 +54,7 @@ export class HandleService {
                 break
         }
         const user = await this.userService.findOne(msg.chat.id)
+        console.log(user)
         if (
             !user?.professionExist ||
             !user?.skillsExist ||

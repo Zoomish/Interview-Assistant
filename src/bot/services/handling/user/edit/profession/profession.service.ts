@@ -51,7 +51,7 @@ export class ProfessionService {
     async endProfession() {
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
-            professionExist: false,
+            professionExist: true,
         })
     }
 }
