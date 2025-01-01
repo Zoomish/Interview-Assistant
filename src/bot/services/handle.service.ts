@@ -74,7 +74,7 @@ export class HandleService {
 
     async setUserInfo(user: User) {
         if (!user?.professionExist) {
-            await this.professionService.startProfession()
+            await this.professionService.getProfession()
             if (!user?.skillsExist) {
                 return await this.skillsService.startSkills()
             }
