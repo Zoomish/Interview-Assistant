@@ -18,6 +18,9 @@ export class User {
     @Column({ nullable: false, default: false })
     admin: boolean
 
+    @Column({ nullable: false, default: false })
+    startedInterview: boolean
+
     @Column({ nullable: true, type: 'json' })
     localhistory: Content[]
 

@@ -14,6 +14,9 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     startedReview?: boolean
 
     @IsOptional()
+    startedInterview?: boolean
+
+    @IsOptional()
     level?: 'Intern' | 'Junior' | 'Middle' | 'Senior' | 'Lead'
 
     @IsOptional()
