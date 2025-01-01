@@ -11,19 +11,14 @@ export class EditReviewService {
         switch (action) {
             case 'start':
                 await bot.answerCallbackQuery(id, {
-                    text: 'Вы выбрали изменить профессию',
+                    text: 'Вы выбрали оставить отзыв',
                 })
-                return await this.userInfoService.sendProfession()
+                return await this.userInfoService.startReview()
             case 'end':
-                await bot.answerCallbackQuery(id, {
-                    text: 'Вы выбрали изменить навыки',
-                })
-                return await this.userInfoService.sendSkills()
-            case 'review':
                 await bot.answerCallbackQuery(id, {
                     text: 'Вы выбрали изменить отзыв',
                 })
-                return await this.userInfoService.sendReview()
+                return await this.userInfoService.endReview()
             default:
                 break
         }

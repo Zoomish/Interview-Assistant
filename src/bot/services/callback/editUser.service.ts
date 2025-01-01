@@ -24,11 +24,6 @@ export class EditUserService {
                     text: 'Вы выбрали изменить уровень',
                 })
                 return await this.userInfoService.level()
-            case 'review':
-                await bot.answerCallbackQuery(callbackQuery.id, {
-                    text: 'Вы выбрали изменить отзыв',
-                })
-                return await this.userInfoService.sendReview()
             default:
                 break
         }

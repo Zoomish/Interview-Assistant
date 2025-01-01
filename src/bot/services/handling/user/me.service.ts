@@ -40,7 +40,9 @@ export class MeService {
                 [
                     {
                         text: user.review ? 'Изменить отзыв' : 'Оставить отзыв',
-                        callback_data: 'edit_review',
+                        callback_data: user.review
+                            ? 'review_edit'
+                            : 'review_start',
                     },
                 ],
                 user.admin
