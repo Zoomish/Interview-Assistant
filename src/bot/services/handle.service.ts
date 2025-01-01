@@ -80,11 +80,11 @@ export class HandleService {
             }
         } else if (!user?.skillsExist) {
             await this.skillsService.getSkills()
-            if (!user?.levelExist) {
+            if (!user.level) {
                 return await this.levelService.level()
             }
             return
-        } else if (!user?.levelExist) {
+        } else if (!user?.level) {
             return await this.levelService.level()
         } else if (user?.startedReview) {
             return await this.reviewService.getReview()
