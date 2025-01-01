@@ -1,2 +1,1 @@
-export * from './interview.service';
-
+export * from './interview.service'

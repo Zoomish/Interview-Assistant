@@ -36,7 +36,10 @@ export class EditLevelService {
         await bot.answerCallbackQuery(id, {
             text: `Вы изменили уровень на ${text}`,
         })
-        await bot.sendMessage(msg.chat.id, `Данные успешно сохранены, а история очищена!`)
+        await bot.sendMessage(
+            msg.chat.id,
+            `Данные успешно сохранены, а история очищена!`
+        )
         return await bot.sendMessage(
             msg.chat.id,
             `Спасибо! Теперь можно начинать!`,
