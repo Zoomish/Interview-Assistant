@@ -9,7 +9,6 @@ import {
     EditProfessionService,
     EditReviewService,
     EditSkillsService,
-    EditUserService,
     GenerateContentService,
     GetInfoService,
     GreetingService,
@@ -23,7 +22,6 @@ import {
     ReviewService,
     SkillsService,
     StartinterviewService,
-    UserInfoService,
 } from './services'
 
 @Module({
@@ -32,7 +30,6 @@ import {
         BotService,
         StartinterviewService,
         MeService,
-        UserInfoService,
         GreetingService,
         CallbackService,
         HelpService,
@@ -40,7 +37,6 @@ import {
         AiStartService,
         GenerateContentService,
         EditLevelService,
-        EditUserService,
         HandleService,
         InfoService,
         GetInfoService,

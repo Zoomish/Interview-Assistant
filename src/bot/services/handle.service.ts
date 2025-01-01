@@ -10,7 +10,6 @@ import {
     InfoService,
     MeService,
     StartinterviewService,
-    UserInfoService,
 } from './handling'
 
 @Injectable()
@@ -18,7 +17,6 @@ export class HandleService {
     constructor(
         private readonly userService: UserService,
         private readonly startinterviewService: StartinterviewService,
-        private readonly userInfoService: UserInfoService,
         private readonly helpService: HelpService,
         private readonly infoService: InfoService,
         private readonly generateContentService: GenerateContentService,

@@ -6,7 +6,7 @@ import { UserService } from 'src/user/user.service'
 export class ProfessionService {
     constructor(private readonly userService: UserService) {}
 
-    async sendProfession() {
+    async startProfession() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
         const user = await this.userService.findOne(msg.chat.id)
