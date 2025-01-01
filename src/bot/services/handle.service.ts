@@ -88,7 +88,11 @@ export class HandleService {
     async endOptions(text: string, msg: TelegramBot.Message, user: User) {
         switch (text) {
             case '/startinterview':
-                return await this.startinterviewService.startinterview()
+                if (user.startedInterview) {
+                    return await this.badCommandService.alreadyStarted()
+                } else {
+                    return await this.startinterviewService.startinterview()
+                }
             case '/me':
                 return await this.meService.getMe(msg)
             case '/review':

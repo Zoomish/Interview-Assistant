@@ -21,6 +21,27 @@ export class BadCommandService {
         )
     }
 
+    async alreadyStarted() {
+        const bot: TelegramBot = global.bot
+        const msg: TelegramBot.Message = global.msg
+        await bot.sendMessage(
+            msg.chat.id,
+            `Вы уже начали собеседование. Остановите его и сбросьте историю или используйте другую команду`,
+            {
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: 'Остановить собеседование',
+                                callback_data: 'interview_stop',
+                            },
+                        ],
+                    ],
+                },
+            }
+        )
+    }
+
     async badText() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
@@ -33,7 +54,7 @@ export class BadCommandService {
                         [
                             {
                                 text: 'Начать собеседование',
-                                callback_data: 'startinterview',
+                                callback_data: 'interview_start',
                             },
                         ],
                     ],
