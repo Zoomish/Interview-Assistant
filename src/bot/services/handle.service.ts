@@ -48,7 +48,12 @@ export class HandleService {
                 break
         }
         const user = await this.userService.findOne(msg.chat.id)
-        if (!user?.profession || !user?.skills.length || !user?.level) {
+        if (
+            !user?.profession ||
+            !user?.skills.length ||
+            !user?.level ||
+            user.startedReview
+        ) {
             if (
                 msg?.entities !== undefined &&
                 msg?.entities[0]?.type === 'bot_command'
@@ -75,6 +80,8 @@ export class HandleService {
             return
         } else if (!user?.level) {
             return await this.userInfoService.level()
+        }else if (user?.startedReview) {
+            return await this.userInfoService.startinterview()
         }
     }
 
