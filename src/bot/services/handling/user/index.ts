@@ -1,2 +1,2 @@
 export * from './me.service'
-export * from './userInfo.service'
+export * from './edit/userInfo.service'
