@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
+import { User } from 'src/user/entities/user.entity'
 
 @Injectable()
 export class BadCommandService {
@@ -63,19 +64,25 @@ export class BadCommandService {
         )
     }
 
-    async exist() {
+    async exist(user: User) {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
         await bot.sendMessage(
             msg.chat.id,
-            `Вы уже зарегестрированы в боте, заполнили данные и начали собеседование. Остановите собеседование и сбросьте историю или используйте другую команду`,
+            user.startedInterview
+                ? `Вы уже зарегестрированы в боте, заполнили данные и начали собеседование. Остановите собеседование и сбросьте историю или используйте другую команду`
+                : 'Вы уже зарегестрированы в боте и заполнили данные. Начните собеседование или используйте другую команду',
             {
                 reply_markup: {
                     inline_keyboard: [
                         [
                             {
-                                text: 'Остановить собеседование',
-                                callback_data: 'interview_end',
+                                text: user.startedInterview
+                                    ? 'Остановить собеседование'
+                                    : 'Начать собеседование',
+                                callback_data: user.startedInterview
+                                    ? 'interview_end'
+                                    : 'interview_start',
                             },
                         ],
                     ],

@@ -31,7 +31,7 @@ export class GreetingService {
         } else if (!user?.level) {
             text = `Теперь укажите свой уровень.`
         } else {
-            return await this.badCommandService.exist()
+            return await this.badCommandService.exist(user)
         }
         const bot: TelegramBot = global.bot
         await bot.sendMessage(
