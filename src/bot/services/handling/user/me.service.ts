@@ -22,19 +22,19 @@ export class MeService {
                 [
                     {
                         text: 'Изменить профессию',
-                        callback_data: 'edit_profession',
+                        callback_data: 'profession_start',
                     },
                 ],
                 [
                     {
                         text: 'Изменить навыки',
-                        callback_data: 'edit_skills',
+                        callback_data: 'skills_start',
                     },
                 ],
                 [
                     {
                         text: 'Изменить уровень',
-                        callback_data: 'edit_level',
+                        callback_data: 'level_start',
                     },
                 ],
                 [
