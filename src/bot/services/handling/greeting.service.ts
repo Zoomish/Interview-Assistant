@@ -1,12 +1,20 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
 import { UserService } from 'src/user/user.service'
+import { BadCommandService } from './badcommand.service'
 
 @Injectable()
 export class GreetingService {
-    constructor(private readonly userService: UserService) {}
+    constructor(
+        private readonly userService: UserService,
+        private readonly badCommandService: BadCommandService
+    ) {}
+
     async greeting(msg: TelegramBot.Message) {
         let user = await this.userService.findOne(msg.chat.id)
+        if (user) {
+            return await this.badCommandService.exist()
+        }
         if (!user) {
             const name =
                 msg?.chat?.first_name && msg?.chat?.last_name

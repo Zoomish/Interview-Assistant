@@ -63,6 +63,33 @@ export class BadCommandService {
         )
     }
 
+    async exist() {
+        const bot: TelegramBot = global.bot
+        const msg: TelegramBot.Message = global.msg
+        await bot.sendMessage(
+            msg.chat.id,
+            `Вы уже зарегестрированы в боте. Остановите собеседование и сбросьте историю, измените информацию о себе или используйте другую команду`,
+            {
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: 'Остановить собеседование',
+                                callback_data: 'interview_end',
+                            },
+                        ],
+                        [
+                            {
+                                text: 'Изменить информацию',
+                                callback_data: 'me',
+                            },
+                        ],
+                    ],
+                },
+            }
+        )
+    }
+
     async badText() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
