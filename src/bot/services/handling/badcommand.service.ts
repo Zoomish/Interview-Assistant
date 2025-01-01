@@ -33,7 +33,7 @@ export class BadCommandService {
                         [
                             {
                                 text: 'Остановить собеседование',
-                                callback_data: 'interview_stop',
+                                callback_data: 'interview_end',
                             },
                         ],
                     ],

@@ -39,7 +39,7 @@ export class CallbackService {
                     action,
                     callbackQuery.id
                 )
-            case 'startinterview':
+            case 'interview':
                 await bot.answerCallbackQuery(callbackQuery.id, {
                     text: 'Вы начали собеседование!',
                 })
