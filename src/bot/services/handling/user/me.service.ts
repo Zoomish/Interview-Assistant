@@ -10,9 +10,13 @@ export class MeService {
         const msgWait = await bot.sendMessage(msg.chat.id, `Получаю данные...`)
         const user = await this.userService.findOne(msg.chat.id)
         await bot.deleteMessage(msgWait.chat.id, msgWait.message_id)
-        const text = `<b>Меня зовут:</b> ${user.name}\n${user.admin ? '<b>Я админ</b>\n' : ''}<b>Профессия:</b> ${
-            user.profession
-        }\n<b>Уровень:</b> ${user.level}\n<b>Навыки:</b>\n      ${user.skills.join('\n      ')}`
+        const text =
+            `<b>Меня зовут:</b> ${user.name}\n` +
+            `${user.admin ? '<b>Я админ</b>\n' : ''}` +
+            `<b>Профессия:</b> ${user.profession}\n` +
+            `<b>Уровень:</b> ${user.level}\n` +
+            `<b>Отзыв:</b> ${user.review || 'Нет'}\n` +
+            `<b>Навыки:</b>\n      ${user.skills.join('\n      ')}`
         const reply_markup = {
             inline_keyboard: [
                 [
@@ -34,11 +38,16 @@ export class MeService {
                     },
                 ],
                 user.review
-                    ? []
+                    ? [
+                          {
+                              text: 'Изменить отзыв',
+                              callback_data: 'edit_review',
+                          },
+                      ]
                     : [
                           {
                               text: 'Отправить отзыв',
-                              callback_data: 'edit_level',
+                              callback_data: 'send_review',
                           },
                       ],
                 user.admin
