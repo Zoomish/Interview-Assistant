@@ -14,6 +14,9 @@ export class EditProfessionService {
                 })
                 return await this.userInfoService.startProfession()
             case 'end':
+                await bot.answerCallbackQuery(id, {
+                    text: 'Вы отменили изменение профессии',
+                })
                 return await this.userInfoService.endProfession()
         }
     }

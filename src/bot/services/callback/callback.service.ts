@@ -3,13 +3,12 @@ import TelegramBot from 'node-telegram-bot-api'
 import { BadCommandService } from '../handling'
 import { GetInfoService } from './getInfo.service'
 import { InterviewService } from './interview'
-import { EditLevelService, EditReviewService, EditUserService } from './user'
+import { EditLevelService, EditReviewService } from './user'
 
 @Injectable()
 export class CallbackService {
     constructor(
         private readonly editLevelService: EditLevelService,
-        private readonly editUserService: EditUserService,
         private readonly getInfoService: GetInfoService,
         private readonly editReviewService: EditReviewService,
         private readonly badCommandService: BadCommandService,
@@ -29,11 +28,8 @@ export class CallbackService {
                 )
             case 'profession':
                 return await this.getInfoService.start(action, callbackQuery.id)
-            case 'edit':
-                return await this.editUserService.editUser(
-                    action,
-                    callbackQuery
-                )
+            case 'skills':
+                return await this.getInfoService.start(action, callbackQuery.id)
             case 'get':
                 return await this.getInfoService.start(action, callbackQuery.id)
             case 'review':

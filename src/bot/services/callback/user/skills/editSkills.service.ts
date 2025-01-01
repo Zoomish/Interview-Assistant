@@ -14,6 +14,9 @@ export class EditSkillsService {
                 })
                 return await this.userInfoService.startSkills()
             case 'end':
+                await bot.answerCallbackQuery(id, {
+                    text: 'Вы отменили изменение навыков',
+                })
                 return await this.userInfoService.endSkills()
         }
     }
