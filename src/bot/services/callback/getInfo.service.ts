@@ -72,7 +72,7 @@ export class GetInfoService {
         const users = await this.userService.findAll()
         const reviews = users.filter((user) => user.review)
         if (reviews.length === 0) {
-            await bot.sendMessage(chatId, 'Нет ни одного пользователя в базе.')
+            await bot.sendMessage(chatId, 'Нет ни одного отзыва в базе.')
             return
         }
         await bot.sendMessage(
