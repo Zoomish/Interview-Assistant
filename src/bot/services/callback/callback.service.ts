@@ -22,7 +22,7 @@ export class CallbackService {
         const type = data[0]
         const action = data[1]
         switch (type) {
-            case 'level':
+            case 'getlevel':
                 return await this.editLevelService.editLevel(
                     action,
                     callbackQuery
