@@ -11,6 +11,7 @@ export class SkillsService {
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
             skills: [],
+            localhistory: [],
         })
         await bot.sendMessage(
             msg.chat.id,
