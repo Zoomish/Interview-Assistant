@@ -93,6 +93,12 @@ export class HandleService {
                 } else {
                     return await this.startinterviewService.startinterview()
                 }
+            case '/endinterview':
+                if (user.startedInterview) {
+                    return await this.startinterviewService.endinterview()
+                } else {
+                    return await this.badCommandService.notStarted()
+                }
             case '/me':
                 return await this.meService.getMe(msg)
             case '/review':
