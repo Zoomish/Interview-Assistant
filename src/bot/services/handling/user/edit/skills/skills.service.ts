@@ -10,7 +10,7 @@ export class SkillsService {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
-            skills: [],
+            skillsExist: false,
         })
         await bot.sendMessage(
             msg.chat.id,
