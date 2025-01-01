@@ -1,18 +1,26 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
-import { BadCommandService, StartinterviewService } from '../handling'
+import { BadCommandService, LevelService } from '../handling'
 import { GetInfoService } from './getInfo.service'
-import { EditLevelService, EditReviewService, EditUserService } from './user'
+import { InterviewService } from './interview'
+import {
+    EditLevelService,
+    EditProfessionService,
+    EditReviewService,
+    EditSkillsService,
+} from './user'
 
 @Injectable()
 export class CallbackService {
     constructor(
         private readonly editLevelService: EditLevelService,
-        private readonly editUserService: EditUserService,
         private readonly getInfoService: GetInfoService,
+        private readonly editSkillsService: EditSkillsService,
+        private readonly levelService: LevelService,
+        private readonly editProfessionService: EditProfessionService,
         private readonly editReviewService: EditReviewService,
         private readonly badCommandService: BadCommandService,
-        private readonly startinterviewService: StartinterviewService
+        private readonly interviewService: InterviewService
     ) {}
     async callback(callbackQuery: TelegramBot.CallbackQuery) {
         const data = callbackQuery.data.split('_')
@@ -22,16 +30,26 @@ export class CallbackService {
         const type = data[0]
         const action = data[1]
         switch (type) {
-            case 'level':
+            case 'getlevel':
                 return await this.editLevelService.editLevel(
                     action,
                     callbackQuery
                 )
-            case 'edit':
-                return await this.editUserService.editUser(
+            case 'profession':
+                return await this.editProfessionService.start(
                     action,
-                    callbackQuery
+                    callbackQuery.id
                 )
+            case 'skills':
+                return await this.editSkillsService.start(
+                    action,
+                    callbackQuery.id
+                )
+            case 'level':
+                await bot.answerCallbackQuery(callbackQuery.id, {
+                    text: 'Вы выбрали изменить уровень',
+                })
+                return await this.levelService.level()
             case 'get':
                 return await this.getInfoService.start(action, callbackQuery.id)
             case 'review':
@@ -39,11 +57,11 @@ export class CallbackService {
                     action,
                     callbackQuery.id
                 )
-            case 'startinterview':
-                await bot.answerCallbackQuery(callbackQuery.id, {
-                    text: 'Вы начали собеседование!',
-                })
-                return await this.startinterviewService.startinterview()
+            case 'interview':
+                return await this.interviewService.start(
+                    action,
+                    callbackQuery.id
+                )
             default:
                 return await this.badCommandService.badQuery()
         }

@@ -15,31 +15,31 @@ export class LevelService {
                         [
                             {
                                 text: 'Intern (без опыта)',
-                                callback_data: 'level_intern',
+                                callback_data: 'getlevel_intern',
                             },
                         ],
                         [
                             {
                                 text: 'Junior (1-3 года)',
-                                callback_data: 'level_junior',
+                                callback_data: 'getlevel_junior',
                             },
                         ],
                         [
                             {
                                 text: 'Middle (3-6 лет)',
-                                callback_data: 'level_middle',
+                                callback_data: 'getlevel_middle',
                             },
                         ],
                         [
                             {
                                 text: 'Senior (6-10 лет)',
-                                callback_data: 'level_senior',
+                                callback_data: 'getlevel_senior',
                             },
                         ],
                         [
                             {
                                 text: 'Lead (более 10 лет)',
-                                callback_data: 'level_lead',
+                                callback_data: 'getlevel_lead',
                             },
                         ],
                     ],

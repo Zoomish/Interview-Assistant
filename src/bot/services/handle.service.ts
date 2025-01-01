@@ -8,9 +8,12 @@ import {
     GreetingService,
     HelpService,
     InfoService,
+    LevelService,
     MeService,
+    ProfessionService,
+    ReviewService,
+    SkillsService,
     StartinterviewService,
-    UserInfoService,
 } from './handling'
 
 @Injectable()
@@ -18,8 +21,11 @@ export class HandleService {
     constructor(
         private readonly userService: UserService,
         private readonly startinterviewService: StartinterviewService,
-        private readonly userInfoService: UserInfoService,
         private readonly helpService: HelpService,
+        private readonly reviewService: ReviewService,
+        private readonly levelService: LevelService,
+        private readonly professionService: ProfessionService,
+        private readonly skillsService: SkillsService,
         private readonly infoService: InfoService,
         private readonly generateContentService: GenerateContentService,
         private readonly meService: MeService,
@@ -48,9 +54,10 @@ export class HandleService {
                 break
         }
         const user = await this.userService.findOne(msg.chat.id)
+        console.log(user)
         if (
-            !user?.profession ||
-            !user?.skills.length ||
+            !user?.professionExist ||
+            !user?.skillsExist ||
             !user?.level ||
             user.startedReview
         ) {
@@ -67,32 +74,42 @@ export class HandleService {
     }
 
     async setUserInfo(user: User) {
-        if (!user?.profession) {
-            await this.userInfoService.getProfession()
-            if (!user?.skills.length) {
-                return await this.userInfoService.sendSkills()
+        if (!user?.professionExist) {
+            await this.professionService.getProfession()
+            if (!user?.skillsExist) {
+                return await this.skillsService.startSkills()
             }
-        } else if (!user?.skills.length) {
-            await this.userInfoService.getSkills()
-            if (!user?.level) {
-                return await this.userInfoService.level()
+        } else if (!user?.skillsExist) {
+            await this.skillsService.getSkills()
+            if (!user.level) {
+                return await this.levelService.level()
             }
             return
         } else if (!user?.level) {
-            return await this.userInfoService.level()
+            return await this.levelService.level()
         } else if (user?.startedReview) {
-            return await this.userInfoService.getReview()
+            return await this.reviewService.getReview()
         }
     }
 
     async endOptions(text: string, msg: TelegramBot.Message, user: User) {
         switch (text) {
             case '/startinterview':
-                return await this.startinterviewService.startinterview()
+                if (user.startedInterview) {
+                    return await this.badCommandService.alreadyStarted()
+                } else {
+                    return await this.startinterviewService.startinterview()
+                }
+            case '/endinterview':
+                if (user.startedInterview) {
+                    return await this.startinterviewService.endinterview()
+                } else {
+                    return await this.badCommandService.notStarted()
+                }
             case '/me':
                 return await this.meService.getMe(msg)
             case '/review':
-                return await this.userInfoService.startReview()
+                return await this.reviewService.startReview()
             default:
                 if (
                     msg?.entities !== undefined &&

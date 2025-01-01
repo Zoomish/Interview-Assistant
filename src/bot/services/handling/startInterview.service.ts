@@ -21,4 +21,17 @@ export class StartinterviewService {
         )
         return await bot.sendMessage(chatId, text.response.text())
     }
+
+    async endinterview() {
+        const bot: TelegramBot = global.bot
+        const chatId = global.msg.chat.id
+        await this.userService.update(chatId, {
+            startedInterview: false,
+            localhistory: [],
+        })
+        return await bot.sendMessage(
+            chatId,
+            `Вы остановили собеседование и удалили историю`
+        )
+    }
 }

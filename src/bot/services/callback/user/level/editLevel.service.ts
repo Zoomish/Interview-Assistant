@@ -30,11 +30,16 @@ export class EditLevelService {
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
             level: text,
+            localhistory: [],
+            startedInterview: false,
         })
         await bot.answerCallbackQuery(id, {
             text: `Вы изменили уровень на ${text}`,
         })
-        await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
+        await bot.sendMessage(
+            msg.chat.id,
+            `Данные успешно сохранены, а история очищена!`
+        )
         return await bot.sendMessage(
             msg.chat.id,
             `Спасибо! Теперь можно начинать!`,

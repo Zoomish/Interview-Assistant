@@ -1,10 +1,15 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
 import { UserService } from 'src/user/user.service'
+import { BadCommandService } from './badcommand.service'
 
 @Injectable()
 export class GreetingService {
-    constructor(private readonly userService: UserService) {}
+    constructor(
+        private readonly userService: UserService,
+        private readonly badCommandService: BadCommandService
+    ) {}
+
     async greeting(msg: TelegramBot.Message) {
         let user = await this.userService.findOne(msg.chat.id)
         if (!user) {
@@ -19,77 +24,56 @@ export class GreetingService {
             })
         }
         let text = ''
-        if (!user?.profession) {
-            global.profession = true
+        if (!user?.professionExist) {
             text = `Какую профессию вы выбрали?`
+        } else if (!user?.skillsExist) {
+            text = `Укажите свои навыки, через запятую. Например: Node.js, React, Next`
+        } else if (!user?.level) {
+            text = `Теперь укажите свой уровень.`
+        } else {
+            return await this.badCommandService.exist(user)
         }
-        if (!user?.skills.length) {
-            global.skills = true
-            if (user?.profession) {
-                text = `Укажите свои навыки, через запятую. Например: Node.js, React, Next`
-            }
-        }
-        if (!user?.level) {
-            global.level = true
-            if (user?.skills.length) {
-                text = `Теперь укажите свой уровень.`
-            }
-        }
-        global.user = user
         const bot: TelegramBot = global.bot
         await bot.sendMessage(
             msg.chat.id,
             `Добро пожаловать, ${msg?.chat?.first_name}! Я здесь, чтобы помочь вам уверенно пройти собеседование. ${text}`,
-            user?.skills.length
-                ? user.level
-                    ? {
-                          reply_markup: {
-                              inline_keyboard: [
-                                  [
-                                      {
-                                          text: 'Начать собеседование',
-                                          callback_data: 'startinterview',
-                                      },
-                                  ],
+            user.skillsExist && !user?.level
+                ? {
+                      reply_markup: {
+                          inline_keyboard: [
+                              [
+                                  {
+                                      text: 'Intern (без опыта)',
+                                      callback_data: 'level_intern',
+                                  },
                               ],
-                          },
-                      }
-                    : {
-                          reply_markup: {
-                              inline_keyboard: [
-                                  [
-                                      {
-                                          text: 'Intern (без опыта)',
-                                          callback_data: 'level_intern',
-                                      },
-                                  ],
-                                  [
-                                      {
-                                          text: 'Junior (1-3 года)',
-                                          callback_data: 'level_junior',
-                                      },
-                                  ],
-                                  [
-                                      {
-                                          text: 'Middle (3-6 лет)',
-                                          callback_data: 'level_middle',
-                                      },
-                                  ],
-                                  [
-                                      {
-                                          text: 'Senior (6-10 лет)',
-                                          callback_data: 'level_senior',
-                                      },
-                                  ],
-                                  [
-                                      {
-                                          text: 'Lead (более 10 лет)',
-                                          callback_data: 'level_lead',
-                                      },
-                                  ],
+                              [
+                                  {
+                                      text: 'Junior (1-3 года)',
+                                      callback_data: 'level_junior',
+                                  },
                               ],
-                          },
-                      }
+                              [
+                                  {
+                                      text: 'Middle (3-6 лет)',
+                                      callback_data: 'level_middle',
+                                  },
+                              ],
+                              [
+                                  {
+                                      text: 'Senior (6-10 лет)',
+                                      callback_data: 'level_senior',
+                                  },
+                              ],
+                              [
+                                  {
+                                      text: 'Lead (более 10 лет)',
+                                      callback_data: 'level_lead',
+                                  },
+                              ],
+                          ],
+                      },
+                  }
                 : {}
         )
     }

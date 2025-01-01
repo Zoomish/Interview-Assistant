@@ -6,13 +6,31 @@ import { UserService } from 'src/user/user.service'
 export class ProfessionService {
     constructor(private readonly userService: UserService) {}
 
-    async sendProfession() {
+    async startProfession() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
+        const user = await this.userService.findOne(msg.chat.id)
         await this.userService.update(msg.chat.id, {
-            profession: null,
+            professionExist: false,
         })
-        return await bot.sendMessage(msg.chat.id, `Какую профессию вы выбрали?`)
+        return await bot.sendMessage(
+            msg.chat.id,
+            `Какую профессию вы выбрали? Изменение профессии очищает историю`,
+            user.profession
+                ? {
+                      reply_markup: {
+                          inline_keyboard: [
+                              [
+                                  {
+                                      text: 'Отменить',
+                                      callback_data: 'profession_end',
+                                  },
+                              ],
+                          ],
+                      },
+                  }
+                : {}
+        )
     }
 
     async getProfession() {
@@ -20,7 +38,20 @@ export class ProfessionService {
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
             profession: msg.text,
+            professionExist: true,
+            localhistory: [],
+            startedInterview: false,
         })
-        return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
+        return await bot.sendMessage(
+            msg.chat.id,
+            `Данные успешно сохранены, а история очищена!`
+        )
+    }
+
+    async endProfession() {
+        const msg: TelegramBot.Message = global.msg
+        await this.userService.update(msg.chat.id, {
+            professionExist: true,
+        })
     }
 }
