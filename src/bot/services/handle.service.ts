@@ -80,8 +80,8 @@ export class HandleService {
             return
         } else if (!user?.level) {
             return await this.userInfoService.level()
-        }else if (user?.startedReview) {
-            return await this.userInfoService.startinterview()
+        } else if (user?.startedReview) {
+            return await this.userInfoService.getReview()
         }
     }
 

@@ -89,4 +89,25 @@ export class UserInfoService {
             }
         )
     }
+
+    async sendReview() {
+        const bot: TelegramBot = global.bot
+        const msg: TelegramBot.Message = global.msg
+        await this.userService.update(msg.chat.id, {
+            startedReview: true,
+        })
+        await bot.sendMessage(
+            msg.chat.id,
+            `Отлично! Теперь напишите свой отзыв.`
+        )
+    }
+
+    async getReview() {
+        const bot: TelegramBot = global.bot
+        const msg: TelegramBot.Message = global.msg
+        await this.userService.update(msg.chat.id, {
+            review: msg.text,
+        })
+        return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
+    }
 }
