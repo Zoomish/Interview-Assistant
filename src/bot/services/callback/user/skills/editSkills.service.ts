@@ -12,9 +12,9 @@ export class EditSkillsService {
                 await bot.answerCallbackQuery(id, {
                     text: 'Вы выбрали изменить навыки',
                 })
-                return await this.userInfoService.startProfession()
+                return await this.userInfoService.startSkills()
             case 'end':
-                return await this.userInfoService.endProfession()
+                return await this.userInfoService.endSkills()
         }
     }
 }
