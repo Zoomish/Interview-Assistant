@@ -68,7 +68,7 @@ export class BadCommandService {
         const msg: TelegramBot.Message = global.msg
         await bot.sendMessage(
             msg.chat.id,
-            `Вы уже зарегестрированы в боте. Остановите собеседование и сбросьте историю, измените информацию о себе или используйте другую команду`,
+            `Вы уже зарегестрированы в боте. Остановите собеседование и сбросьте историю или используйте другую команду`,
             {
                 reply_markup: {
                     inline_keyboard: [
@@ -76,12 +76,6 @@ export class BadCommandService {
                             {
                                 text: 'Остановить собеседование',
                                 callback_data: 'interview_end',
-                            },
-                        ],
-                        [
-                            {
-                                text: 'Изменить информацию',
-                                callback_data: 'me',
                             },
                         ],
                     ],

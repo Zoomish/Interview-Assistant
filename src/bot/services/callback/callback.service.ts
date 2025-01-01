@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
-import { BadCommandService, MeService } from '../handling'
+import { BadCommandService } from '../handling'
 import { GetInfoService } from './getInfo.service'
 import { InterviewService } from './interview'
 import { EditLevelService, EditReviewService, EditUserService } from './user'
@@ -11,14 +11,12 @@ export class CallbackService {
         private readonly editLevelService: EditLevelService,
         private readonly editUserService: EditUserService,
         private readonly getInfoService: GetInfoService,
-        private readonly meService: MeService,
         private readonly editReviewService: EditReviewService,
         private readonly badCommandService: BadCommandService,
         private readonly interviewService: InterviewService
     ) {}
     async callback(callbackQuery: TelegramBot.CallbackQuery) {
         const data = callbackQuery.data.split('_')
-        const bot: TelegramBot = global.bot
         const msg = callbackQuery.message
         global.msg = msg
         const type = data[0]
@@ -46,11 +44,6 @@ export class CallbackService {
                     action,
                     callbackQuery.id
                 )
-            case 'me':
-                await bot.answerCallbackQuery(callbackQuery.id, {
-                    text: 'Вы выбрали редактировать профиль',
-                })
-                return await this.meService.getMe(msg)
             default:
                 return await this.badCommandService.badQuery()
         }
