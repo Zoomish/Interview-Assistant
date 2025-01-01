@@ -49,7 +49,7 @@ export class EditLevelService {
                         [
                             {
                                 text: 'Начать собеседование',
-                                callback_data: 'startinterview',
+                                callback_data: 'interview_start',
                             },
                         ],
                     ],
