@@ -1,2 +1,1 @@
-export * from './skills.service';
-
+export * from './skills.service'

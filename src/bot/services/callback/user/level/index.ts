@@ -1,2 +1,1 @@
-export * from './editLevel.service';
-
+export * from './editLevel.service'

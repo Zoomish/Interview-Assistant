@@ -88,9 +88,11 @@ export class HandleService {
     async endOptions(text: string, msg: TelegramBot.Message, user: User) {
         switch (text) {
             case '/startinterview':
-                return this.startinterviewService.startinterview()
+                return await this.startinterviewService.startinterview()
             case '/me':
-                return this.meService.getMe(msg)
+                return await this.meService.getMe(msg)
+            case '/review':
+                return await this.userInfoService.startReview()
             default:
                 if (
                     msg?.entities !== undefined &&

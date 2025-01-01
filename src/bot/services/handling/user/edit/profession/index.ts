@@ -1,2 +1,1 @@
-export * from './profession.service';
-
+export * from './profession.service'
