@@ -11,8 +11,6 @@ export class SkillsService {
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
             skills: [],
-            localhistory: [],
-            startedInterview: false,
         })
         await bot.sendMessage(
             msg.chat.id,
@@ -25,6 +23,8 @@ export class SkillsService {
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
             skills: msg.text.replaceAll(' ', '').split(','),
+            localhistory: [],
+            startedInterview: false,
         })
         return await bot.sendMessage(
             msg.chat.id,
