@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
-import { UserInfoService } from '../handling'
+import { UserInfoService } from '../../../handling'
 
 @Injectable()
 export class EditReviewService {

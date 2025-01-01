@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
 import { BadCommandService, StartinterviewService } from '../handling'
-import { EditLevelService } from './editLevel.service'
-import { EditReviewService } from './editReview.service'
-import { EditUserService } from './editUser.service'
 import { GetUsersService } from './getUsers.service'
+import { EditUserService } from './user/editUser.service'
+import { EditLevelService } from './user/level/editLevel.service'
+import { EditReviewService } from './user/review/editReview.service'
 
 @Injectable()
 export class CallbackService {
