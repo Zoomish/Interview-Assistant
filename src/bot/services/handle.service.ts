@@ -67,18 +67,18 @@ export class HandleService {
     }
 
     async setUserInfo(user: User) {
-        if (!user?.profession) {
+        if (!user?.professionExist) {
             await this.userInfoService.getProfession()
-            if (!user?.skills.length) {
+            if (!user?.skillsExist) {
                 return await this.userInfoService.sendSkills()
             }
-        } else if (!user?.skills.length) {
+        } else if (!user?.skillsExist) {
             await this.userInfoService.getSkills()
-            if (!user?.level) {
+            if (!user?.levelExist) {
                 return await this.userInfoService.level()
             }
             return
-        } else if (!user?.level) {
+        } else if (!user?.levelExist) {
             return await this.userInfoService.level()
         } else if (user?.startedReview) {
             return await this.userInfoService.getReview()
