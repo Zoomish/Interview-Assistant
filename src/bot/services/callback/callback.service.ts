@@ -24,6 +24,7 @@ export class CallbackService {
     ) {}
     async callback(callbackQuery: TelegramBot.CallbackQuery) {
         const data = callbackQuery.data.split('_')
+        const bot: TelegramBot = global.bot
         const msg = callbackQuery.message
         global.msg = msg
         const type = data[0]
@@ -45,6 +46,9 @@ export class CallbackService {
                     callbackQuery.id
                 )
             case 'level':
+                await bot.answerCallbackQuery(callbackQuery.id, {
+                    text: 'Вы выбрали изменить уровень',
+                })
                 return await this.levelService.level()
             case 'get':
                 return await this.getInfoService.start(action, callbackQuery.id)
