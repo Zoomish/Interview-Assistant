@@ -17,7 +17,6 @@ export class CallbackService {
     ) {}
     async callback(callbackQuery: TelegramBot.CallbackQuery) {
         const data = callbackQuery.data.split('_')
-        const bot: TelegramBot = global.bot
         const msg = callbackQuery.message
         global.msg = msg
         const type = data[0]
@@ -41,7 +40,10 @@ export class CallbackService {
                     callbackQuery.id
                 )
             case 'interview':
-                return await this.interviewService.start(action, callbackQuery.id)
+                return await this.interviewService.start(
+                    action,
+                    callbackQuery.id
+                )
             default:
                 return await this.badCommandService.badQuery()
         }
