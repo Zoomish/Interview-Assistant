@@ -25,12 +25,16 @@ export class UserInfoService {
         return await this.professionService.endProfession()
     }
 
-    async sendSkills() {
+    async startSkills() {
         return await this.skillsService.sendSkills()
     }
 
     async getSkills() {
         return await this.skillsService.getSkills()
+    }
+
+    async endSkills() {
+        return await this.skillsService.endSkills()
     }
 
     async level() {

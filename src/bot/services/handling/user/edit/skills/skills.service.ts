@@ -47,4 +47,11 @@ export class SkillsService {
             `Данные успешно сохранены, а история очищена!`
         )
     }
+
+    async endSkills() {
+        const msg: TelegramBot.Message = global.msg
+        await this.userService.update(msg.chat.id, {
+            skillsExist: false,
+        })
+    }
 }
