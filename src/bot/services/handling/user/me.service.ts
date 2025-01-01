@@ -37,19 +37,12 @@ export class MeService {
                         callback_data: 'edit_level',
                     },
                 ],
-                user.review
-                    ? [
-                          {
-                              text: 'Изменить отзыв',
-                              callback_data: 'edit_review',
-                          },
-                      ]
-                    : [
-                          {
-                              text: 'Отправить отзыв',
-                              callback_data: 'send_review',
-                          },
-                      ],
+                [
+                    {
+                        text: user.review ? 'Изменить отзыв' : 'Оставить отзыв',
+                        callback_data: 'edit_review',
+                    },
+                ],
                 user.admin
                     ? [
                           {
