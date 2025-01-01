@@ -1,2 +1,3 @@
+export * from './edit'
 export * from './me.service'
-export * from './userInfo.service'
+

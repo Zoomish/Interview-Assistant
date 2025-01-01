@@ -21,6 +21,27 @@ export class BadCommandService {
         )
     }
 
+    async badText() {
+        const bot: TelegramBot = global.bot
+        const msg: TelegramBot.Message = global.msg
+        await bot.sendMessage(
+            msg.chat.id,
+            'Вы не начали собеседование. Начните его или используйте другую команду',
+            {
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: 'Начать собеседование',
+                                callback_data: 'startinterview',
+                            },
+                        ],
+                    ],
+                },
+            }
+        )
+    }
+
     async badQuery() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg

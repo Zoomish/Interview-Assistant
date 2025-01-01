@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
 import { BadCommandService, StartinterviewService } from '../handling'
-import { EditLevelService } from './editLevel.service'
-import { EditUserService } from './editUser.service'
-import { GetUsersService } from './getUsers.service'
+import { GetInfoService } from './getInfo.service'
+import { EditLevelService, EditReviewService, EditUserService } from './user'
 
 @Injectable()
 export class CallbackService {
     constructor(
         private readonly editLevelService: EditLevelService,
         private readonly editUserService: EditUserService,
-        private readonly getUsersService: GetUsersService,
+        private readonly getInfoService: GetInfoService,
+        private readonly editReviewService: EditReviewService,
         private readonly badCommandService: BadCommandService,
         private readonly startinterviewService: StartinterviewService
     ) {}
@@ -33,7 +33,9 @@ export class CallbackService {
                     callbackQuery
                 )
             case 'get':
-                return await this.getUsersService.start(
+                return await this.getInfoService.start(action, callbackQuery.id)
+            case 'review':
+                return await this.editReviewService.editReview(
                     action,
                     callbackQuery.id
                 )

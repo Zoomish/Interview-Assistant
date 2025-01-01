@@ -48,7 +48,12 @@ export class HandleService {
                 break
         }
         const user = await this.userService.findOne(msg.chat.id)
-        if (!user?.profession || !user?.skills.length || !user?.level) {
+        if (
+            !user?.profession ||
+            !user?.skills.length ||
+            !user?.level ||
+            user.startedReview
+        ) {
             if (
                 msg?.entities !== undefined &&
                 msg?.entities[0]?.type === 'bot_command'
@@ -58,7 +63,7 @@ export class HandleService {
                 return await this.setUserInfo(user)
             }
         }
-        return await this.endOptions(text, msg)
+        return await this.endOptions(text, msg, user)
     }
 
     async setUserInfo(user: User) {
@@ -75,10 +80,12 @@ export class HandleService {
             return
         } else if (!user?.level) {
             return await this.userInfoService.level()
+        } else if (user?.startedReview) {
+            return await this.userInfoService.getReview()
         }
     }
 
-    async endOptions(text: string, msg: TelegramBot.Message) {
+    async endOptions(text: string, msg: TelegramBot.Message, user: User) {
         switch (text) {
             case '/startinterview':
                 return this.startinterviewService.startinterview()
@@ -90,10 +97,14 @@ export class HandleService {
                     msg?.entities[0]?.type === 'bot_command'
                 ) {
                     return await this.badCommandService.badCommand()
+                } else if (user.startedInterview) {
+                    return await this.generateContentService.generateQuetion(
+                        msg.text,
+                        user
+                    )
+                } else {
+                    return await this.badCommandService.badText()
                 }
-                return await this.generateContentService.generateQuetion(
-                    msg.text
-                )
         }
     }
 }

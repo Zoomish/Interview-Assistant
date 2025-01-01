@@ -18,6 +18,9 @@ export class User {
     @Column({ nullable: false, default: false })
     admin: boolean
 
+    @Column({ nullable: false, default: false })
+    startedInterview: boolean
+
     @Column({ nullable: true, type: 'json' })
     localhistory: Content[]
 
@@ -35,6 +38,12 @@ export class User {
 
     @Column({ nullable: true })
     level: 'Intern' | 'Junior' | 'Middle' | 'Senior' | 'Lead'
+
+    @Column({ nullable: false, default: false })
+    startedReview: boolean
+
+    @Column({ nullable: true })
+    review: string
 
     @CreateDateColumn()
     createdAt: Date
