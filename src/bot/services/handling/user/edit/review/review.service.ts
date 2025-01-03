@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
+import { ReviewGlobalService } from 'src/review/review.service'
 import { UserService } from 'src/user/user.service'
 
 @Injectable()
 export class ReviewService {
-    constructor(private readonly userService: UserService) {}
+    constructor(
+        private readonly userService: UserService,
+        private readonly reviewService: ReviewGlobalService
+    ) {}
 
     async startReview() {
         const bot: TelegramBot = global.bot
