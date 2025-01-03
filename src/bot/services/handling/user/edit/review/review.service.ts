@@ -58,13 +58,15 @@ export class ReviewService {
             watched: true,
             answerStarted: true,
         })
+        global.id = id
         await bot.sendMessage(id, `Ваш отзыв просмотрен!`)
         return await bot.sendMessage(msg.chat.id, `Напишите ответ на отзыв!`)
     }
 
-    async answerEndReview(id: number) {
+    async answerEndReview() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
+        const id = global.id
         await this.reviewService.update(id, {
             answer: msg.text,
         })

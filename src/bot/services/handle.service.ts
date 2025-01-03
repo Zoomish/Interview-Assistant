@@ -59,7 +59,7 @@ export class HandleService {
             !user?.skillsExist ||
             !user?.level ||
             user.startedReview ||
-            user?.reviewfirst?.answerStarted
+            global.id
         ) {
             if (
                 msg?.entities !== undefined &&
@@ -89,8 +89,8 @@ export class HandleService {
             return await this.levelService.level()
         } else if (user?.startedReview) {
             return await this.reviewService.getReview()
-        } else if (user?.reviewfirst.answerStarted) {
-            return await this.reviewService.answerEndReview(user.reviewfirst.id)
+        } else if (global.id) {
+            return await this.reviewService.answerEndReview()
         }
     }
 
