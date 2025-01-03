@@ -1,4 +1,3 @@
-import { Content } from '@google/generative-ai'
 import {
     Column,
     CreateDateColumn,
@@ -8,48 +7,18 @@ import {
 } from 'typeorm'
 
 @Entity()
-export class User {
+export class Review {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ nullable: false, unique: true })
-    tgId: number
-
-    @Column({ nullable: false, default: false })
-    admin: boolean
-
-    @Column({ nullable: false, default: false })
-    startedInterview: boolean
-
-    @Column({ nullable: true, type: 'json' })
-    localhistory: Content[]
-
     @Column({ nullable: false })
-    name: string
+    text: string
 
     @Column({ nullable: true })
-    nickname: string
+    answer: string
 
     @Column({ nullable: false, default: false })
-    professionExist: boolean
-
-    @Column({ nullable: true })
-    profession: string
-
-    @Column({ nullable: false, default: false })
-    skillsExist: boolean
-
-    @Column({ nullable: true, array: true, default: [], type: 'text' })
-    skills: string[]
-
-    @Column({ nullable: true })
-    level: 'Intern' | 'Junior' | 'Middle' | 'Senior' | 'Lead'
-
-    @Column({ nullable: false, default: false })
-    startedReview: boolean
-
-    @Column({ nullable: true })
-    review: string
+    watched: boolean
 
     @CreateDateColumn()
     createdAt: Date
