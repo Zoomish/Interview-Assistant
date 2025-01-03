@@ -59,7 +59,7 @@ export class HandleService {
             !user?.skillsExist ||
             !user?.level ||
             user.startedReview ||
-            user.reviewfirst.answerStarted
+            user?.reviewfirst?.answerStarted
         ) {
             if (
                 msg?.entities !== undefined &&
