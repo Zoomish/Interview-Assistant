@@ -2,11 +2,11 @@ import { IsNotEmpty } from 'class-validator'
 
 export class CreateReviewDto {
     @IsNotEmpty()
-    name: string
+    text?: string
 
     @IsNotEmpty()
-    nickname: string
+    watched?: boolean
 
     @IsNotEmpty()
-    tgId: number
+    answer?: string
 }
