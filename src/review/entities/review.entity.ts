@@ -11,7 +11,7 @@ export class Review {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ nullable: false })
+    @Column({ nullable: true })
     text: string
 
     @Column({ nullable: true })
