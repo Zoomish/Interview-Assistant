@@ -1,8 +1,10 @@
 import { Content } from '@google/generative-ai'
+import { Review } from 'src/review/entities/review.entity'
 import {
     Column,
     CreateDateColumn,
     Entity,
+    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm'
@@ -50,6 +52,9 @@ export class User {
 
     @Column({ nullable: true })
     review: string
+
+    @OneToOne(() => Review, (review) => review.user)
+    reviewfirst: Review
 
     @CreateDateColumn()
     createdAt: Date

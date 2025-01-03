@@ -1,7 +1,9 @@
+import { User } from 'src/user/entities/user.entity'
 import {
     Column,
     CreateDateColumn,
     Entity,
+    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm'
@@ -19,6 +21,9 @@ export class Review {
 
     @Column({ nullable: false, default: false })
     watched: boolean
+
+    @OneToOne(() => User, (user) => user.review)
+    user: User
 
     @CreateDateColumn()
     createdAt: Date
