@@ -17,9 +17,6 @@ export class Review {
     @Column({ nullable: true, length: 1000 })
     text: string
 
-    @Column({ nullable: false, default: false })
-    answerStarted: boolean
-
     @Column({ nullable: true, length: 1000 })
     answer: string
 

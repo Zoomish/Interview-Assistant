@@ -56,7 +56,6 @@ export class ReviewService {
         const msg: TelegramBot.Message = global.msg
         await this.reviewService.update(id, {
             watched: true,
-            answerStarted: true,
         })
         global.id = id
         await bot.sendMessage(id, `Ваш отзыв просмотрен!`)
