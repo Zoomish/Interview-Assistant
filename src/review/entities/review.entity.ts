@@ -24,7 +24,6 @@ export class Review {
     watched: boolean
 
     @OneToOne(() => User, (user) => user.review)
-    @JoinColumn()
     user: User
 
     @CreateDateColumn()

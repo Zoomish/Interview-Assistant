@@ -4,6 +4,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinColumn,
     OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -54,6 +55,7 @@ export class User {
     review: string
 
     @OneToOne(() => Review, (review) => review.user)
+    @JoinColumn()
     reviewfirst: Review
 
     @CreateDateColumn()

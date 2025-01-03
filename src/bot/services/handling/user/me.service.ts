@@ -9,6 +9,7 @@ export class MeService {
         const bot: TelegramBot = global.bot
         const msgWait = await bot.sendMessage(msg.chat.id, `Получаю данные...`)
         const user = await this.userService.findOne(msg.chat.id)
+        console.log(user)
         await bot.deleteMessage(msgWait.chat.id, msgWait.message_id)
         const text =
             `<b>Меня зовут:</b> ${user.name}\n` +
