@@ -107,7 +107,7 @@ export class GetInfoService {
                             ],
                             [
                                 {
-                                    text: 'Ответить отзыв',
+                                    text: 'Ответить на отзыв',
                                     callback_data: `review_answer-${review.user.tgId}`,
                                 },
                             ],
