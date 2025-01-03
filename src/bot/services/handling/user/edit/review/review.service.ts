@@ -59,7 +59,7 @@ export class ReviewService {
             answerStarted: true,
         })
         await bot.sendMessage(id, `Ваш отзыв просмотрен!`)
-        return await bot.sendMessage(msg.chat.id, `Вы ответили на отзыв!`)
+        return await bot.sendMessage(msg.chat.id, `Напишите ответ на отзыв!`)
     }
 
     async answerEndReview(id: number) {
