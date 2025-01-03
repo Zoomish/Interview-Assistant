@@ -44,8 +44,10 @@ export class ReviewService {
     async getReview() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
+        await this.reviewService.update(msg.chat.id, {
+            text: msg.text,
+        })
         await this.userService.update(msg.chat.id, {
-            review: msg.text,
             startedReview: false,
         })
         return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
