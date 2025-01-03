@@ -97,6 +97,22 @@ export class GetInfoService {
                     review.text,
                 {
                     parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [
+                                {
+                                    text: 'Просмотреть отзыв',
+                                    callback_data: `review_watch`,
+                                },
+                            ],
+                            [
+                                {
+                                    text: 'Ответить отзыв',
+                                    callback_data: `review_answer`,
+                                },
+                            ],
+                        ],
+                    },
                 }
             )
         })
