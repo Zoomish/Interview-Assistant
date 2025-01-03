@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
+import { ReviewGlobalService } from 'src/review/review.service'
 import { UserService } from 'src/user/user.service'
 
 @Injectable()
 export class GetInfoService {
-    constructor(private readonly userService: UserService) {}
+    constructor(
+        private readonly userService: UserService,
+        private readonly reviewService: ReviewGlobalService
+    ) {}
 
     async start(action: string, id: string) {
         switch (action) {
@@ -69,8 +73,7 @@ export class GetInfoService {
         await bot.answerCallbackQuery(id, {
             text: `Вы получаете все отзывы`,
         })
-        const users = await this.userService.findAll()
-        const reviews = users.filter((user) => user.review)
+        const reviews = await this.reviewService.findAll()
         if (reviews.length === 0) {
             await bot.sendMessage(chatId, 'Нет ни одного отзыва в базе.')
             return
@@ -82,16 +85,16 @@ export class GetInfoService {
                 parse_mode: 'HTML',
             }
         )
-        reviews.forEach(async (user, i) => {
+        reviews.forEach(async (review, i) => {
             await bot.sendChatAction(chatId, 'typing')
             await bot.sendMessage(
                 chatId,
                 `<b>Пользователь ${i + 1}:</b>` +
                     '\n<b>Ник:</b> ' +
                     '@' +
-                    user.nickname +
+                    review.user.nickname +
                     '\n<b>Отзыв:</b> ' +
-                    user.review,
+                    review.user.review,
                 {
                     parse_mode: 'HTML',
                 }
