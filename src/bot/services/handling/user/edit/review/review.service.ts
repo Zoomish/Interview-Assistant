@@ -71,7 +71,7 @@ export class ReviewService {
         })
         await bot.sendMessage(
             id,
-            `На ваш отзыв ответили!\n\nОтвет:\n` + msg.text
+            `На ваш отзыв ответили!\nОтвет:\n` + msg.text
         )
         return await bot.sendMessage(msg.chat.id, `Вы ответили на отзыв!`)
     }
