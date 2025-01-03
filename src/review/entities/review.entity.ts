@@ -3,6 +3,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinColumn,
     OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -23,6 +24,7 @@ export class Review {
     watched: boolean
 
     @OneToOne(() => User, (user) => user.review)
+    @JoinColumn()
     user: User
 
     @CreateDateColumn()
