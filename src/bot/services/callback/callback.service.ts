@@ -3,10 +3,10 @@ import TelegramBot from 'node-telegram-bot-api'
 import { BadCommandService, LevelService } from '../handling'
 import { GetInfoService } from './getInfo.service'
 import { InterviewService } from './interview'
+import { EditReviewService } from './review'
 import {
     EditLevelService,
     EditProfessionService,
-    EditReviewService,
     EditSkillsService,
 } from './user'
 
