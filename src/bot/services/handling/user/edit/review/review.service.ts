@@ -41,6 +41,10 @@ export class ReviewService {
         })
     }
 
+    async cancelReview() {
+        
+    }
+
     async getReview() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg

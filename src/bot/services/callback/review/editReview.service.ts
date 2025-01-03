@@ -6,8 +6,10 @@ import { ReviewService } from 'src/bot/services/handling'
 export class EditReviewService {
     constructor(private readonly reviewService: ReviewService) {}
 
-    async editReview(action: string, id: string) {
+    async editReview(data: string, id: string) {
         const bot: TelegramBot = global.bot
+        const action = data.split('-')[0]
+        const reviewId = data.split('-')[1]
         switch (action) {
             case 'start':
                 await bot.answerCallbackQuery(id, {

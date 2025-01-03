@@ -102,13 +102,13 @@ export class GetInfoService {
                             [
                                 {
                                     text: 'Просмотреть отзыв',
-                                    callback_data: `review_watch`,
+                                    callback_data: `review_watch-${review.user.tgId}`,
                                 },
                             ],
                             [
                                 {
                                     text: 'Ответить отзыв',
-                                    callback_data: `review_answer`,
+                                    callback_data: `review_answer-${review.user.tgId}`,
                                 },
                             ],
                         ],
