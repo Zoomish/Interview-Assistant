@@ -16,7 +16,7 @@ export class MeService {
             `${user.admin ? '<b>Я админ</b>\n' : ''}` +
             `<b>Профессия:</b> ${user.profession || 'Не указана'}\n` +
             `<b>Уровень:</b> ${user.level || 'Не указан'}\n` +
-            `<b>Отзыв:</b> ${user.review || 'Нет'}\n` +
+            `<b>Отзыв:</b> ${user.reviewfirst.text || 'Нет'}\n` +
             `<b>Навыки:</b>\n      ${user.skills.join('\n      ')}`
         const reply_markup = {
             inline_keyboard: [
