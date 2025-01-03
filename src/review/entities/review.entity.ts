@@ -13,10 +13,10 @@ export class Review {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, length: 1000 })
     text: string
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, length: 1000 })
     answer: string
 
     @Column({ nullable: false, default: false })
