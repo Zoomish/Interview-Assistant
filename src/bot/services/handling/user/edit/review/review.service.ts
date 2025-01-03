@@ -41,8 +41,14 @@ export class ReviewService {
         })
     }
 
-    async cancelReview() {
-        
+    async watchReview(id: number) {
+        const bot: TelegramBot = global.bot
+        const msg: TelegramBot.Message = global.msg
+        await this.reviewService.update(id, {
+            watched: true,
+        })
+        await bot.sendMessage(id, `Ваш отзыв просмотрен!`)
+        return await bot.sendMessage(msg.chat.id, `Вы просмотрели отзыв!`)
     }
 
     async getReview() {

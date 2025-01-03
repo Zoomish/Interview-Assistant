@@ -8,8 +8,11 @@ export class EditReviewService {
 
     async editReview(data: string, id: string) {
         const bot: TelegramBot = global.bot
+        data = data.trim()
         const action = data.split('-')[0]
-        const reviewId = data.split('-')[1]
+        const reviewId = Number(
+            data.split('-').length > 1 ? data.split('-')[1] : data
+        )
         switch (action) {
             case 'start':
                 await bot.answerCallbackQuery(id, {
@@ -21,6 +24,11 @@ export class EditReviewService {
                     text: 'Вы выбрали изменить отзыв',
                 })
                 return await this.reviewService.startReview()
+            case 'watch':
+                await bot.answerCallbackQuery(id, {
+                    text: 'Вы выбрали просмотр отзыва',
+                })
+                return await this.reviewService.watchReview(reviewId)
             case 'end':
                 await bot.answerCallbackQuery(id, {
                     text: 'Вы отменили действие',
