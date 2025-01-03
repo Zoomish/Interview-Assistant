@@ -33,7 +33,7 @@ export class EditReviewService {
                 await bot.answerCallbackQuery(id, {
                     text: 'Вы выбрали ответить на отзыв',
                 })
-                return await this.reviewService.answerReview(reviewId)
+                return await this.reviewService.answerStartReview(reviewId)
             case 'end':
                 await bot.answerCallbackQuery(id, {
                     text: 'Вы отменили действие',
