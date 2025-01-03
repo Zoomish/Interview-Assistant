@@ -11,15 +11,16 @@ export class ReviewGlobalService {
         @InjectRepository(Review)
         private readonly reviewRepository: Repository<Review>
     ) {}
-    async create(createReviewDto: CreateReviewDto) {
+    async create(tgid: number, createReviewDto: CreateReviewDto) {
         return await this.reviewRepository.save({
             ...createReviewDto,
+            user: { tgId: tgid },
         })
     }
 
-    async findOne(id: number) {
+    async findOne(tgid: number) {
         return await this.reviewRepository.findOne({
-            where: { id },
+            where: { user: { tgId: tgid } },
             relations: {
                 user: true,
             },
@@ -34,8 +35,8 @@ export class ReviewGlobalService {
         })
     }
 
-    async update(id: number, dto: UpdateReviewDto) {
-        const review = await this.findOne(id)
+    async update(tgid: number, dto: UpdateReviewDto) {
+        const review = await this.findOne(tgid)
         return await this.reviewRepository.save(Object.assign(review, dto))
     }
 }
