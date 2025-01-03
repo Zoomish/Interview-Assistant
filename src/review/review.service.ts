@@ -36,7 +36,8 @@ export class ReviewGlobalService {
     }
 
     async update(tgid: number, dto: UpdateReviewDto) {
-        const review = await this.findOne(tgid)
+        let review = await this.findOne(tgid)
+        if (!review) review = await this.create(tgid, { text: '' })
         return await this.reviewRepository.save(Object.assign(review, dto))
     }
 }
