@@ -20,11 +20,18 @@ export class ReviewService {
     async findOne(id: number) {
         return await this.reviewRepository.findOne({
             where: { id },
+            relations: {
+                user: true,
+            },
         })
     }
 
     async findAll() {
-        return await this.reviewRepository.find()
+        return await this.reviewRepository.find({
+            relations: {
+                user: true,
+            },
+        })
     }
 
     async update(id: number, dto: UpdateReviewDto) {
