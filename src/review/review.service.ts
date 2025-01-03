@@ -12,10 +12,9 @@ export class ReviewService {
         private readonly reviewRepository: Repository<Review>
     ) {}
     async create(createReviewDto: CreateReviewDto) {
-        const review = await this.reviewRepository.save({
+        return await this.reviewRepository.save({
             ...createReviewDto,
         })
-        return review
     }
 
     async findOne(id: number) {
