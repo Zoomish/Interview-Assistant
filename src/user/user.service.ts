@@ -21,11 +21,18 @@ export class UserService {
     async findOne(tgId: number) {
         return await this.userRepository.findOne({
             where: { tgId },
+            relations: {
+                reviewfirst: true,
+            },
         })
     }
 
     async findAll() {
-        return await this.userRepository.find()
+        return await this.userRepository.find({
+            relations: {
+                reviewfirst: true,
+            },
+        })
     }
 
     async update(tgId: number, dto: UpdateUserDto) {
