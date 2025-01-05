@@ -77,7 +77,7 @@ export class ReviewService {
         const review = await this.reviewService.findOne(msg.chat.id)
         const text =
             `<b>Меня зовут:</b> @${msg.chat.username}\n` +
-            `<b>Отзыв просмотрен?:</b> ${review?.watched ? 'Да' : 'Нет'}\n` +
+            `<b>Отзыв просмотрен?</b> ${review?.watched ? 'Да' : 'Нет'}\n` +
             `<b>Отзыв:</b> ${review?.text || 'Нет'}\n` +
             `<b>Ответ:</b> ${review?.answer || 'Нет'}\n`
         const reply_markup = {
