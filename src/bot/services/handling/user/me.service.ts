@@ -15,7 +15,6 @@ export class MeService {
             `${user.admin ? '<b>Я админ</b>\n' : ''}` +
             `<b>Профессия:</b> ${user.profession || 'Не указана'}\n` +
             `<b>Уровень:</b> ${user.level || 'Не указан'}\n` +
-            `<b>Отзыв:</b> ${user.review || 'Нет'}\n` +
             `<b>Навыки:</b>\n      ${user.skills.join('\n      ')}`
         const reply_markup = {
             inline_keyboard: [
@@ -39,10 +38,8 @@ export class MeService {
                 ],
                 [
                     {
-                        text: user.review ? 'Изменить отзыв' : 'Оставить отзыв',
-                        callback_data: user.review
-                            ? 'review_edit'
-                            : 'review_start',
+                        text: 'Мой отзыв',
+                        callback_data: 'review_get',
                     },
                 ],
                 user.admin

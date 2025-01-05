@@ -15,9 +15,11 @@ export class ProfessionService {
         })
         return await bot.sendMessage(
             msg.chat.id,
-            `Какую профессию вы выбрали? Изменение профессии очищает историю`,
+            `Какую профессию вы выбрали? Изменение профессии очищает историю\n\n` +
+                '<b>Напоминание:</b> Изменить данные можно с помощью /me, а изменение данных очищает историю.',
             user.profession
                 ? {
+                      parse_mode: 'HTML',
                       reply_markup: {
                           inline_keyboard: [
                               [
@@ -29,7 +31,9 @@ export class ProfessionService {
                           ],
                       },
                   }
-                : {}
+                : {
+                      parse_mode: 'HTML',
+                  }
         )
     }
 
@@ -42,10 +46,7 @@ export class ProfessionService {
             localhistory: [],
             startedInterview: false,
         })
-        return await bot.sendMessage(
-            msg.chat.id,
-            `Данные успешно сохранены, а история очищена!`
-        )
+        return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
     }
 
     async endProfession() {

@@ -15,9 +15,12 @@ export class SkillsService {
         })
         await bot.sendMessage(
             msg.chat.id,
-            `Отлично! Теперь укажите свои навыки, через запятую. Например: Node.js, React, Next. Изменение навыков очищает историю`,
+            `Отлично! Теперь укажите свои навыки, через запятую.\n` +
+                `<b>Например:</b> Node.js, React, Next.\n\n` +
+                '<b>Напоминание:</b> Изменить данные можно с помощью /me, а изменение данных очищает историю.',
             user.skills.length > 0
                 ? {
+                      parse_mode: 'HTML',
                       reply_markup: {
                           inline_keyboard: [
                               [
@@ -29,7 +32,9 @@ export class SkillsService {
                           ],
                       },
                   }
-                : {}
+                : {
+                      parse_mode: 'HTML',
+                  }
         )
     }
 
@@ -37,15 +42,12 @@ export class SkillsService {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
-            skills: msg.text.replaceAll(' ', '').split(','),
+            skills: msg.text.trim().split(','),
             skillsExist: true,
             localhistory: [],
             startedInterview: false,
         })
-        return await bot.sendMessage(
-            msg.chat.id,
-            `Данные успешно сохранены, а история очищена!`
-        )
+        return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены`)
     }
 
     async endSkills() {

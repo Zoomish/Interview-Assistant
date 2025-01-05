@@ -8,8 +8,10 @@ export class LevelService {
         const msg: TelegramBot.Message = global.msg
         await bot.sendMessage(
             msg.chat.id,
-            `Отлично! Теперь укажите свой уровень.`,
+            `Отлично! Теперь укажите свой уровень.\n\n` +
+                '<b>Напоминание:</b> Изменить данные можно с помощью /me, а изменение данных очищает историю.',
             {
+                parse_mode: 'HTML',
                 reply_markup: {
                     inline_keyboard: [
                         [

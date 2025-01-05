@@ -58,7 +58,8 @@ export class HandleService {
             !user?.professionExist ||
             !user?.skillsExist ||
             !user?.level ||
-            user.startedReview
+            user.startedReview ||
+            global.id
         ) {
             if (
                 msg?.entities !== undefined &&
@@ -87,7 +88,9 @@ export class HandleService {
         } else if (!user?.level) {
             return await this.levelService.level()
         } else if (user?.startedReview) {
-            return await this.reviewService.getReview()
+            return await this.reviewService.newReview()
+        } else if (global.id) {
+            return await this.reviewService.answerEndReview()
         }
     }
 
@@ -108,7 +111,7 @@ export class HandleService {
             case '/me':
                 return await this.meService.getMe(msg)
             case '/review':
-                return await this.reviewService.startReview()
+                return await this.reviewService.getReview()
             default:
                 if (
                     msg?.entities !== undefined &&

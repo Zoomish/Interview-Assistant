@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common'
+import { ReviewModule } from 'src/review/review.module'
 import { UserModule } from 'src/user/user.module'
 import { BotService } from './bot.service'
 import {
@@ -25,7 +26,7 @@ import {
 } from './services'
 
 @Module({
-    imports: [UserModule],
+    imports: [UserModule, ReviewModule],
     providers: [
         BotService,
         StartinterviewService,
