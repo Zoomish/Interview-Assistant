@@ -15,9 +15,11 @@ export class SkillsService {
         })
         await bot.sendMessage(
             msg.chat.id,
-            `Отлично! Теперь укажите свои навыки, через запятую. Например: Node.js, React, Next. Изменение навыков очищает историю`,
+            `Отлично! Теперь укажите свои навыки, через запятую. Например: Node.js, React, Next.\n` +
+                '<b>Напоминание:</b> Изменить данные можно с помощью /me, а изменение данных очищает историю.',
             user.skills.length > 0
                 ? {
+                      parse_mode: 'HTML',
                       reply_markup: {
                           inline_keyboard: [
                               [
@@ -29,7 +31,9 @@ export class SkillsService {
                           ],
                       },
                   }
-                : {}
+                : {
+                      parse_mode: 'HTML',
+                  }
         )
     }
 
