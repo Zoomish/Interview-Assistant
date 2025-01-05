@@ -75,7 +75,8 @@ export class ReviewService {
         const msgWait = await bot.sendMessage(msg.chat.id, `Получаю данные...`)
         const review = await this.reviewService.findOne(msg.chat.id)
         const text =
-            `<b>Меня зовут:</b> ${user.name}\n` +
+            `<b>Меня зовут:</b> ${review.user.name}\n` +
+            `<b>Отзыв просмотрен?:</b> ${review.watched ? 'Да' : 'Нет'}\n` +
             `<b>Отзыв:</b> ${review?.text || 'Нет'}\n` +
             `<b>Ответ:</b> ${review?.answer || 'Нет'}\n`
         const reply_markup = {
