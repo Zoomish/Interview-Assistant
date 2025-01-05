@@ -88,7 +88,7 @@ export class HandleService {
         } else if (!user?.level) {
             return await this.levelService.level()
         } else if (user?.startedReview) {
-            return await this.reviewService.getReview()
+            return await this.reviewService.newReview()
         } else if (global.id) {
             return await this.reviewService.answerEndReview()
         }
