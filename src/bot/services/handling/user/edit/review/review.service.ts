@@ -93,6 +93,22 @@ export class ReviewService {
                 msg.text,
             {
                 parse_mode: 'HTML',
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: 'Просмотреть отзыв',
+                                callback_data: `review_watch-${msg.chat.id}`,
+                            },
+                        ],
+                        [
+                            {
+                                text: 'Ответить на отзыв',
+                                callback_data: `review_answer-${msg.chat.id}`,
+                            },
+                        ],
+                    ],
+                },
             }
         )
         return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
