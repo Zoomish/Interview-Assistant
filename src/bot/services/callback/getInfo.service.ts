@@ -38,7 +38,7 @@ export class GetInfoService {
                 parse_mode: 'HTML',
             }
         )
-        users.forEach(async (user, i) => {
+        users.forEach(async (user) => {
             const messgase =
                 user?.localhistory?.length > 0
                     ? Math.floor(user.localhistory.length / 2).toString()
@@ -46,8 +46,7 @@ export class GetInfoService {
             await bot.sendChatAction(chatId, 'typing')
             await bot.sendMessage(
                 chatId,
-                `<b>Пользователь ${i + 1}:</b>` +
-                    '\n<b>Id:</b> ' +
+                '<b>Id:</b> ' +
                     user.tgId.toString() +
                     '\n<b>Ник:</b> ' +
                     '@' +
