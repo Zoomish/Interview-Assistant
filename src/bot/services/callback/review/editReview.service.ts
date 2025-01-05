@@ -29,7 +29,7 @@ export class EditReviewService {
                     text: 'Вы выбрали просмотр отзыва',
                 })
                 return await this.reviewService.watchReview(reviewId)
-            case 'answerstart':
+            case 'answer':
                 await bot.answerCallbackQuery(id, {
                     text: 'Вы выбрали ответить на отзыв',
                 })

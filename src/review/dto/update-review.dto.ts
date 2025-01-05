@@ -7,9 +7,6 @@ export class UpdateReviewDto extends PartialType(CreateReviewDto) {
     text?: string
 
     @IsOptional()
-    answerStarted?: boolean
-
-    @IsOptional()
     watched?: boolean
 
     @IsOptional()
