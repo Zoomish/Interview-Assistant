@@ -22,7 +22,7 @@ export class UserService {
         return await this.userRepository.findOne({
             where: { tgId },
             relations: {
-                reviewfirst: true,
+                review: true,
             },
         })
     }
@@ -31,7 +31,7 @@ export class UserService {
         return await this.userRepository.findOne({
             where: { admin: true },
             relations: {
-                reviewfirst: true,
+                review: true,
             },
         })
     }
@@ -39,7 +39,7 @@ export class UserService {
     async findAll() {
         return await this.userRepository.find({
             relations: {
-                reviewfirst: true,
+                review: true,
             },
         })
     }

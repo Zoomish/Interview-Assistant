@@ -50,11 +50,8 @@ export class User {
     @Column({ nullable: false, default: false })
     startedReview: boolean
 
-    @Column({ nullable: true })
-    review: string
-
     @OneToOne(() => Review, (review) => review.user)
-    reviewfirst: Review
+    review: Review
 
     @CreateDateColumn()
     createdAt: Date
