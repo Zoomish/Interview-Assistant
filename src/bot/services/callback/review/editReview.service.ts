@@ -34,6 +34,11 @@ export class EditReviewService {
                     text: 'Вы отменили действие',
                 })
                 return await this.reviewService.endReview()
+            case 'get':
+                await bot.answerCallbackQuery(id, {
+                    text: 'Вы получаете свой отзыв',
+                })
+                return await this.reviewService.getReview()
             default:
                 break
         }

@@ -39,12 +39,8 @@ export class MeService {
                 ],
                 [
                     {
-                        text: user?.reviewfirst?.text
-                            ? 'Изменить отзыв'
-                            : 'Оставить отзыв',
-                        callback_data: user?.reviewfirst?.text
-                            ? 'review_edit'
-                            : 'review_start',
+                        text: 'Мой отзыв',
+                        callback_data: 'review_get',
                     },
                 ],
                 user.admin
