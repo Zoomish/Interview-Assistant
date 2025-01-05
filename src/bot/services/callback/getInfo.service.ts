@@ -103,13 +103,9 @@ export class GetInfoService {
                         inline_keyboard: [
                             [
                                 {
-                                    text: 'Просмотреть отзыв',
-                                    callback_data: `review_watch-${review.user.tgId}`,
-                                },
-                            ],
-                            [
-                                {
-                                    text: 'Ответить на отзыв',
+                                    text: review.answer
+                                        ? 'Изменить отзыв'
+                                        : 'Ответить на отзыв',
                                     callback_data: `review_answer-${review.user.tgId}`,
                                 },
                             ],
