@@ -76,7 +76,7 @@ export class ReviewService {
         const msgWait = await bot.sendMessage(msg.chat.id, `Получаю данные...`)
         const review = await this.reviewService.findOne(msg.chat.id)
         const text =
-            `<b>Меня зовут:</b> @${msg.from.username}\n` +
+            `<b>Меня зовут:</b> @${msg.chat.username}\n` +
             `<b>Отзыв просмотрен?:</b> ${review?.watched ? 'Да' : 'Нет'}\n` +
             `<b>Отзыв:</b> ${review?.text || 'Нет'}\n` +
             `<b>Ответ:</b> ${review?.answer || 'Нет'}\n`
@@ -116,7 +116,7 @@ export class ReviewService {
                 user.tgId,
                 `<b>Новый отзыв!</b>\n` +
                     `<b>Пользователь:</b> @` +
-                    msg.from.username +
+                    msg.chat.username +
                     `\n` +
                     `<b>Отзыв:</b>\n` +
                     msg.text,
