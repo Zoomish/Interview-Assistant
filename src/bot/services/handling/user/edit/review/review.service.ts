@@ -72,36 +72,7 @@ export class ReviewService {
     async getReview() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
-        await this.reviewService.update(msg.chat.id, {
-            text: msg.text,
-        })
-        await this.userService.update(msg.chat.id, {
-            startedReview: false,
-        })
-        const user = await this.userService.findAdmin()
-        await bot.sendMessage(
-            user.tgId,
-            `<b>Новый отзыв!</b>\n` +
-                `<b>Пользователь:</b> @` +
-                msg.from.username +
-                `\n` +
-                `<b>Отзыв:</b>\n` +
-                msg.text,
-            {
-                parse_mode: 'HTML',
-                reply_markup: {
-                    inline_keyboard: [
-                        [
-                            {
-                                text: 'Ответить на отзыв',
-                                callback_data: `review_answer-${msg.chat.id}`,
-                            },
-                        ],
-                    ],
-                },
-            }
-        )
-        return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
+        
     }
 
     async newReview() {
