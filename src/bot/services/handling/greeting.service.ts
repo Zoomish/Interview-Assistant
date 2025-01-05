@@ -45,6 +45,7 @@ export class GreetingService {
             `Добро пожаловать, ${msg?.chat?.first_name}! Я здесь, чтобы помочь вам уверенно пройти собеседование. ${text}`,
             user.skillsExist && !user?.level
                 ? {
+                      parse_mode: 'HTML',
                       reply_markup: {
                           inline_keyboard: [
                               [
@@ -80,7 +81,9 @@ export class GreetingService {
                           ],
                       },
                   }
-                : {}
+                : {
+                      parse_mode: 'HTML',
+                  }
         )
     }
 }
