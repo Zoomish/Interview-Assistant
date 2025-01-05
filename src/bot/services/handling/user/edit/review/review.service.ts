@@ -86,7 +86,7 @@ export class ReviewService {
         await bot.sendMessage(
             user.tgId,
             `<b>Новый отзыв!</b>\n` +
-                `<b>Пользователь!</b> @` +
+                `<b>Пользователь:</b> @` +
                 msg.from.username +
                 `\n` +
                 `<b>Отзыв:</b>\n` +
