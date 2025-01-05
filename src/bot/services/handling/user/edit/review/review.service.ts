@@ -64,7 +64,7 @@ export class ReviewService {
         })
         await bot.sendMessage(
             id,
-            `На ваш отзыв ответили!\n<b>Ответ:</b>\n` + msg.text,
+            `<b>На ваш отзыв ответили!</b\n<b>Ответ:</b>\n` + msg.text,
             {
                 parse_mode: 'HTML',
             }
