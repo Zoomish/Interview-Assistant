@@ -82,6 +82,8 @@ export class ReviewService {
         await this.userService.update(msg.chat.id, {
             startedReview: false,
         })
+        const user = await this.userService.findAdmin()
+        await bot.sendMessage(user.tgId, `Новый отзыв!\n${msg.text}`)
         return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
     }
 }
