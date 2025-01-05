@@ -111,7 +111,7 @@ export class HandleService {
             case '/me':
                 return await this.meService.getMe(msg)
             case '/review':
-                return await this.reviewService.startReview()
+                return await this.reviewService.getReview()
             default:
                 if (
                     msg?.entities !== undefined &&
