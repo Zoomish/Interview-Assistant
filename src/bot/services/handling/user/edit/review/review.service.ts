@@ -66,6 +66,7 @@ export class ReviewService {
                 parse_mode: 'HTML',
             }
         )
+        global.id = null
         return await bot.sendMessage(msg.chat.id, `Вы ответили на отзыв!`)
     }
 
