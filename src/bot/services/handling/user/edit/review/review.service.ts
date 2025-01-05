@@ -41,20 +41,13 @@ export class ReviewService {
         })
     }
 
-    async watchReview(id: number) {
+    async answerStartReview(id: number) {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
         await this.reviewService.update(id, {
             watched: true,
         })
         await bot.sendMessage(id, `Ваш отзыв просмотрен!`)
-        return await bot.sendMessage(msg.chat.id, `Вы просмотрели отзыв!`)
-    }
-
-    async answerStartReview(id: number) {
-        const bot: TelegramBot = global.bot
-        const msg: TelegramBot.Message = global.msg
-        await this.watchReview(id)
         global.id = id
         return await bot.sendMessage(msg.chat.id, `Напишите ответ на отзыв!`)
     }
@@ -95,12 +88,6 @@ export class ReviewService {
                 parse_mode: 'HTML',
                 reply_markup: {
                     inline_keyboard: [
-                        [
-                            {
-                                text: 'Просмотреть отзыв',
-                                callback_data: `review_watch-${msg.chat.id}`,
-                            },
-                        ],
                         [
                             {
                                 text: 'Ответить на отзыв',
