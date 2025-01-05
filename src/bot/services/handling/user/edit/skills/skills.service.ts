@@ -47,10 +47,7 @@ export class SkillsService {
             localhistory: [],
             startedInterview: false,
         })
-        return await bot.sendMessage(
-            msg.chat.id,
-            `Данные успешно сохранены, а история очищена!`
-        )
+        return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены`)
     }
 
     async endSkills() {
