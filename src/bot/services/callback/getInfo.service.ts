@@ -104,7 +104,7 @@ export class GetInfoService {
                             [
                                 {
                                     text: review.answer
-                                        ? 'Изменить отзыв'
+                                        ? 'Изменить ответ'
                                         : 'Ответить на отзыв',
                                     callback_data: `review_answer-${review.user.tgId}`,
                                 },
