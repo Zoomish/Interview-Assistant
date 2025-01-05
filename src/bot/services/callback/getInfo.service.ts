@@ -95,7 +95,7 @@ export class GetInfoService {
                     '\n<b>Отзыв:</b> ' +
                     review.text +
                     '\n<b>Ответ:</b> ' +
-                    review.answer,
+                    review.answer || 'Нет',
                 {
                     parse_mode: 'HTML',
                     reply_markup: {
