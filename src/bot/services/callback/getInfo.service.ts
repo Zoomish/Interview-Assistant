@@ -94,7 +94,9 @@ export class GetInfoService {
                     '@' +
                     review.user.nickname +
                     '\n<b>Отзыв:</b> ' +
-                    review.text,
+                    review.text +
+                    '\n<b>Ответ:</b> ' +
+                    review.answer,
                 {
                     parse_mode: 'HTML',
                     reply_markup: {
