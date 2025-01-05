@@ -90,7 +90,10 @@ export class ReviewService {
                 msg.from.username +
                 `\n` +
                 `<b>Отзыв:</b>\n` +
-                msg.text
+                msg.text,
+            {
+                parse_mode: 'HTML',
+            }
         )
         return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
     }
