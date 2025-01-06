@@ -22,10 +22,10 @@ const fs = require('fs')
                 entities: [__dirname + '/**/*.entity{.ts,.js}'],
                 synchronize: true,
                 migrationsRun: true,
-                // ssl: {
-                //     rejectUnauthorized: true,
-                //     ca: fs.readFileSync('./ca.pem').toString(),
-                // },
+                ssl: {
+                    rejectUnauthorized: true,
+                    ca: fs.readFileSync('./ca.pem').toString(),
+                },
                 autoLoadEntities: true,
             }),
             inject: [ConfigService],
