@@ -22,6 +22,27 @@ export class BadCommandService {
         )
     }
 
+    async voiceNotAllowed() {
+        const bot: TelegramBot = global.bot
+        const msg: TelegramBot.Message = global.msg
+        await bot.sendMessage(
+            msg.chat.id,
+            `Голосовые сообщения разрешены только во время собеседования. Начните собеседование или используйте другую команду.`,
+            {
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: 'Начать собеседование',
+                                callback_data: 'interview_start',
+                            },
+                        ],
+                    ],
+                },
+            }
+        )
+    }
+
     async alreadyStarted() {
         const bot: TelegramBot = global.bot
         const msg: TelegramBot.Message = global.msg
