@@ -45,6 +45,14 @@ export class HandleService {
             const fileLink = await bot.getFileLink(msg.voice.file_id)
             const recognizedText = await this.sttService.transcribeOgg(fileLink)
             if (recognizedText && recognizedText.length > 0) {
+                await bot.sendMessage(
+                    chatId,
+                    '<b>Функция распознавания речи экспериментальная и может работать некорректно</b>\n<b>Вы сказали: </b>' +
+                        recognizedText,
+                    {
+                        parse_mode: 'HTML',
+                    }
+                )
                 return this.processTextMessage(recognizedText, msg)
             } else {
                 return bot.sendMessage(chatId, 'Не удалось распознать голос.')
