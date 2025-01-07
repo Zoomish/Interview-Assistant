@@ -15,6 +15,7 @@ import {
     SkillsService,
     StartinterviewService,
 } from './handling'
+import { SpeechToTextService } from './handling/speechToText/speech-to-text.service'
 
 @Injectable()
 export class HandleService {
@@ -30,30 +31,50 @@ export class HandleService {
         private readonly generateContentService: GenerateContentService,
         private readonly meService: MeService,
         private readonly badCommandService: BadCommandService,
-        private readonly greetingService: GreetingService
+        private readonly greetingService: GreetingService,
+        private readonly sttService: SpeechToTextService
     ) {}
-
     async handleMessage(msg: TelegramBot.Message) {
         if (msg.chat.type !== 'private') return
+
         const bot: TelegramBot = global.bot
         const chatId = msg.chat.id
-        await bot.sendChatAction(chatId, 'typing')
-        const text = msg.text
         global.msg = msg
-        if (!msg.text) {
-            return await this.badCommandService.onlyText()
+        if (msg.voice) {
+            await bot.sendChatAction(chatId, 'typing')
+            const fileLink = await bot.getFileLink(msg.voice.file_id)
+            const recognizedText = await this.sttService.transcribeOgg(fileLink)
+
+            if (recognizedText && recognizedText.length > 0) {
+                return this.processTextMessage(recognizedText, msg)
+            } else {
+                return bot.sendMessage(chatId, 'Не удалось распознать голос.')
+            }
         }
+        if (!msg.text) {
+            return this.badCommandService.onlyText()
+        }
+        return this.processTextMessage(msg.text, msg)
+    }
+
+    private async processTextMessage(text: string, msg: TelegramBot.Message) {
+        const bot: TelegramBot = global.bot
+        const chatId = msg.chat.id
+
+        await bot.sendChatAction(chatId, 'typing')
+
         switch (text) {
             case '/start':
-                return await this.greetingService.greeting(msg)
+                return this.greetingService.greeting(msg)
             case '/help':
-                return await this.helpService.help(msg.chat.id)
+                return this.helpService.help(chatId)
             case '/info':
-                return await this.infoService.info(msg.chat.id)
+                return this.infoService.info(chatId)
             default:
                 break
         }
-        const user = await this.userService.findOne(msg.chat.id)
+
+        const user = await this.userService.findOne(chatId)
         if (
             !user?.professionExist ||
             !user?.skillsExist ||
@@ -61,36 +82,34 @@ export class HandleService {
             user.startedReview ||
             global.id
         ) {
-            if (
-                msg?.entities !== undefined &&
-                msg?.entities[0]?.type === 'bot_command'
-            ) {
-                return await this.badCommandService.noCommands()
+            if (msg?.entities && msg.entities[0]?.type === 'bot_command') {
+                return this.badCommandService.noCommands()
             } else {
-                return await this.setUserInfo(user)
+                return this.setUserInfo(user)
             }
         }
-        return await this.endOptions(text, msg, user)
+
+        return this.endOptions(text, msg, user)
     }
 
     async setUserInfo(user: User) {
         if (!user?.professionExist) {
             await this.professionService.getProfession()
             if (!user?.skillsExist) {
-                return await this.skillsService.startSkills()
+                return this.skillsService.startSkills()
             }
         } else if (!user?.skillsExist) {
             await this.skillsService.getSkills()
             if (!user.level) {
-                return await this.levelService.level()
+                return this.levelService.level()
             }
             return
         } else if (!user?.level) {
-            return await this.levelService.level()
+            return this.levelService.level()
         } else if (user?.startedReview) {
-            return await this.reviewService.newReview()
+            return this.reviewService.newReview()
         } else if (global.id) {
-            return await this.reviewService.answerEndReview()
+            return this.reviewService.answerEndReview()
         }
     }
 
@@ -98,33 +117,30 @@ export class HandleService {
         switch (text) {
             case '/startinterview':
                 if (user.startedInterview) {
-                    return await this.badCommandService.alreadyStarted()
+                    return this.badCommandService.alreadyStarted()
                 } else {
-                    return await this.startinterviewService.startinterview()
+                    return this.startinterviewService.startinterview()
                 }
             case '/endinterview':
                 if (user.startedInterview) {
-                    return await this.startinterviewService.endinterview()
+                    return this.startinterviewService.endinterview()
                 } else {
-                    return await this.badCommandService.notStarted()
+                    return this.badCommandService.notStarted()
                 }
             case '/me':
-                return await this.meService.getMe(msg)
+                return this.meService.getMe(msg)
             case '/review':
-                return await this.reviewService.getReview()
+                return this.reviewService.getReview()
             default:
-                if (
-                    msg?.entities !== undefined &&
-                    msg?.entities[0]?.type === 'bot_command'
-                ) {
-                    return await this.badCommandService.badCommand()
+                if (msg?.entities && msg.entities[0]?.type === 'bot_command') {
+                    return this.badCommandService.badCommand()
                 } else if (user.startedInterview) {
-                    return await this.generateContentService.generateQuetion(
-                        msg.text,
+                    return this.generateContentService.generateQuetion(
+                        text,
                         user
                     )
                 } else {
-                    return await this.badCommandService.badText()
+                    return this.badCommandService.badText()
                 }
         }
     }

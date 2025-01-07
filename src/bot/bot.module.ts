@@ -24,11 +24,13 @@ import {
     SkillsService,
     StartinterviewService,
 } from './services'
+import { SpeechToTextService } from './services/handling/speechToText/speech-to-text.service'
 
 @Module({
     imports: [UserModule, ReviewModule],
     providers: [
         BotService,
+        SpeechToTextService,
         StartinterviewService,
         MeService,
         GreetingService,
