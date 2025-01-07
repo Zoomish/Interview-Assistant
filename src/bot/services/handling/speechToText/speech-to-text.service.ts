@@ -1,13 +1,15 @@
 import { Injectable, Logger } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
 import axios from 'axios'
 import * as fs from 'fs'
 import { v4 as uuid } from 'uuid'
 
 @Injectable()
 export class SpeechToTextService {
+    constructor(private readonly configService: ConfigService) {}
     private readonly logger = new Logger(SpeechToTextService.name)
-    private readonly apiToken = process.env.YANDEX_API_TOKEN
-    private readonly folderId = process.env.YANDEX_FOLDER_ID
+    private readonly apiToken = this.configService.get('YANDEX_API_TOKEN')
+    private readonly folderId = this.configService.get('YANDEX_FOLDER_ID')
 
     async transcribeOgg(fileUrl: string): Promise<string> {
         if (!this.apiToken || !this.folderId) {
