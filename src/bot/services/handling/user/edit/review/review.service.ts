@@ -51,6 +51,7 @@ export class ReviewService {
             })
             await bot.sendMessage(id, `Ваш отзыв просмотрен!`)
         }
+        console.log(id)
         global.id = id
         return await bot.sendMessage(msg.chat.id, `Напишите ответ на отзыв!`)
     }
@@ -64,13 +65,13 @@ export class ReviewService {
         })
         await bot.sendMessage(
             id,
-            `<b>На ваш отзыв ответили!</b\n<b>Ответ:</b>\n` + msg.text,
+            '<b>На ваш отзыв ответили!</b>\n<b>Ответ:</b>\n' + msg.text,
             {
                 parse_mode: 'HTML',
             }
         )
         global.id = null
-        return await bot.sendMessage(msg.chat.id, `Вы ответили на отзыв!`)
+        return await bot.sendMessage(msg.chat.id, 'Вы ответили на отзыв!')
     }
 
     async getReview() {
