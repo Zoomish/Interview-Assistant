@@ -41,7 +41,6 @@ export class HandleService {
         const chatId = msg.chat.id
         global.msg = msg
         if (msg.voice) {
-            await bot.sendChatAction(chatId, 'typing')
             const fileLink = await bot.getFileLink(msg.voice.file_id)
             const recognizedText = await this.sttService.transcribeOgg(fileLink)
             if (recognizedText && recognizedText.length > 0) {
@@ -53,6 +52,7 @@ export class HandleService {
                         parse_mode: 'HTML',
                     }
                 )
+                await bot.sendChatAction(chatId, 'typing')
                 return this.processTextMessage(recognizedText, msg)
             } else {
                 return bot.sendMessage(chatId, 'Не удалось распознать голос.')
