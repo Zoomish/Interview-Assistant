@@ -31,13 +31,13 @@ This repository contains a Telegram bot built using [Nest.js](https://nestjs.com
    ```env
      GEMINI_API = your-gemini-api-key
      TELEGRAM_TOKEN = your-telegram-bot-token
-     POSTGRES_USER= your-bd-user
-     POSTGRES_HOST= your-host-user
-     POSTGRES_PASSWORD= your-password-user
-     POSTGRES_DATABASE= your-database-user
+     POSTGRES_USER = your-bd-user
+     POSTGRES_HOST = your-host-user
+     POSTGRES_PASSWORD = your-password-user
+     POSTGRES_DATABASE = your-database-user
      POSTGRES_PORT = your-database-port
-     YANDEX_IAM_TOKEN=your-iam-token
-     YANDEX_FOLDER_ID=your-folder-id
+     YANDEX_IAM_TOKEN = your-iam-token
+     YANDEX_FOLDER_ID = your-folder-id
    ```
 
 ### Running the Bot
