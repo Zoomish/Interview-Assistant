@@ -51,7 +51,6 @@ export class ReviewService {
             })
             await bot.sendMessage(id, `Ваш отзыв просмотрен!`)
         }
-        console.log(id)
         global.id = id
         return await bot.sendMessage(msg.chat.id, `Напишите ответ на отзыв!`)
     }
