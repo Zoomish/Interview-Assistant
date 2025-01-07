@@ -44,7 +44,6 @@ export class HandleService {
             await bot.sendChatAction(chatId, 'typing')
             const fileLink = await bot.getFileLink(msg.voice.file_id)
             const recognizedText = await this.sttService.transcribeOgg(fileLink)
-
             if (recognizedText && recognizedText.length > 0) {
                 return this.processTextMessage(recognizedText, msg)
             } else {

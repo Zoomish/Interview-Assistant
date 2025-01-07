@@ -36,7 +36,7 @@ This repository contains a Telegram bot built using [Nest.js](https://nestjs.com
      POSTGRES_PASSWORD = your-password-user
      POSTGRES_DATABASE = your-database-user
      POSTGRES_PORT = your-database-port
-     YANDEX_IAM_TOKEN = your-iam-token
+     YANDEX_API_TOKEN = your-iam-token
      YANDEX_FOLDER_ID = your-folder-id
    ```
 
