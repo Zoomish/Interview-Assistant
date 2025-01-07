@@ -14,7 +14,7 @@ export class GenerateContentService {
         const chat = await this.aiStartService.getModel()
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
-        const msgWait = await bot.sendMessage(chatId, `Генерирую вопрос...`)
+        await bot.sendChatAction(chatId, 'typing')
         const generatedText = await chat.sendMessage(text)
         const history = await chat.getHistory()
         await this.userService.update(chatId, {
@@ -31,7 +31,6 @@ export class GenerateContentService {
                 []
             ),
         })
-        await bot.deleteMessage(msgWait.chat.id, msgWait.message_id)
         return await bot.sendMessage(chatId, generatedText.response.text())
     }
 }
