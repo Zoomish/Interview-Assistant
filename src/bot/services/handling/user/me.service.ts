@@ -48,10 +48,6 @@ export class MeService {
                               text: 'Получить пользователей',
                               callback_data: 'get_users',
                           },
-                      ]
-                    : [],
-                user.admin
-                    ? [
                           {
                               text: 'Получить отзывы',
                               callback_data: 'get_reviews',
