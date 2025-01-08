@@ -17,14 +17,17 @@ export class GlobalAnnouncementService {
 
     async getAnnouncement() {
         const bot: TelegramBot = global.bot
-        const chatId = global.msg.chat.id
+        const msg: TelegramBot.Message = global.msg
         const users = await this.userService.findAll()
-        if (users.length === 0) {
-            await bot.sendMessage(chatId, 'Нет ни одного пользователя в базе.')
+        if (users.length === 1) {
+            await bot.sendMessage(
+                msg.chat.id,
+                'Нет ни одного пользователя в базе.'
+            )
             return
         }
         await bot.sendMessage(
-            chatId,
+            msg.chat.id,
             `<b>Список всех пользователей (${users.length}):</b>`,
             {
                 parse_mode: 'HTML',
@@ -35,9 +38,9 @@ export class GlobalAnnouncementService {
                 user?.localhistory?.length > 0
                     ? Math.floor(user.localhistory.length / 2).toString()
                     : '0'
-            await bot.sendChatAction(chatId, 'typing')
+            await bot.sendChatAction(msg.chat.id, 'typing')
             await bot.sendMessage(
-                chatId,
+                msg.chat.id,
                 '<b>Id:</b> ' +
                     user.tgId.toString() +
                     '\n<b>Ник:</b> ' +
