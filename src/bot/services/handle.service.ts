@@ -139,7 +139,7 @@ export class HandleService {
                     return this.badCommandService.notStarted()
                 }
             case '/me':
-                return this.meService.getMe(msg)
+                return this.meService.getMe(msg, user)
             case '/review':
                 return this.reviewService.getReview()
             default:
