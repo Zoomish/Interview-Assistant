@@ -15,7 +15,7 @@ export class StartinterviewService {
         await this.userService.update(chatId, {
             startedInterview: true,
         })
-        const chat = await this.aiStartService.getModel()
+        const chat = await this.aiStartService.getChat()
         const text = await chat.sendMessage(
             'Расскажи о себе и задай первый вопрос'
         )

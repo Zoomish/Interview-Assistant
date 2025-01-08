@@ -11,7 +11,7 @@ export class GenerateContentService {
         private readonly userService: UserService
     ) {}
     async generateQuetion(text: string, user: User) {
-        const chat = await this.aiStartService.getModel()
+        const chat = await this.aiStartService.getChat()
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
         await bot.sendChatAction(chatId, 'typing')
