@@ -10,9 +10,9 @@ export class GlobalAnnouncementCallbackService {
     async start(action: string, id: string) {
         switch (action) {
             case 'start':
-                return await this.globalAnnouncementService.getUsers(id)
+                return await this.globalAnnouncementService.startAnnouncement()
             case 'end':
-                return await this.globalAnnouncementService.getUsers(id)
+                return await this.globalAnnouncementService.endAnnouncement()
             default:
                 break
         }
