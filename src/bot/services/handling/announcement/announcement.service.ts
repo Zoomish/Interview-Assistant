@@ -6,14 +6,6 @@ import { UserService } from 'src/user/user.service'
 export class GlobalAnnouncementService {
     constructor(private readonly userService: UserService) {}
 
-    async start(action: string, id: string) {
-        switch (action) {
-            case 'users':
-                return await this.getUsers(id)
-            default:
-                break
-        }
-    }
     async getUsers(id: string) {
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
