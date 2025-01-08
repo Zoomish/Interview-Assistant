@@ -53,6 +53,9 @@ export class User {
     @OneToOne(() => Review, (review) => review.user)
     review: Review
 
+    @Column({ nullable: false, default: false })
+    startedAnnouncement: boolean
+
     @CreateDateColumn()
     createdAt: Date
 

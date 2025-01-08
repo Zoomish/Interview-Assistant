@@ -6,7 +6,14 @@ import { UserService } from 'src/user/user.service'
 export class GlobalAnnouncementService {
     constructor(private readonly userService: UserService) {}
 
-    async startAnnouncement() {}
+    async startAnnouncement() {
+        const bot: TelegramBot = global.bot
+        const chatId = global.msg.chat.id
+        await this.userService.update(chatId, {
+            startedAnnouncement: true,
+        })
+        return await bot.sendMessage(chatId, 'Напишите объявление!')
+    }
 
     async getAnnouncement() {
         const bot: TelegramBot = global.bot
@@ -54,6 +61,9 @@ export class GlobalAnnouncementService {
     async endAnnouncement() {
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
-        await this.userService.update(chatId, {})
+        await this.userService.update(chatId, {
+            startedAnnouncement: false,
+        })
+        return await bot.sendMessage(chatId, 'Вы отменили объявление!')
     }
 }
