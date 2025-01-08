@@ -59,7 +59,7 @@ The bot can be deployed on any Node.js-compatible platform. For cloud deployment
 - **src**: Contains the source code
   - **app**: Main application module
   - **bot**: Telegram bot logic and handlers
-   - **services**: Business logic and AI integration
+    - **services**: Business logic and AI integration
   - **config**: Configuration and environment setup
 
 ## Usage
