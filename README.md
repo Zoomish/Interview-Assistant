@@ -36,11 +36,7 @@ This repository contains a Telegram bot built using [Nest.js](https://nestjs.com
      POSTGRES_PASSWORD = your-password-user
      POSTGRES_DATABASE = your-database-user
      POSTGRES_PORT = your-database-port
-     YANDEX_API_TOKEN = your-api-token
-     YANDEX_FOLDER_ID = your-folder-id
    ```
-   
-### Yandex SpeechKit Integration Guide
 
 #### 1. Create a Service Account in Yandex Cloud
 
