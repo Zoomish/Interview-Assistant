@@ -26,39 +26,21 @@ export class GlobalAnnouncementService {
             )
             return
         }
+        users.forEach(async (user) => {
+            if (user.tgId === msg.chat.id) {
+                await bot.sendChatAction(msg.chat.id, 'typing')
+                await bot.sendMessage(user.tgId, msg.text, {
+                    parse_mode: 'HTML',
+                })
+            }
+        })
         await bot.sendMessage(
             msg.chat.id,
-            `<b>Список всех пользователей (${users.length}):</b>`,
+            `<b>Объявление отправлено ${users.length - 1} пользователям</b>`,
             {
                 parse_mode: 'HTML',
             }
         )
-        users.forEach(async (user) => {
-            const messgase =
-                user?.localhistory?.length > 0
-                    ? Math.floor(user.localhistory.length / 2).toString()
-                    : '0'
-            await bot.sendChatAction(msg.chat.id, 'typing')
-            await bot.sendMessage(
-                msg.chat.id,
-                '<b>Id:</b> ' +
-                    user.tgId.toString() +
-                    '\n<b>Ник:</b> ' +
-                    '@' +
-                    user.nickname +
-                    '\n<b>Сообщения:</b> ' +
-                    messgase +
-                    '\n<b>Имя:</b> ' +
-                    user.name +
-                    '\n<b>Профессия:</b> ' +
-                    user.profession +
-                    '\n<b>Уровень:</b> ' +
-                    user.level,
-                {
-                    parse_mode: 'HTML',
-                }
-            )
-        })
     }
 
     async endAnnouncement() {
