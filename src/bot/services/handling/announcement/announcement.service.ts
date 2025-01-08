@@ -11,9 +11,6 @@ export class GlobalAnnouncementService {
     async getAnnouncement() {
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
-        await bot.answerCallbackQuery(id, {
-            text: `Вы получаете всех пользователей`,
-        })
         const users = await this.userService.findAll()
         if (users.length === 0) {
             await bot.sendMessage(chatId, 'Нет ни одного пользователя в базе.')
@@ -57,9 +54,6 @@ export class GlobalAnnouncementService {
     async endAnnouncement() {
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
-        await bot.answerCallbackQuery(id, {
-            text: `Вы получаете всех пользователей`,
-        })
         const users = await this.userService.findAll()
         if (users.length === 0) {
             await bot.sendMessage(chatId, 'Нет ни одного пользователя в базе.')
