@@ -8,6 +8,9 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     startedReview?: boolean
 
     @IsOptional()
+    startedAnnouncement?: boolean
+
+    @IsOptional()
     startedInterview?: boolean
 
     @IsOptional()

@@ -5,6 +5,7 @@ import { UserService } from 'src/user/user.service'
 import {
     BadCommandService,
     GenerateContentService,
+    GlobalAnnouncementService,
     GreetingService,
     HelpService,
     InfoService,
@@ -25,6 +26,7 @@ export class HandleService {
         private readonly helpService: HelpService,
         private readonly reviewService: ReviewService,
         private readonly levelService: LevelService,
+        private readonly globalAnnouncementService: GlobalAnnouncementService,
         private readonly professionService: ProfessionService,
         private readonly skillsService: SkillsService,
         private readonly infoService: InfoService,
@@ -86,6 +88,7 @@ export class HandleService {
             !user?.skillsExist ||
             !user?.level ||
             user.startedReview ||
+            user.startedAnnouncement ||
             global.id
         ) {
             if (msg?.entities && msg.entities[0]?.type === 'bot_command') {
@@ -114,6 +117,8 @@ export class HandleService {
             return this.levelService.level()
         } else if (user?.startedReview) {
             return this.reviewService.newReview()
+        } else if (user?.startedAnnouncement){
+            return this.globalAnnouncementService.getAnnouncement()
         } else if (global.id) {
             return this.reviewService.answerEndReview()
         }
@@ -134,7 +139,7 @@ export class HandleService {
                     return this.badCommandService.notStarted()
                 }
             case '/me':
-                return this.meService.getMe(msg)
+                return this.meService.getMe(msg, user)
             case '/review':
                 return this.reviewService.getReview()
             default:
