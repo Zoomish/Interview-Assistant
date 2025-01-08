@@ -1,4 +1,5 @@
 export * from './ai'
+export * from './announcement'
 export * from './badcommand.service'
 export * from './greeting.service'
 export * from './help.service'
