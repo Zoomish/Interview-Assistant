@@ -12,7 +12,19 @@ export class GlobalAnnouncementService {
         await this.userService.update(chatId, {
             startedAnnouncement: true,
         })
-        return await bot.sendMessage(chatId, 'Напишите объявление!')
+        return await bot.sendMessage(chatId, '<b>Напишите объявление</b>', {
+            parse_mode: 'HTML',
+            reply_markup: {
+                inline_keyboard: [
+                    [
+                        {
+                            text: 'Отменить',
+                            callback_data: 'announcement_end',
+                        },
+                    ],
+                ],
+            },
+        })
     }
 
     async getAnnouncement() {
