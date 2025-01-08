@@ -60,7 +60,7 @@ export class SpeechToTextService {
         )
         try {
             const response = await model.generateContent([
-                'Скажи что сказал человек в аудио',
+                'Перескажи что сказал человек в аудио, ничего не добавляя от себя, только то что было сказано',
                 {
                     fileData: {
                         fileUri: uploadResult.file.uri,
