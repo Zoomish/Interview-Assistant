@@ -39,13 +39,14 @@ export class GlobalAnnouncementService {
             return
         }
         users.forEach(async (user) => {
-            if (user.tgId === msg.chat.id) {
-                await bot.sendChatAction(msg.chat.id, 'typing')
+            if (user.tgId !== msg.chat.id) {
+                await bot.sendChatAction(user.tgId, 'typing')
                 await bot.sendMessage(user.tgId, msg.text, {
                     parse_mode: 'HTML',
                 })
             }
         })
+        await bot.sendChatAction(msg.chat.id, 'typing')
         await bot.sendMessage(
             msg.chat.id,
             `<b>Объявление отправлено ${users.length - 1} пользователям</b>`,
