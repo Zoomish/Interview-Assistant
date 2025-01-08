@@ -22,9 +22,9 @@ import {
     ProfessionService,
     ReviewService,
     SkillsService,
+    SpeechToTextService,
     StartinterviewService,
 } from './services'
-import { SpeechToTextService } from './services/handling/speechToText/speech-to-text.service'
 
 @Module({
     imports: [UserModule, ReviewModule],

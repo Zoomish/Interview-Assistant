@@ -13,9 +13,9 @@ import {
     ProfessionService,
     ReviewService,
     SkillsService,
+    SpeechToTextService,
     StartinterviewService,
 } from './handling'
-import { SpeechToTextService } from './handling/speechToText/speech-to-text.service'
 
 @Injectable()
 export class HandleService {
@@ -36,7 +36,6 @@ export class HandleService {
     ) {}
     async handleMessage(msg: TelegramBot.Message) {
         if (msg.chat.type !== 'private') return
-
         const bot: TelegramBot = global.bot
         const chatId = msg.chat.id
         global.msg = msg

@@ -3,5 +3,8 @@ export * from './badcommand.service'
 export * from './greeting.service'
 export * from './help.service'
 export * from './info.service'
+export * from './review'
+export * from './speechToText'
 export * from './startInterview.service'
 export * from './user'
+
