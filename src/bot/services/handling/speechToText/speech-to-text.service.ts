@@ -41,14 +41,12 @@ export class SpeechToTextService {
     }
 
     private async recognizeSpeech(filePath: string): Promise<string> {
-        const model = await this.aiStartService.getModel()
-        const uploadResult = await this.fileManager.uploadFile(
-            filePath,
-            {
-                mimeType: 'audio/ogg',
-                displayName: 'Audio sample',
-            }
-        )
+        const model = await this.aiStartService.getIndependentModel()
+        const uploadResult = await this.fileManager.uploadFile(filePath, {
+            mimeType: 'audio/ogg',
+            displayName: 'Audio sample',
+        })
+        console.log(uploadResult)
 
         let file = await this.fileManager.getFile(uploadResult.file.name)
         while (file.state === FileState.PROCESSING) {
@@ -58,6 +56,7 @@ export class SpeechToTextService {
             // Fetch the file from the API again
             file = await this.fileManager.getFile(uploadResult.file.name)
         }
+        console.log(file)
 
         if (file.state === FileState.FAILED) {
             throw new Error('Audio processing failed.')
