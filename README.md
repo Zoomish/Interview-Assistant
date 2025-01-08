@@ -38,57 +38,6 @@ This repository contains a Telegram bot built using [Nest.js](https://nestjs.com
      POSTGRES_PORT = your-database-port
    ```
 
-#### 1. Create a Service Account in Yandex Cloud
-
-1. **Create a service account:**
-    ```powershell
-    yc iam service-account create --name=speek --description="Service account for SpeechKit"
-    ```
-
-2. **Retrieve the ID of the created service account:**
-    ```powershell
-    yc iam service-account list
-    ```
-    Find the `ID` of your `speek` service account.
-
-#### 2. Assign Roles to the Service Account
-
-Run the following **single-line** command in **PowerShell**:
-
-```powershell
-yc resource-manager folder add-access-binding your-folder-id --role editor --subject serviceAccount:your-service-id
-```
-
-Where:
-- `your-folder-id` is your folder ID.
-- `your-service-id` is the service account ID of your `speek` account.
-
-#### 3. Obtain an API Token
-
-Run the following command in PowerShell to generate an API token while impersonating the service account:
-
-```powershell
- yc iam api-key create --service-account-name speek --description "API key for SpeechKit"
-```
-
-**Result:** The command will return an API token in the "secret" field. Copy this token.
-
-#### 4. Configure Environment Variables
-
-Update the `.env` file at the project root with the following variables:
-
-```env
-YANDEX_API_TOKEN = your-api-token
-YANDEX_FOLDER_ID = your-folder-id
-```
-
-#### 5. Activate SpeechKit in Yandex Cloud Console
-
-1. Open the Yandex Cloud Console.
-2. Select your Cloud and Folder.
-3. In the left sidebar, find and select SpeechKit.
-4. Activate the SpeechKit service following the on-screen instructions.
-
 ### Running the Bot
 
 #### Development Mode
