@@ -12,6 +12,7 @@ import {
     EditSkillsService,
     GenerateContentService,
     GetInfoService,
+    GlobalAnnouncementCallbackService,
     GreetingService,
     HandleService,
     HelpService,
@@ -31,6 +32,7 @@ import {
     providers: [
         BotService,
         SpeechToTextService,
+        GlobalAnnouncementCallbackService,
         StartinterviewService,
         MeService,
         GreetingService,
