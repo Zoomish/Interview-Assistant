@@ -45,11 +45,11 @@ export class MeService {
                 user.admin
                     ? [
                           {
-                              text: 'Получить пользователей',
+                              text: 'Все пользователи',
                               callback_data: 'get_users',
                           },
                           {
-                              text: 'Получить отзывы',
+                              text: 'Все отзывы',
                               callback_data: 'get_reviews',
                           },
                       ]
