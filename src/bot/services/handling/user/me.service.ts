@@ -58,6 +58,14 @@ export class MeService {
                           },
                       ]
                     : [],
+                user.admin
+                    ? [
+                          {
+                              text: 'Отправить объявление',
+                              callback_data: 'announcement_start',
+                          },
+                      ]
+                    : [],
             ],
         }
         return await bot.sendMessage(msg.chat.id, text, {
