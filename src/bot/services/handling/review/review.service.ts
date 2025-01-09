@@ -109,6 +109,8 @@ export class ReviewService {
         const msg: TelegramBot.Message = global.msg
         await this.reviewService.update(msg.chat.id, {
             text: msg.text,
+            watched: false,
+            answer: null,
         })
         await this.userService.update(msg.chat.id, {
             startedReview: false,
