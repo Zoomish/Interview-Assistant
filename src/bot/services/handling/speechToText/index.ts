@@ -1,2 +1,1 @@
-export * from './speech-to-text.service';
-
+export * from './speech-to-text.service'

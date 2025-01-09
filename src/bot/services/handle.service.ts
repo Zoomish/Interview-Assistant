@@ -117,7 +117,7 @@ export class HandleService {
             return this.levelService.level()
         } else if (user?.startedReview) {
             return this.reviewService.newReview()
-        } else if (user?.startedAnnouncement){
+        } else if (user?.startedAnnouncement) {
             return this.globalAnnouncementService.getAnnouncement()
         } else if (global.id) {
             return this.reviewService.answerEndReview()
