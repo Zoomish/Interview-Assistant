@@ -8,8 +8,6 @@ export class MeService {
     constructor(private readonly userService: UserService) {}
     async getMe(msg: TelegramBot.Message, user: User) {
         const bot: TelegramBot = global.bot
-        const msgWait = await bot.sendMessage(msg.chat.id, `Получаю данные...`)
-        await bot.deleteMessage(msgWait.chat.id, msgWait.message_id)
         const text =
             `<b>Меня зовут:</b> ${user.name}\n` +
             `${user.admin ? '<b>Я админ</b>\n' : ''}` +
