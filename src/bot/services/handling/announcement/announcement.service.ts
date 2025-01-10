@@ -46,6 +46,9 @@ export class GlobalAnnouncementService {
                 })
             }
         })
+        await this.userService.update(msg.chat.id, {
+            startedAnnouncement: false,
+        })
         await bot.sendChatAction(msg.chat.id, 'typing')
         await bot.sendMessage(
             msg.chat.id,
