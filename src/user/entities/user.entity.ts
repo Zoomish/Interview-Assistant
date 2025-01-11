@@ -5,7 +5,6 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    JoinColumn,
     OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -31,7 +30,6 @@ export class User {
     @OneToOne(() => History, (history) => history.user, {
         onDelete: 'CASCADE',
     })
-    @JoinColumn()
     history: History
 
     @Column({ nullable: false })
