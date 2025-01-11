@@ -1,4 +1,5 @@
 import { Content } from '@google/generative-ai'
+import { History } from 'src/history/entities/history.entity'
 import { Review } from 'src/review/entities/review.entity'
 import {
     Column,
@@ -25,6 +26,9 @@ export class User {
 
     @Column({ nullable: true, type: 'json' })
     localhistory: Content[]
+
+    @OneToOne(() => History, (history) => history.user)
+    history: History
 
     @Column({ nullable: false })
     name: string
