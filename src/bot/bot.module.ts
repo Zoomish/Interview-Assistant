@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common'
+import { HistoryModule } from 'src/history/history.module'
 import { ReviewModule } from 'src/review/review.module'
 import { UserModule } from 'src/user/user.module'
 import { BotService } from './bot.service'
@@ -29,7 +30,7 @@ import {
 } from './services'
 
 @Module({
-    imports: [UserModule, ReviewModule],
+    imports: [UserModule, ReviewModule, HistoryModule],
     providers: [
         BotService,
         SpeechToTextService,
