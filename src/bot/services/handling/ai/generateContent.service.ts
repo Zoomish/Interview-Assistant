@@ -18,7 +18,10 @@ export class GenerateContentService {
         const generatedText = await chat.sendMessage(text)
         const history = await chat.getHistory()
         await this.userService.update(chatId, {
-            localhistory: [...user?.history.localhistory, ...history].reduce(
+            localhistory: [
+                ...(user?.history?.localhistory || []),
+                ...history,
+            ].reduce(
                 (res, cur) =>
                     res.find(
                         (find) => JSON.stringify(find) === JSON.stringify(cur)

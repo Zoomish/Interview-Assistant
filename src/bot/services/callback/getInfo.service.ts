@@ -42,7 +42,7 @@ export class GetInfoService {
             const messgase =
                 user?.history?.localhistory?.length > 0
                     ? Math.floor(
-                          user?.history.localhistory.length / 2
+                          user?.history?.localhistory.length / 2
                       ).toString()
                     : '0'
             await bot.sendChatAction(chatId, 'typing')
