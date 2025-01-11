@@ -21,7 +21,7 @@ export class History {
     @Column({ nullable: true, type: 'json' })
     globalhistory: Content[][]
 
-    @OneToOne(() => User, (user) => user.review)
+    @OneToOne(() => User, (user) => user.history)
     @JoinColumn({ referencedColumnName: 'tgId' })
     user: User
 
