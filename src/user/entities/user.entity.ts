@@ -5,7 +5,6 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    JoinColumn,
     OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -29,7 +28,6 @@ export class User {
     localhistory: Content[]
 
     @OneToOne(() => History, (history) => history.user)
-    @JoinColumn()
     history: History
 
     @Column({ nullable: false })

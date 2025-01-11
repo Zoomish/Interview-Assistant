@@ -1,6 +1,12 @@
 import { Content } from '@google/generative-ai'
 import { User } from 'src/user/entities/user.entity'
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import {
+    Column,
+    Entity,
+    JoinColumn,
+    OneToOne,
+    PrimaryGeneratedColumn,
+} from 'typeorm'
 
 @Entity()
 export class History {
@@ -14,5 +20,6 @@ export class History {
     globalhistory: Content[][]
 
     @OneToOne(() => User, (user) => user.history)
+    @JoinColumn({ referencedColumnName: 'tgId' })
     user: User
 }
