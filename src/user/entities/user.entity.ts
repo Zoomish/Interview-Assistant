@@ -5,6 +5,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinColumn,
     OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -27,7 +28,10 @@ export class User {
     @Column({ nullable: true, type: 'json' })
     localhistory: Content[]
 
-    @OneToOne(() => History, (history) => history.user)
+    @OneToOne(() => History, (history) => history.user, {
+        onDelete: 'CASCADE',
+    })
+    @JoinColumn()
     history: History
 
     @Column({ nullable: false })
@@ -54,7 +58,9 @@ export class User {
     @Column({ nullable: false, default: false })
     startedReview: boolean
 
-    @OneToOne(() => Review, (review) => review.user)
+    @OneToOne(() => Review, (review) => review.user, {
+        onDelete: 'CASCADE',
+    })
     review: Review
 
     @Column({ nullable: false, default: false })
