@@ -1,3 +1,4 @@
+import { Content } from '@google/generative-ai'
 import { User } from 'src/user/entities/user.entity'
 import {
     Column,
@@ -14,14 +15,11 @@ export class History {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ nullable: true, length: 1000 })
-    text: string
+    @Column({ nullable: true, type: 'json' })
+    localhistory: Content[]
 
-    @Column({ nullable: true, length: 1000 })
-    answer: string
-
-    @Column({ nullable: false, default: false })
-    watched: boolean
+    @Column({ nullable: true, type: 'json' })
+    globalhistory: Content[][]
 
     @OneToOne(() => User, (user) => user.review)
     @JoinColumn({ referencedColumnName: 'tgId' })
