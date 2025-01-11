@@ -37,7 +37,7 @@ export class HistoryGlobalService {
 
     async update(tgid: number, dto: UpdateHistoryDto) {
         let review = await this.findOne(tgid)
-        if (!review) review = await this.create(tgid, { text: '' })
+        if (!review) review = await this.create(tgid, { localhistory: [] })
         return await this.reviewRepository.save(Object.assign(review, dto))
     }
 }
