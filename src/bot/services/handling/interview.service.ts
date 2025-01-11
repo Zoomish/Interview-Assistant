@@ -33,7 +33,6 @@ export class InterviewService {
         const chatId = global.msg.chat.id
         await this.userService.update(chatId, {
             startedInterview: false,
-            localhistory: [],
         })
         const history = await this.historyGlobalService.findOne(chatId)
         await this.historyGlobalService.update(chatId, {
