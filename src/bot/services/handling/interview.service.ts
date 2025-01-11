@@ -4,7 +4,7 @@ import { UserService } from 'src/user/user.service'
 import { AiStartService } from './ai'
 
 @Injectable()
-export class StartinterviewService {
+export class InterviewService {
     constructor(
         private readonly aiStartService: AiStartService,
         private readonly userService: UserService

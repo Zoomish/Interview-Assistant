@@ -19,6 +19,7 @@ import {
     HandleService,
     HelpService,
     InfoService,
+    InterviewCallbackService,
     InterviewService,
     LevelService,
     MeService,
@@ -26,7 +27,6 @@ import {
     ReviewService,
     SkillsService,
     SpeechToTextService,
-    StartinterviewService,
 } from './services'
 
 @Module({
@@ -35,7 +35,7 @@ import {
         BotService,
         SpeechToTextService,
         GlobalAnnouncementCallbackService,
-        StartinterviewService,
+        InterviewService,
         MeService,
         GreetingService,
         CallbackService,
@@ -53,7 +53,7 @@ import {
         ProfessionService,
         ReviewService,
         SkillsService,
-        InterviewService,
+        InterviewCallbackService,
         EditSkillsService,
         EditProfessionService,
     ],
