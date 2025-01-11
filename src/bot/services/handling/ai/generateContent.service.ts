@@ -19,7 +19,7 @@ export class GenerateContentService {
         const history = await chat.getHistory()
         await this.userService.update(chatId, {
             localhistory: [
-                ...(user.localhistory ? user.localhistory : []),
+                ...(user.history.localhistory ? user.history.localhistory : []),
                 ...history,
             ].reduce(
                 (res, cur) =>
