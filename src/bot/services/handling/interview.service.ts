@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
+import { HistoryGlobalService } from 'src/history/history.service'
 import { UserService } from 'src/user/user.service'
 import { AiStartService } from './ai'
 
@@ -7,6 +8,7 @@ import { AiStartService } from './ai'
 export class InterviewService {
     constructor(
         private readonly aiStartService: AiStartService,
+        private readonly historyGlobalService: HistoryGlobalService,
         private readonly userService: UserService
     ) {}
     async startinterview() {
@@ -19,6 +21,8 @@ export class InterviewService {
         const history = await chat.getHistory()
         await this.userService.update(chatId, {
             startedInterview: true,
+        })
+        await this.historyGlobalService.update(chatId, {
             localhistory: history,
         })
         return await bot.sendMessage(chatId, text.response.text())
@@ -30,6 +34,11 @@ export class InterviewService {
         await this.userService.update(chatId, {
             startedInterview: false,
             localhistory: [],
+        })
+        const history = await this.historyGlobalService.findOne(chatId)
+        await this.historyGlobalService.update(chatId, {
+            localhistory: [],
+            globalhistory: [...history.globalhistory, history.localhistory],
         })
         return await bot.sendMessage(
             chatId,
