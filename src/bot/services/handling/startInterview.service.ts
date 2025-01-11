@@ -12,13 +12,15 @@ export class StartinterviewService {
     async startinterview() {
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
-        await this.userService.update(chatId, {
-            startedInterview: true,
-        })
         const chat = await this.aiStartService.getChat()
         const text = await chat.sendMessage(
             'Расскажи о себе и задай первый вопрос'
         )
+        const history = await chat.getHistory()
+        await this.userService.update(chatId, {
+            startedInterview: true,
+            localhistory: history,
+        })
         return await bot.sendMessage(chatId, text.response.text())
     }
 
