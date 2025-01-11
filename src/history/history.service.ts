@@ -19,12 +19,18 @@ export class HistoryGlobalService {
     }
 
     async findOne(tgid: number) {
-        return await this.reviewRepository.findOne({
+        let history = await this.reviewRepository.findOne({
             where: { user: { tgId: tgid } },
             relations: {
                 user: true,
             },
         })
+        if (!history)
+            history = await this.create(tgid, {
+                localhistory: [],
+                globalhistory: [],
+            })
+        return history
     }
 
     async findAll() {
@@ -37,9 +43,6 @@ export class HistoryGlobalService {
 
     async update(tgid: number, dto: UpdateHistoryDto) {
         let review = await this.findOne(tgid)
-        if (!review) review = await this.create(tgid, { localhistory: [],
-            globalhistory: []
-         })
         return await this.reviewRepository.save(Object.assign(review, dto))
     }
 }
