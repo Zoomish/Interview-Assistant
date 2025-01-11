@@ -38,6 +38,7 @@ export class UserService {
         return await this.userRepository.find({
             relations: {
                 review: true,
+                history: true,
             },
         })
     }
