@@ -23,6 +23,7 @@ export class UserService {
             where: { tgId },
             relations: {
                 review: true,
+                history: true,
             },
         })
     }
@@ -30,9 +31,6 @@ export class UserService {
     async findAdmin() {
         return await this.userRepository.findOne({
             where: { admin: true },
-            relations: {
-                review: true,
-            },
         })
     }
 

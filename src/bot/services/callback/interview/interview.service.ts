@@ -1,12 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
-import { StartinterviewService } from '../../handling'
+import { InterviewService } from '../../handling'
 
 @Injectable()
-export class InterviewService {
-    constructor(
-        private readonly startinterviewService: StartinterviewService
-    ) {}
+export class InterviewCallbackService {
+    constructor(private readonly startinterviewService: InterviewService) {}
 
     async start(action: string, id: string) {
         const bot: TelegramBot = global.bot

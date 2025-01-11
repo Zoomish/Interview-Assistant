@@ -40,8 +40,10 @@ export class GetInfoService {
         )
         users.forEach(async (user) => {
             const messgase =
-                user?.localhistory?.length > 0
-                    ? Math.floor(user.localhistory.length / 2).toString()
+                user?.history?.localhistory?.length > 0
+                    ? Math.floor(
+                          user.history.localhistory.length / 2
+                      ).toString()
                     : '0'
             await bot.sendChatAction(chatId, 'typing')
             await bot.sendMessage(

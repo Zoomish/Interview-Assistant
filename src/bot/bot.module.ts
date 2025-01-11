@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common'
+import { HistoryModule } from 'src/history/history.module'
 import { ReviewModule } from 'src/review/review.module'
 import { UserModule } from 'src/user/user.module'
 import { BotService } from './bot.service'
@@ -18,6 +19,7 @@ import {
     HandleService,
     HelpService,
     InfoService,
+    InterviewCallbackService,
     InterviewService,
     LevelService,
     MeService,
@@ -25,16 +27,15 @@ import {
     ReviewService,
     SkillsService,
     SpeechToTextService,
-    StartinterviewService,
 } from './services'
 
 @Module({
-    imports: [UserModule, ReviewModule],
+    imports: [UserModule, ReviewModule, HistoryModule],
     providers: [
         BotService,
         SpeechToTextService,
         GlobalAnnouncementCallbackService,
-        StartinterviewService,
+        InterviewService,
         MeService,
         GreetingService,
         CallbackService,
@@ -52,7 +53,7 @@ import {
         ProfessionService,
         ReviewService,
         SkillsService,
-        InterviewService,
+        InterviewCallbackService,
         EditSkillsService,
         EditProfessionService,
     ],

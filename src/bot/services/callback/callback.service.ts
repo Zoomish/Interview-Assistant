@@ -3,7 +3,7 @@ import TelegramBot from 'node-telegram-bot-api'
 import { BadCommandService, LevelService } from '../handling'
 import { GlobalAnnouncementCallbackService } from './announcement'
 import { GetInfoService } from './getInfo.service'
-import { InterviewService } from './interview'
+import { InterviewCallbackService } from './interview'
 import { EditReviewService } from './review'
 import {
     EditLevelService,
@@ -22,7 +22,7 @@ export class CallbackService {
         private readonly editProfessionService: EditProfessionService,
         private readonly editReviewService: EditReviewService,
         private readonly badCommandService: BadCommandService,
-        private readonly interviewService: InterviewService
+        private readonly interviewCallbackService: InterviewCallbackService
     ) {}
     async callback(callbackQuery: TelegramBot.CallbackQuery) {
         const data = callbackQuery.data.split('_')
@@ -65,7 +65,7 @@ export class CallbackService {
                     callbackQuery.id
                 )
             case 'interview':
-                return await this.interviewService.start(
+                return await this.interviewCallbackService.start(
                     action,
                     callbackQuery.id
                 )

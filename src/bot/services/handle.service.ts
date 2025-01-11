@@ -9,20 +9,20 @@ import {
     GreetingService,
     HelpService,
     InfoService,
+    InterviewService,
     LevelService,
     MeService,
     ProfessionService,
     ReviewService,
     SkillsService,
     SpeechToTextService,
-    StartinterviewService,
 } from './handling'
 
 @Injectable()
 export class HandleService {
     constructor(
         private readonly userService: UserService,
-        private readonly startinterviewService: StartinterviewService,
+        private readonly startinterviewService: InterviewService,
         private readonly helpService: HelpService,
         private readonly reviewService: ReviewService,
         private readonly levelService: LevelService,

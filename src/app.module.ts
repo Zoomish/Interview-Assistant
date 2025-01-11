@@ -3,6 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppController } from './app.controller'
 import { BotModule } from './bot/bot.module'
+import { HistoryModule } from './history/history.module'
+import { ReviewModule } from './review/review.module'
 import { UserModule } from './user/user.module'
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const fs = require('fs')
@@ -31,6 +33,8 @@ const fs = require('fs')
             inject: [ConfigService],
         }),
         BotModule,
+        HistoryModule,
+        ReviewModule,
         UserModule,
     ],
     controllers: [AppController],
