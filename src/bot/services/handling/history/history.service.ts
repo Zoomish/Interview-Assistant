@@ -21,12 +21,14 @@ export class HistoryService {
             {
                 parse_mode: 'HTML',
                 reply_markup: {
-                    inline_keyboard: history.globalhistory.map((el, i) => [
-                        {
-                            text: `Запись: ${el[2].parts[0].text}`,
-                            callback_data: `history_get-${i}`,
-                        } as InlineKeyboardButton,
-                    ]),
+                    inline_keyboard: history.globalhistory
+                        .shift()
+                        .map((el, i) => [
+                            {
+                                text: `Запись: ${el[2].parts[0].text}`,
+                                callback_data: `history_get-${i}`,
+                            } as InlineKeyboardButton,
+                        ]),
                 },
             }
         )
