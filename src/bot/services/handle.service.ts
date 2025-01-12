@@ -90,7 +90,6 @@ export class HandleService {
             !user?.skillsExist ||
             !user?.level ||
             user.startedReview ||
-            user.startedAnnouncement ||
             global.id
         ) {
             if (msg?.entities && msg.entities[0]?.type === 'bot_command') {
@@ -99,7 +98,9 @@ export class HandleService {
                 return this.setUserInfo(user)
             }
         }
-
+        if (user?.startedAnnouncement) {
+            return this.globalAnnouncementService.getAnnouncement()
+        }
         return this.endOptions(text, msg, user)
     }
 
@@ -119,8 +120,6 @@ export class HandleService {
             return this.levelService.level()
         } else if (user?.startedReview) {
             return this.reviewService.newReview()
-        } else if (user?.startedAnnouncement) {
-            return this.globalAnnouncementService.getAnnouncement()
         } else if (global.id) {
             return this.reviewService.answerEndReview()
         }
