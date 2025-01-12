@@ -43,7 +43,19 @@ export class InterviewService {
         })
         return await bot.sendMessage(
             chatId,
-            `Вы остановили собеседование и очистили историю`
+            `Вы остановили собеседование и очистили историю`,
+            {
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: 'Начать собеседование',
+                                callback_data: 'interview_start',
+                            },
+                        ],
+                    ],
+                },
+            }
         )
     }
 }
