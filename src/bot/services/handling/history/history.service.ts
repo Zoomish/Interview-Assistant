@@ -39,6 +39,10 @@ export class HistoryService {
         const chatId = global.msg.chat.id
         const Allhistory = await this.historyGlobalService.findOne(chatId)
         const history = Allhistory.globalhistory[id]
+        await bot.sendMessage(
+            chatId,
+            '<b>Вы получаете запись своего собеседования:</b>'
+        )
         return history.map(async (el) => {
             await bot.sendMessage(
                 chatId,
