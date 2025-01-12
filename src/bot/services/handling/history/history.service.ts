@@ -9,6 +9,12 @@ export class HistoryService {
         private readonly historyGlobalService: HistoryGlobalService
     ) {}
 
+    async getGlobalHistory() {
+        const chatId = global.msg.chat.id
+        const history = await this.historyGlobalService.findOne(chatId)
+        console.log(history.globalhistory)
+    }
+
     async clearHistory() {
         const chatId = global.msg.chat.id
         await this.userService.update(chatId, {
