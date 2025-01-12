@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
 import { UserService } from 'src/user/user.service'
+import { InterviewService } from '../../../interview.service'
 
 @Injectable()
 export class ProfessionService {
-    constructor(private readonly userService: UserService) {}
+    constructor(
+        private readonly userService: UserService,
+        private readonly interviewService: InterviewService
+    ) {}
 
     async startProfession() {
         const bot: TelegramBot = global.bot
@@ -43,9 +47,8 @@ export class ProfessionService {
         await this.userService.update(msg.chat.id, {
             profession: msg.text,
             professionExist: true,
-            localhistory: [],
-            startedInterview: false,
         })
+        await this.interviewService.endinterview()
         return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
     }
 

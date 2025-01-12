@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
+import { InterviewService } from 'src/bot/services/handling'
 import { UserService } from 'src/user/user.service'
 
 @Injectable()
 export class EditLevelService {
-    constructor(private readonly userService: UserService) {}
+    constructor(
+        private readonly userService: UserService,
+        private readonly interviewService: InterviewService
+    ) {}
     async editLevel(action, callbackQuery) {
         switch (action) {
             case 'intern':
@@ -30,9 +34,8 @@ export class EditLevelService {
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
             level: text,
-            localhistory: [],
-            startedInterview: false,
         })
+        await this.interviewService.endinterview()
         await bot.answerCallbackQuery(id, {
             text: `Вы изменили уровень на ${text}`,
         })
