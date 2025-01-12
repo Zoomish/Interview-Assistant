@@ -3,12 +3,14 @@ import TelegramBot from 'node-telegram-bot-api'
 import { HistoryGlobalService } from 'src/history/history.service'
 import { UserService } from 'src/user/user.service'
 import { AiStartService } from './ai'
+import { HistoryService } from './history'
 
 @Injectable()
 export class InterviewService {
     constructor(
         private readonly aiStartService: AiStartService,
         private readonly historyGlobalService: HistoryGlobalService,
+        private readonly historyService: HistoryService,
         private readonly userService: UserService
     ) {}
     async startinterview() {
@@ -33,16 +35,7 @@ export class InterviewService {
     async endinterview() {
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
-        await this.userService.update(chatId, {
-            startedInterview: false,
-        })
-        const history = await this.historyGlobalService.findOne(chatId)
-        if (history.localhistory.length > 0) {
-            await this.historyGlobalService.update(chatId, {
-                localhistory: [],
-                globalhistory: [...history.globalhistory, history.localhistory],
-            })
-        }
+        await this.historyService.clearHistory()
         return await bot.sendMessage(
             chatId,
             `Вы остановили собеседование и очистили локальную историю`,
