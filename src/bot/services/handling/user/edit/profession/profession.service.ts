@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
-import { HistoryGlobalService } from 'src/history/history.service'
 import { UserService } from 'src/user/user.service'
+import { HistoryService } from '../../../history'
 
 @Injectable()
 export class ProfessionService {
     constructor(
         private readonly userService: UserService,
-        private readonly historyGlobalService: HistoryGlobalService
+        private readonly historyService: HistoryService
     ) {}
 
     async startProfession() {
@@ -47,15 +47,8 @@ export class ProfessionService {
         await this.userService.update(msg.chat.id, {
             profession: msg.text,
             professionExist: true,
-            startedInterview: false,
         })
-        const history = await this.historyGlobalService.findOne(msg.chat.id)
-        if (history.localhistory.length > 0) {
-            await this.historyGlobalService.update(msg.chat.id, {
-                localhistory: [],
-                globalhistory: [...history.globalhistory, history.localhistory],
-            })
-        }
+        await this.historyService.clearHistory()
         return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены!`)
     }
 

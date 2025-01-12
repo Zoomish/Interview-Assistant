@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
-import { HistoryGlobalService } from 'src/history/history.service'
+import { HistoryService } from 'src/bot/services/handling'
 import { UserService } from 'src/user/user.service'
 
 @Injectable()
 export class EditLevelService {
     constructor(
         private readonly userService: UserService,
-        private readonly historyGlobalService: HistoryGlobalService
+        private readonly historyService: HistoryService
     ) {}
     async editLevel(action, callbackQuery) {
         switch (action) {
@@ -34,15 +34,8 @@ export class EditLevelService {
         const msg: TelegramBot.Message = global.msg
         await this.userService.update(msg.chat.id, {
             level: text,
-            startedInterview: false,
         })
-        const history = await this.historyGlobalService.findOne(msg.chat.id)
-        if (history.localhistory.length > 0) {
-            await this.historyGlobalService.update(msg.chat.id, {
-                localhistory: [],
-                globalhistory: [...history.globalhistory, history.localhistory],
-            })
-        }
+        await this.historyService.clearHistory()
         await bot.answerCallbackQuery(id, {
             text: `Вы изменили уровень на ${text}`,
         })
