@@ -140,7 +140,7 @@ export class HandleService {
                 } else {
                     return this.badCommandService.notStarted()
                 }
-            case 'history':
+            case '/history':
                 return this.historyService.getGlobalHistory()
             case '/me':
                 return this.meService.getMe(msg, user)
