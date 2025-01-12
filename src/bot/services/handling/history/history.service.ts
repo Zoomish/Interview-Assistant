@@ -42,7 +42,10 @@ export class HistoryService {
                 chatId,
                 `<b>Кто говорит: ${el.role === 'model' ? 'Бот' : 'Вы'}:</b>\n` +
                     `<b>Сообщение:</b> \n` +
-                    el.parts[0].text
+                    el.parts[0].text,
+                {
+                    parse_mode: 'HTML',
+                }
             )
         })
     }
