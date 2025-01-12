@@ -53,10 +53,12 @@ export class SkillsService {
             startedInterview: false,
         })
         const history = await this.historyGlobalService.findOne(msg.chat.id)
-        await this.historyGlobalService.update(msg.chat.id, {
-            localhistory: [],
-            globalhistory: [...history.globalhistory, history.localhistory],
-        })
+        if (history.localhistory.length > 0) {
+            await this.historyGlobalService.update(msg.chat.id, {
+                localhistory: [],
+                globalhistory: [...history.globalhistory, history.localhistory],
+            })
+        }
         return await bot.sendMessage(msg.chat.id, `Данные успешно сохранены`)
     }
 

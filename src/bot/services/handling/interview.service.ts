@@ -37,10 +37,12 @@ export class InterviewService {
             startedInterview: false,
         })
         const history = await this.historyGlobalService.findOne(chatId)
-        await this.historyGlobalService.update(chatId, {
-            localhistory: [],
-            globalhistory: [...history.globalhistory, history.localhistory],
-        })
+        if (history.localhistory.length > 0) {
+            await this.historyGlobalService.update(chatId, {
+                localhistory: [],
+                globalhistory: [...history.globalhistory, history.localhistory],
+            })
+        }
         return await bot.sendMessage(
             chatId,
             `Вы остановили собеседование и очистили локальную историю`,

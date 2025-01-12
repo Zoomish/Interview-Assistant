@@ -37,10 +37,12 @@ export class EditLevelService {
             startedInterview: false,
         })
         const history = await this.historyGlobalService.findOne(msg.chat.id)
-        await this.historyGlobalService.update(msg.chat.id, {
-            localhistory: [],
-            globalhistory: [...history.globalhistory, history.localhistory],
-        })
+        if (history.localhistory.length > 0) {
+            await this.historyGlobalService.update(msg.chat.id, {
+                localhistory: [],
+                globalhistory: [...history.globalhistory, history.localhistory],
+            })
+        }
         await bot.answerCallbackQuery(id, {
             text: `Вы изменили уровень на ${text}`,
         })
