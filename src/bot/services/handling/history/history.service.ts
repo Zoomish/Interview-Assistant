@@ -40,7 +40,9 @@ export class HistoryService {
         return history.map(async (el) => {
             await bot.sendMessage(
                 chatId,
-                `<b>${el[2].parts[0].text}</b>\n${el[2].parts[1].text}`
+                `<b>Кто говорит: ${el.role === 'model' ? 'Бот' : 'Вы'}:</b>\n` +
+                    `<b>Сообщение:</b> \n` +
+                    el.parts[0].text
             )
         })
     }
