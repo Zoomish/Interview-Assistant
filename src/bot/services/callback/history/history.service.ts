@@ -1,13 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
-import { HistoryService, ReviewService } from 'src/bot/services/handling'
+import { HistoryService } from 'src/bot/services/handling'
 
 @Injectable()
 export class HistoryCallbackService {
-    constructor(
-        private readonly reviewService: ReviewService,
-        private readonly historyService: HistoryService
-    ) {}
+    constructor(private readonly historyService: HistoryService) {}
 
     async getHistory(data: string, id: string) {
         const bot: TelegramBot = global.bot
