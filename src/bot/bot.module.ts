@@ -18,6 +18,7 @@ import {
     GreetingService,
     HandleService,
     HelpService,
+    HistoryService,
     InfoService,
     InterviewCallbackService,
     InterviewService,
@@ -56,6 +57,7 @@ import {
         InterviewCallbackService,
         EditSkillsService,
         EditProfessionService,
+        HistoryService,
     ],
     exports: [],
 })
