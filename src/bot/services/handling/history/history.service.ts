@@ -14,7 +14,7 @@ export class HistoryService {
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
         const history = await this.historyGlobalService.findOne(chatId)
-        await bot.sendMessage(
+        return await bot.sendMessage(
             chatId,
             '<b>Примечание:</b> История обновляется при завершении текущего собеседования\n' +
                 '<b>Ваша история:</b>',
