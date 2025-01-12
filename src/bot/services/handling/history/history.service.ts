@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import TelegramBot from 'node-telegram-bot-api'
+import TelegramBot, { InlineKeyboardButton } from 'node-telegram-bot-api'
 import { HistoryGlobalService } from 'src/history/history.service'
 import { UserService } from 'src/user/user.service'
 
@@ -21,14 +21,12 @@ export class HistoryService {
             {
                 parse_mode: 'HTML',
                 reply_markup: {
-                    inline_keyboard: [
-                        [
-                            {
-                                text: 'Очистить историю',
-                                callback_data: 'clearHistory',
-                            },
-                        ],
-                    ],
+                    inline_keyboard: history.globalhistory.map((el, i) => [
+                        {
+                            text: `Запись: ${el[1].parts[0].text}`,
+                            callback_data: `history_get-${i}`,
+                        } as InlineKeyboardButton,
+                    ]),
                 },
             }
         )
