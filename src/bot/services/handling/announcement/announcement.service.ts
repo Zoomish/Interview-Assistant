@@ -40,9 +40,13 @@ export class GlobalAnnouncementService {
         }
         users.forEach(async (user) => {
             if (user.tgId !== msg.chat.id) {
-                await bot.sendMessage(user.tgId, msg.text, {
-                    parse_mode: 'HTML',
-                })
+                try {
+                    await bot.sendMessage(user.tgId, msg.text, {
+                        parse_mode: 'HTML',
+                    })
+                } catch (error) {
+                    console.error(error)
+                }
             }
         })
         await this.userService.update(msg.chat.id, {
