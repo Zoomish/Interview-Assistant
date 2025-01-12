@@ -5,4 +5,3 @@ export * from './history'
 export * from './interview'
 export * from './review'
 export * from './user'
-
