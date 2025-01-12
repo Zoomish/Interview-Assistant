@@ -1,16 +1,19 @@
 import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
-import { ReviewService } from 'src/bot/services/handling'
+import { HistoryService, ReviewService } from 'src/bot/services/handling'
 
 @Injectable()
 export class HistoryCallbackService {
-    constructor(private readonly reviewService: ReviewService) {}
+    constructor(
+        private readonly reviewService: ReviewService,
+        private readonly historyService: HistoryService
+    ) {}
 
-    async editReview(data: string, id: string) {
+    async getHistory(data: string, id: string) {
         const bot: TelegramBot = global.bot
         data = data.trim()
         const action = data.split('-')[0]
-        const reviewId = Number(
+        const historyId = Number(
             data.split('-').length > 1 ? data.split('-')[1] : data
         )
         switch (action) {
@@ -28,7 +31,7 @@ export class HistoryCallbackService {
                 await bot.answerCallbackQuery(id, {
                     text: 'Вы выбрали ответить на отзыв',
                 })
-                return await this.reviewService.answerStartReview(reviewId)
+                return await this.reviewService.answerStartReview(historyId)
             case 'end':
                 await bot.answerCallbackQuery(id, {
                     text: 'Вы отменили действие',
