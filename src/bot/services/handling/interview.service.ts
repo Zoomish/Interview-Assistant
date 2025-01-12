@@ -25,7 +25,9 @@ export class InterviewService {
         await this.historyGlobalService.update(chatId, {
             localhistory: history,
         })
-        return await bot.sendMessage(chatId, text.response.text())
+        return await bot.sendMessage(chatId, text.response.text(), {
+            parse_mode: 'HTML',
+        })
     }
 
     async endinterview() {

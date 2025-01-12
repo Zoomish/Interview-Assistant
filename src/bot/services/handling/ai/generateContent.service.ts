@@ -2,15 +2,13 @@ import { Injectable } from '@nestjs/common'
 import TelegramBot from 'node-telegram-bot-api'
 import { HistoryGlobalService } from 'src/history/history.service'
 import { User } from 'src/user/entities/user.entity'
-import { UserService } from 'src/user/user.service'
 import { AiStartService } from './aiStart.service'
 
 @Injectable()
 export class GenerateContentService {
     constructor(
         private readonly aiStartService: AiStartService,
-        private readonly historyGlobalService: HistoryGlobalService,
-        private readonly userService: UserService
+        private readonly historyGlobalService: HistoryGlobalService
     ) {}
     async generateQuetion(text: string, user: User) {
         const chat = await this.aiStartService.getChat()
@@ -33,6 +31,8 @@ export class GenerateContentService {
                 []
             ),
         })
-        return await bot.sendMessage(chatId, generatedText.response.text())
+        return await bot.sendMessage(chatId, generatedText.response.text(), {
+            parse_mode: 'HTML',
+        })
     }
 }
