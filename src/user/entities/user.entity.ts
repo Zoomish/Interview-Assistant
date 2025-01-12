@@ -1,4 +1,3 @@
-import { Content } from '@google/generative-ai'
 import { History } from 'src/history/entities/history.entity'
 import { Review } from 'src/review/entities/review.entity'
 import {
@@ -23,9 +22,6 @@ export class User {
 
     @Column({ nullable: false, default: false })
     startedInterview: boolean
-
-    @Column({ nullable: true, type: 'json' })
-    localhistory: Content[]
 
     @OneToOne(() => History, (history) => history.user, {
         onDelete: 'CASCADE',
