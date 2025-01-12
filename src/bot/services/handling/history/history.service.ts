@@ -21,14 +21,12 @@ export class HistoryService {
             {
                 parse_mode: 'HTML',
                 reply_markup: {
-                    inline_keyboard: history.globalhistory
-                        .shift()
-                        .map((el, i) => [
-                            {
-                                text: `Запись: ${el[2].parts[0].text}`,
-                                callback_data: `history_get-${i}`,
-                            } as InlineKeyboardButton,
-                        ]),
+                    inline_keyboard: history.globalhistory.map((el, i) => [
+                        {
+                            text: `Запись: ${el[2]?.parts[0]?.text}`,
+                            callback_data: `history_get-${i}`,
+                        } as InlineKeyboardButton,
+                    ]),
                 },
             }
         )
@@ -39,14 +37,18 @@ export class HistoryService {
         const chatId = global.msg.chat.id
         const Allhistory = await this.historyGlobalService.findOne(chatId)
         const history = Allhistory.globalhistory[id]
+        history.shift()
         await bot.sendMessage(
             chatId,
-            '<b>Вы получаете запись своего собеседования:</b>'
+            '<b>Вы получаете запись своего собеседования:</b>',
+            {
+                parse_mode: 'HTML',
+            }
         )
         return history.map(async (el) => {
             await bot.sendMessage(
                 chatId,
-                `<b>Кто говорит: ${el.role === 'model' ? 'Бот' : 'Вы'}:</b>\n` +
+                `<b>Кто говорит: ${el.role === 'model' ? 'Бот' : 'Вы'}</b>\n` +
                     `<b>Сообщение:</b> \n` +
                     el.parts[0].text,
                 {
