@@ -26,7 +26,7 @@ export class HistoryCallbackService {
                 await bot.answerCallbackQuery(id, {
                     text: 'Вы получаете запись из истории',
                 })
-                return await this.reviewService.getReview()
+                return await this.historyService.getArcticle(historyId)
             default:
                 break
         }

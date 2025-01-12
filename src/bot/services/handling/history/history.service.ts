@@ -32,6 +32,19 @@ export class HistoryService {
         )
     }
 
+    async getArcticle(id: number) {
+        const bot: TelegramBot = global.bot
+        const chatId = global.msg.chat.id
+        const Allhistory = await this.historyGlobalService.findOne(chatId)
+        const history = Allhistory.globalhistory[id]
+        return history.map(async (el) => {
+            await bot.sendMessage(
+                chatId,
+                `<b>${el[2].parts[0].text}</b>\n${el[2].parts[1].text}`
+            )
+        })
+    }
+
     async clearHistory() {
         const chatId = global.msg.chat.id
         await this.userService.update(chatId, {
