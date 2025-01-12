@@ -23,14 +23,13 @@ export class HistoryService {
                 reply_markup: {
                     inline_keyboard: history.globalhistory.map((el, i) => [
                         {
-                            text: `Запись: ${el[1].parts[0].text}`,
+                            text: `Запись: ${el[2].parts[0].text}`,
                             callback_data: `history_get-${i}`,
                         } as InlineKeyboardButton,
                     ]),
                 },
             }
         )
-        console.log(history.globalhistory)
     }
 
     async clearHistory() {
