@@ -40,6 +40,12 @@ export class MeService {
                         callback_data: 'review_get',
                     },
                 ],
+                [
+                    {
+                        text: 'Моя история',
+                        callback_data: 'history_getall',
+                    },
+                ],
                 user.admin
                     ? [
                           {

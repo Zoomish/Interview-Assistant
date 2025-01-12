@@ -17,29 +17,14 @@ export class HistoryCallbackService {
             data.split('-').length > 1 ? data.split('-')[1] : data
         )
         switch (action) {
-            case 'start':
+            case 'getall':
                 await bot.answerCallbackQuery(id, {
-                    text: 'Вы выбрали оставить отзыв',
+                    text: 'Вы получаете свою историю',
                 })
-                return await this.reviewService.startReview()
-            case 'edit':
-                await bot.answerCallbackQuery(id, {
-                    text: 'Вы выбрали изменить отзыв',
-                })
-                return await this.reviewService.startReview()
-            case 'answer':
-                await bot.answerCallbackQuery(id, {
-                    text: 'Вы выбрали ответить на отзыв',
-                })
-                return await this.reviewService.answerStartReview(historyId)
-            case 'end':
-                await bot.answerCallbackQuery(id, {
-                    text: 'Вы отменили действие',
-                })
-                return await this.reviewService.endReview()
+                return await this.historyService.getGlobalHistory()
             case 'get':
                 await bot.answerCallbackQuery(id, {
-                    text: 'Вы получаете свой отзыв',
+                    text: 'Вы получаете запись из истории',
                 })
                 return await this.reviewService.getReview()
             default:
