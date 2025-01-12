@@ -8,6 +8,7 @@ import {
     GlobalAnnouncementService,
     GreetingService,
     HelpService,
+    HistoryService,
     InfoService,
     InterviewService,
     LevelService,
@@ -34,7 +35,8 @@ export class HandleService {
         private readonly meService: MeService,
         private readonly badCommandService: BadCommandService,
         private readonly greetingService: GreetingService,
-        private readonly sttService: SpeechToTextService
+        private readonly sttService: SpeechToTextService,
+        private readonly historyService: HistoryService
     ) {}
     async handleMessage(msg: TelegramBot.Message) {
         if (msg.chat.type !== 'private') return
@@ -138,6 +140,8 @@ export class HandleService {
                 } else {
                     return this.badCommandService.notStarted()
                 }
+            case '/history':
+                return this.historyService.getGlobalHistory()
             case '/me':
                 return this.meService.getMe(msg, user)
             case '/review':
