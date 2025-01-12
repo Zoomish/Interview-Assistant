@@ -21,12 +21,21 @@ export class HistoryService {
             {
                 parse_mode: 'HTML',
                 reply_markup: {
-                    inline_keyboard: history.globalhistory.map((el, i) => [
-                        {
-                            text: `Запись: ${el[2]?.parts[0]?.text}`,
-                            callback_data: `history_get-${i}`,
-                        } as InlineKeyboardButton,
-                    ]),
+                    inline_keyboard:
+                        history.globalhistory.length > 0
+                            ? history.globalhistory.map((el, i) => [
+                                  {
+                                      text: `Запись: ${el[2]?.parts[0]?.text}`,
+                                      callback_data: `history_get-${i}`,
+                                  } as InlineKeyboardButton,
+                              ])
+                            : [
+                                  [
+                                      {
+                                          text: 'У вас нет сохраненной истории. Завершите активное собеседование или проведите свое первое, чтобы сохранить историю.',
+                                      },
+                                  ],
+                              ],
                 },
             }
         )
