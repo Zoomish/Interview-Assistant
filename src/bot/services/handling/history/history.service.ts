@@ -16,8 +16,8 @@ export class HistoryService {
         const history = await this.historyGlobalService.findOne(chatId)
         await bot.sendMessage(
             chatId,
-            '<b>Ваша история:</b>\n' +
-                '<b>Примечание:</b> История обновляется при завершении текущего собеседования',
+            '<b>Примечание:</b> История обновляется при завершении текущего собеседования\n' +
+                '<b>Ваша история:</b>',
             {
                 parse_mode: 'HTML',
                 reply_markup: {
