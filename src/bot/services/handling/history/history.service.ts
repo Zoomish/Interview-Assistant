@@ -14,32 +14,34 @@ export class HistoryService {
         const bot: TelegramBot = global.bot
         const chatId = global.msg.chat.id
         const history = await this.historyGlobalService.findOne(chatId)
-        const historyExist = history.globalhistory.length > 0
-        return await bot.sendMessage(
-            chatId,
-            '<b>Примечание:</b> История обновляется при завершении текущего собеседования\n' +
-                '<b>Ваша история:</b>\n' +
-                !historyExist
-                ? 'У вас нет сохраненной истории. Завершите активное собеседование или пройдите свое первое, чтобы сохранить историю.'
-                : '',
-            historyExist
-                ? {
-                      parse_mode: 'HTML',
-                      reply_markup: {
-                          inline_keyboard: history.globalhistory.map(
-                              (el, i) => [
-                                  {
-                                      text: `Запись: ${el[2]?.parts[0]?.text}`,
-                                      callback_data: `history_get-${i}`,
-                                  } as InlineKeyboardButton,
-                              ]
-                          ),
-                      },
-                  }
-                : {
-                      parse_mode: 'HTML',
-                  }
-        )
+        if (history.globalhistory.length > 0) {
+            return await bot.sendMessage(
+                chatId,
+                '<b>Примечание:</b> История обновляется при завершении текущего собеседования\n' +
+                    '<b>Ваша история:</b>',
+                {
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: history.globalhistory.map((el, i) => [
+                            {
+                                text: `Запись: ${el[2]?.parts[0]?.text}`,
+                                callback_data: `history_get-${i}`,
+                            } as InlineKeyboardButton,
+                        ]),
+                    },
+                }
+            )
+        } else {
+            return await bot.sendMessage(
+                chatId,
+                '<b>Примечание:</b> История обновляется при завершении текущего собеседования\n' +
+                    '<b>Ваша история:</b>\n' +
+                    'У вас нет сохраненной истории. Завершите активное собеседование или пройдите свое первое, чтобы сохранить историю.',
+                {
+                    parse_mode: 'HTML',
+                }
+            )
+        }
     }
 
     async getArcticle(id: number) {
