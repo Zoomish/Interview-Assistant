@@ -45,6 +45,11 @@ export class HandleService {
         global.msg = msg
         if (msg.voice) {
             const fileLink = await bot.getFileLink(msg.voice.file_id)
+            const user = await this.userService.findOne(chatId)
+            if (!user.startedInterview) {
+                return this.badCommandService.voiceNotAllowed()
+            }
+            await bot.sendChatAction(chatId, 'typing')
             const recognizedText = await this.sttService.transcribeOgg(fileLink)
             if (recognizedText && recognizedText.length > 0) {
                 await bot.sendMessage(
@@ -70,9 +75,7 @@ export class HandleService {
     private async processTextMessage(text: string, msg: TelegramBot.Message) {
         const bot: TelegramBot = global.bot
         const chatId = msg.chat.id
-
         await bot.sendChatAction(chatId, 'typing')
-
         switch (text) {
             case '/start':
                 return this.greetingService.greeting(msg)
@@ -83,7 +86,6 @@ export class HandleService {
             default:
                 break
         }
-
         const user = await this.userService.findOne(chatId)
         if (
             !user?.professionExist ||
