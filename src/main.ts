@@ -10,7 +10,7 @@ async function bootstrap() {
             async () => {
                 await fetch('https://interview-assistant.onrender.com/api/app')
             },
-            1000 * 60 * 14 + 1000 * 30
+            1000 * 60 * 10
         )
     }
 
