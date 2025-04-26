@@ -6,7 +6,7 @@ export class AppController {
     constructor(private readonly userService: UserService) {}
     @Get()
     async AAA() {
-        if (new Date().getHours() === 0) {
+        if (new Date().getHours() > 22) {
             return this.userService.findAll()
         }
         return {}
