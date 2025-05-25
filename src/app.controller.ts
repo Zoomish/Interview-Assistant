@@ -6,6 +6,9 @@ export class AppController {
     constructor(private readonly userService: UserService) {}
     @Get()
     async AAA() {
-        return this.userService.findAll()
+        this.userService.findAll()
+        return {
+            message: 'Hello World!',
+        }
     }
 }
